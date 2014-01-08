@@ -27,5 +27,12 @@ class Portal {
       c.loc.set(partner.loc.x, partner.loc.y);
     }
   }
+  void checkPlayer(Player p, Portal paartner)
+  {
+    if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25)
+    {
+      p.loc.set(partner.loc.x, partner.loc.y);
+    }
+  }
 }
 

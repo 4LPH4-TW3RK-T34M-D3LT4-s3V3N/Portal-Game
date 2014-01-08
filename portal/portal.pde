@@ -2,6 +2,7 @@ Cube cube;
 Portal orange;
 Portal blue;
 Level level1;
+Player player;
 
 void setup()
 {
@@ -10,6 +11,7 @@ void setup()
   level1 = new Level(1, "Level 1.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
+  player = new Player("P34CH35", 20, 20);
 }
 void draw()
 {
@@ -19,5 +21,9 @@ void draw()
   blue.display();
   orange.display();
   orange.checkObject(cube, blue);
+  player.fall();
+  player.display();
+  player.update();
+  player.move();
 }
 

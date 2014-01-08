@@ -1,22 +1,35 @@
-class player {
+class Player {
 
   String name;
   PVector loc, vel, acc;
-  player(String playername, int locx, int locy) {
+  Player(String playername, int locx, int locy) {
     name = playername;
     loc = new PVector(locx, locy);
     vel = new PVector(0, 0);
-    acc = new PVector(0, 0);
+    acc = new PVector(0, .1);
   }
 
   void display() {
     fill(255, 0, 0);
     rect(loc.x+15, loc.y+50, 15, 50);
   }
-
+  void fall()
+  {
+    if (get(int(loc.x+15+7.5), int(loc.y+50+25)) == color(0))
+    {
+      println("YAS");
+      while (get (int (loc.x+15+7.5), int(loc.y+50+23)) == color(0))
+      {
+        loc.y--;
+      }
+      vel.set(0, 0);
+    }
+    else {
+      vel.add(acc);
+      loc.add(vel);
+    }
+  }
   void update() {
-    loc.add(vel);
-    vel.add(acc);
   }
 
   void move() {
@@ -32,8 +45,8 @@ class player {
 
     if (keyPressed && key == ' ') {
       vel.y = -3;
-    }
+    }      loc.add(vel);
+
   }
-  
 }
 
