@@ -20,10 +20,25 @@ class Cube
   }
   void fall()
   {
+    println(vel.y);
+    //dont go faster than 30?
     if (get(int(loc.x+15), int(loc.y+15)) == color(195))
     {
       vel.add(acc);
       loc.add(vel);
+    }
+    else if (get(int(loc.x+15), int(loc.y+15)) == color(255, 115, 0))
+    {
+      vel.add(acc);
+      loc.add(vel);
+    }
+    else if (get(int(loc.x+15), int(loc.y+15)) == color(0))
+    {
+      while (get (int (loc.x+15), int(loc.y+14)) == color(0))
+      {
+        loc.y--;
+      }
+      vel.set(0, 0);
     }
   }
 }

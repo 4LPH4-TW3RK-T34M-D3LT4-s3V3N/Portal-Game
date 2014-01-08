@@ -1,4 +1,6 @@
 Cube cube;
+Portal orange;
+Portal blue;
 Level level1;
 
 void setup()
@@ -6,11 +8,16 @@ void setup()
   size(800, 500);
   cube = new Cube(width/2, height/2);
   level1 = new Level(1, "Level 1.png");
+  orange = new Portal(color(255, 115, 0));
+  blue = new Portal(color(0, 0, 255));
 }
 void draw()
 {
   level1.display();
-  cube.display();
   cube.fall();
+  cube.display();
+  blue.display();
+  orange.display();
+  orange.checkObject(cube, blue);
 }
 
