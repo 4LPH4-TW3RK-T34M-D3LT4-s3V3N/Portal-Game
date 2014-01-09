@@ -3,7 +3,7 @@ Portal orange;
 Portal blue;
 Level level1;
 Player player;
-
+boolean[] keys;
 void setup()
 {
   size(800, 500);
@@ -12,6 +12,10 @@ void setup()
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 20);
+  keys=new boolean[3];
+  keys[0]=false;
+  keys[1]=false;
+  keys[2]=false; 
 }
 void draw()
 {
@@ -30,4 +34,23 @@ void draw()
   player.display();
   player.move();
 }
+void keyPressed()
+{
+  if(key=='d'){
+    keys[0]=true;}
+  if(key=='a'){
+    keys[1]=true;}
+    if(key==' '){
+    keys[2]=true;}
+}
+
+void keyReleased()
+{
+  if(key=='d'){
+    keys[0]=false;}
+  if(key=='a'){
+    keys[1]=false;}
+    if(key==' '){
+    keys[2]=false;}
+} 
 

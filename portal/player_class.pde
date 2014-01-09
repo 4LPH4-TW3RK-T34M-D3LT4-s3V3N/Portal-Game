@@ -61,18 +61,26 @@ class Player {
   }
 
   void move() {
-    if (keyPressed && key == 'd') {
+    
+    
+    
+    
+    
+    
+    
+    if (keys[0]) {
       vel.x = 1;
     } 
-    else if (keyPressed && key == 'a') {
+    else if (keys[1]) {
       vel.x = -1;
     } 
     else {
       vel.x = 0;
     }
 
-    if (keyPressed && key == ' ') {
+    if (keys[2]) {
       vel.y = -1;
+      
     }      
     loc.add(vel);
   }
