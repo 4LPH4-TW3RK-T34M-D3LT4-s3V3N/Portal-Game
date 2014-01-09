@@ -29,7 +29,7 @@ class Player {
   {
     if (get(int(loc.x+7.5), int(loc.y+20)) == color(0))
     {
-      while (get (int (loc.x+7.5), int(loc.y+20)) == color(0))
+      while (get (int (loc.x+7.5), int(loc.y+19)) == color(0))
       {
         loc.y--;
       }
@@ -76,7 +76,7 @@ class Player {
     }
 
     if (keyPressed && key == ' ' && onGround() == true) {
-      vel.y = -5;
+      vel.y = -3;
     }
   }
 }
