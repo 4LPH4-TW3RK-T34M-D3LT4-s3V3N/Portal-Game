@@ -30,6 +30,7 @@ void draw()
   orange.checkPlayer(player, blue);  
   player.fall();
   orange.shoot(player);
+  blue.shoot(player);
 
   //  blue.checkPlayer(player, orange);
   player.display();
@@ -63,6 +64,13 @@ void keyReleased()
 
 void mousePressed()
 {
-  orange.shoot2();
+  if (mouseButton == LEFT)
+  {
+    orange.shoot2();
+  }
+  if (mouseButton == RIGHT)
+  {
+    blue.shoot2();
+  }
 }
 

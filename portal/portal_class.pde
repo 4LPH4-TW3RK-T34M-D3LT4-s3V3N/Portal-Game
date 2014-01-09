@@ -5,21 +5,22 @@ class Portal {
   boolean touching;
   color c;
   int orient;
-  float wut = 0;
   /*
   0 = portal is on the floor
    1 = wall (right)
    2 = wall (left)
    3 = ceiling
    */
+  float wut = 0;
+
   Portal(color _c)
   {
     c = _c;
-    orient = 0;
+    // orient = 0;
     if (c == color(0, 0, 255))
     {
       loc = new PVector(50, 3);
-      orient = 3;
+      //  orient = 3;
     }
     else
     {
@@ -49,9 +50,6 @@ class Portal {
       shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
     }
     fill(255, 0, 0);
-    if (mousePressed)
-    {
-    }
     println(wut);
     wut = 0;
     for (int i =0; i < 20; i++)
@@ -61,8 +59,15 @@ class Portal {
   }
   void shoot2()
   {
-
     loc = shootLoc;
+    if (mouseY < shootLoc.y)
+    {
+      orient = 0;
+    }
+    else if (mouseY > shootLoc.y)
+    {
+      orient = 3;
+    }
   }
   void checkObject(Cube c, Portal partner)
   {
@@ -70,7 +75,7 @@ class Portal {
     {
       if (partner.orient == 0)
       {
-        c.loc.set(partner.loc.x, partner.loc.y);
+        c.loc.set(partner.loc.x, partner.loc.y-15);
       }
       else if (partner.orient == 3)
       {
@@ -84,7 +89,7 @@ class Portal {
     {
       if (partner.orient == 0)
       {
-        p.loc.set(partner.loc.x, partner.loc.y);
+        p.loc.set(partner.loc.x, partner.loc.y-25);
       }
       else if (partner.orient == 3)
       {
