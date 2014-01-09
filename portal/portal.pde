@@ -17,13 +17,16 @@ void draw()
 {
   level1.display();
   cube.fall();
+  cube.hitPlayer(player);
+  player.fall();
+  player.hitCeiling();
   cube.display();
   blue.display();
   orange.display();
   orange.checkObject(cube, blue);
-  player.fall();
+  orange.checkPlayer(player, blue);
+//  blue.checkPlayer(player, orange);
   player.display();
-  player.update();
   player.move();
 }
 

@@ -3,6 +3,13 @@ class Portal {
   int size;
   boolean touching;
   color c;
+  int orient;
+  /*
+  0 = portal is on the floor
+   1 = wall (right)
+   2 = wall (left)
+   3 = ceiling
+   */
   Portal(color _c)
   {
     c = _c;
@@ -11,9 +18,11 @@ class Portal {
   {
     fill(c);
     loc = new PVector(mouseX, 490);
+    orient = 0;
     if (c == color(0, 0, 255))
     {
       loc = new PVector(50, 3);
+      orient = 3;
     }
     rect(loc.x, loc.y, 50, 5);
   }
@@ -24,14 +33,28 @@ class Portal {
   {
     if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 15)
     {
-      c.loc.set(partner.loc.x, partner.loc.y);
+      if (partner.orient == 0)
+      {
+        c.loc.set(partner.loc.x, partner.loc.y);
+      }
+      else if (partner.orient == 3)
+      {
+        c.loc.set(partner.loc.x, partner.loc.y+15);
+      }
     }
   }
-  void checkPlayer(Player p, Portal paartner)
+  void checkPlayer(Player p, Portal partner)
   {
     if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25)
     {
-      p.loc.set(partner.loc.x, partner.loc.y);
+      if (partner.orient == 0)
+      {
+        p.loc.set(partner.loc.x, partner.loc.y);
+      }
+      else if (partner.orient == 3)
+      {
+        p.loc.set(partner.loc.x, partner.loc.y+25);
+      }
     }
   }
 }
