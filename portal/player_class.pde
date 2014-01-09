@@ -15,6 +15,7 @@ class Player {
     fill(255, 0, 0);
     rectMode(CENTER);
     rect(loc.x, loc.y, 12, 45);
+    loc.add(vel);
   }
   void fall()
   {
@@ -22,18 +23,27 @@ class Player {
     {
       vel.add(acc);
       limitVel();
-      loc.add(vel);
     }
-    else if (get(int(loc.x+7.5), int(loc.y+24)) == color(0))
+  }
+  boolean onGround() 
+  {
+    if (get(int(loc.x+7.5), int(loc.y+20)) == color(0))
     {
       while (get (int (loc.x+7.5), int(loc.y+20)) == color(0))
       {
         loc.y--;
       }
-      vel.set(0, 0);
+      return true;
     }
-  }
-  void hitCeiling()
+    else if (get(int(loc.x+7.5), int(loc.y+20)) == color(195))
+    {
+      return false;
+    }
+    else {
+      return true;
+    }
+  } 
+  boolean hitCeiling()
   {
     if (get(int(loc.x+7.5), int(loc.y-24)) == color(0))
     {
@@ -41,7 +51,10 @@ class Player {
       {
         loc.y++;
       }
-      vel.set(0, 0);
+      return true;
+    }
+    else {
+      return false;
     }
   }
   void limitVel()
@@ -51,7 +64,6 @@ class Player {
       vel.y = velSet;
     }
   }
-
   void move() {
     if (keyPressed && key == 'd') {
       vel.x = 1;
@@ -63,10 +75,9 @@ class Player {
       vel.x = 0;
     }
 
-    if (keyPressed && key == ' ') {
-      vel.y = -1;
-    }      
-    loc.add(vel);
+    if (keyPressed && key == ' ' && onGround() == true) {
+      vel.y = -5;
+    }
   }
 }
 
