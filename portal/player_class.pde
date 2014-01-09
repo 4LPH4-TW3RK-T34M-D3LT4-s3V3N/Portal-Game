@@ -24,9 +24,9 @@ class Player {
       limitVel();
       loc.add(vel);
     }
-    else if (get(int(loc.x), int(loc.y+24)) == color(0) || get(int(loc.x+7.5), int(loc.y+24)) == color(255,0,255))
+    else if (get(int(loc.x+7.5), int(loc.y+24)) == color(0) || get(int(loc.x+7.5), int(loc.y+24)) == color(255, 0, 255))
     {
-      while (get (int (loc.x), int(loc.y+20)) == color(0) || get (int (loc.x+7.5), int(loc.y+20)) == color(255,0,255))
+      while (get (int (loc.x+7.5), int(loc.y+20)) == color(0) || get (int (loc.x+7.5), int(loc.y+20)) == color(255, 0, 255))
       {
         loc.y--;
       }
@@ -53,17 +53,19 @@ class Player {
   }
 
   void move() {
-    if (keyPressed && key == 'd') {
+
+
+    if (keys[0]) {
       vel.x = 1;
     } 
-    else if (keyPressed && key == 'a') {
+    else if (keys[1]) {
       vel.x = -1;
     } 
     else {
       vel.x = 0;
     }
 
-    if (keyPressed && key == ' ') {
+    if (keys[2]) {
       vel.y = -1;
     }      
     loc.add(vel);
