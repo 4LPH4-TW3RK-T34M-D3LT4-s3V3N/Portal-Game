@@ -1,5 +1,4 @@
 class Player {
-
   String name;
   PVector loc, vel, acc;
   int velSet;
@@ -15,6 +14,7 @@ class Player {
     fill(255, 0, 0);
     rectMode(CENTER);
     rect(loc.x, loc.y, 12, 45);
+    loc.add(vel);
   }
   void fall()
   {
@@ -22,15 +22,23 @@ class Player {
     {
       vel.add(acc);
       limitVel();
-      loc.add(vel);
     }
-    else if (get(int(loc.x+7.5), int(loc.y+24)) == color(0) || get(int(loc.x+7.5), int(loc.y+24)) == color(255,0,255))
+  }
+  boolean onGround()
+  {
+    if (get(int(loc.x+7.5), int(loc.y+20)) == color(0) || get(int(loc.x+7.5), int(loc.y+20)) == color(255, 0, 255))
     {
-      while (get (int (loc.x+7.5), int(loc.y+20)) == color(0) || get (int (loc.x+7.5), int(loc.y+20)) == color(255,0,255))
+      while (get (int (loc.x+7.5), int(loc.y+19)) == color(0) || get (int (loc.x+7.5), int(loc.y+19 )) == color(255, 0, 255))
       {
         loc.y--;
       }
-      vel.set(0, 0);
+      return true
+    }
+    else if (get(int(loc.x+7.5), int(loc.y+20)) == color(0)) {
+      return false;
+    } 
+    else { 
+      return true;
     }
   }
   void hitCube(Cube c)
@@ -59,15 +67,7 @@ class Player {
       vel.y = velSet;
     }
   }
-
   void move() {
-    
-    
-    
-    
-    
-    
-    
     if (keys[0]) {
       vel.x = 1;
     } 
@@ -80,7 +80,6 @@ class Player {
 
     if (keys[2]) {
       vel.y = -1;
-      
     }      
     loc.add(vel);
   }
