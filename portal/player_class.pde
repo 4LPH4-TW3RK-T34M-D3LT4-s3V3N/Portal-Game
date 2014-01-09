@@ -8,7 +8,7 @@ class Player {
     loc = new PVector(locx, locy);
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
-    velSet = 10;
+    velSet = 20;
   }
 
   void display() {
@@ -32,6 +32,14 @@ class Player {
       }
       vel.set(0, 0);
     }
+  }
+  void hitCube(Cube c)
+  {
+    if (dist(loc.x, loc.y, c.loc.x, c.loc.y) < 22)
+      if (loc.y > c.loc.y)
+      {
+        loc.y = c.loc.y-15;
+      }
   }
   void hitCeiling()
   {

@@ -18,14 +18,15 @@ void draw()
   level1.display();
   cube.fall();
   cube.hitPlayer(player);
-  player.fall();
   player.hitCeiling();
   cube.display();
   blue.display();
   orange.display();
   orange.checkObject(cube, blue);
-  orange.checkPlayer(player, blue);
-//  blue.checkPlayer(player, orange);
+  orange.checkPlayer(player, blue);  
+  player.fall();
+
+  //  blue.checkPlayer(player, orange);
   player.display();
   player.move();
 }
