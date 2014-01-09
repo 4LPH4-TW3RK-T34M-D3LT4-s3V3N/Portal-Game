@@ -24,9 +24,9 @@ class Player {
       limitVel();
       loc.add(vel);
     }
-    else if (get(int(loc.x+7.5), int(loc.y+24)) == color(0))
+    else if (get(int(loc.x+7.5), int(loc.y+24)) == color(0) || get(int(loc.x+7.5), int(loc.y+24)) == color(255,0,255))
     {
-      while (get (int (loc.x+7.5), int(loc.y+20)) == color(0))
+      while (get (int (loc.x+7.5), int(loc.y+20)) == color(0) || get (int (loc.x+7.5), int(loc.y+20)) == color(255,0,255))
       {
         loc.y--;
       }
