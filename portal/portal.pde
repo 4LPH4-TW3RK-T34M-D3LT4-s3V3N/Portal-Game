@@ -15,7 +15,7 @@ void setup()
   keys=new boolean[3];
   keys[0]=false;
   keys[1]=false;
-  keys[2]=false; 
+  keys[2]=false;
 }
 void draw()
 {
@@ -26,10 +26,10 @@ void draw()
   cube.display();
   blue.display();
   orange.display();
-  orange.shoot(player);
   orange.checkObject(cube, blue);
   orange.checkPlayer(player, blue);  
   player.fall();
+  orange.shoot(player);
 
   //  blue.checkPlayer(player, orange);
   player.display();
@@ -37,21 +37,32 @@ void draw()
 }
 void keyPressed()
 {
-  if(key=='d'){
-    keys[0]=true;}
-  if(key=='a'){
-    keys[1]=true;}
-    if(key==' '){
-    keys[2]=true;}
+  if (key=='d') {
+    keys[0]=true;
+  }
+  if (key=='a') {
+    keys[1]=true;
+  }
+  if (key==' ') {
+    keys[2]=true;
+  }
 }
 
 void keyReleased()
 {
-  if(key=='d'){
-    keys[0]=false;}
-  if(key=='a'){
-    keys[1]=false;}
-    if(key==' '){
-    keys[2]=false;}
+  if (key=='d') {
+    keys[0]=false;
+  }
+  if (key=='a') {
+    keys[1]=false;
+  }
+  if (key==' ') {
+    keys[2]=false;
+  }
 } 
+
+void mousePressed()
+{
+  orange.shoot2();
+}
 

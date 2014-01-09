@@ -28,7 +28,6 @@ class Cube
   }
   void fall()
   {
-    println(dist(loc.x, loc.y, player.loc.x, player.loc.y));
     if (get(int(loc.x+15), int(loc.y+15)) == color(195))
     {
       vel.add(acc);
