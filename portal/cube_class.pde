@@ -14,7 +14,7 @@ class Cube
   }
   void display()
   {
-    fill(0, 0, 255);
+    fill(255, 0, 255);
     noStroke();
     rectMode(CENTER);
     rect(loc.x, loc.y, 30, 30);
@@ -48,13 +48,13 @@ class Cube
   {
     if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 22)
     {
-      if (loc.x > p.loc.x)
+      if (loc.x > p.loc.x && p.loc.y > loc.y-15)
       {
-        loc.x = p.loc.x+22;
+        loc.x = p.loc.x+21;
       }
-      else  if (loc.x < p.loc.x)
+      else  if (loc.x < p.loc.x && p.loc.y > loc.y-15)
       {
-        loc.x = p.loc.x-22;
+        loc.x = p.loc.x-21;
       }
     }
   }
