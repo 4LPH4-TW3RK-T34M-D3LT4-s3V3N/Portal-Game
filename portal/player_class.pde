@@ -13,6 +13,7 @@ class Player {
 
   void display() {
     fill(255, 0, 0);
+    noStroke();
     rectMode(CENTER);
     rect(loc.x, loc.y, 12, 45);
   }

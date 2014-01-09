@@ -1,9 +1,11 @@
 class Portal {
   PVector loc;
+  PVector shootLoc;
   int size;
   boolean touching;
   color c;
   int orient;
+  float wut = 0;
   /*
   0 = portal is on the floor
    1 = wall (right)
@@ -13,30 +15,54 @@ class Portal {
   Portal(color _c)
   {
     c = _c;
-  }
-  void display()
-  {
-    fill(c);
-    loc = new PVector(mouseX, 490);
     orient = 0;
     if (c == color(0, 0, 255))
     {
       loc = new PVector(50, 3);
       orient = 3;
     }
+    else
+    {
+      loc = new PVector(50, 3);
+    }
+  }
+  void display()
+  {
+    fill(c);
+    //if(!mousePressed)
+    //{
+    // loc = new PVector(mouseX, 490);
+    // }
+
     rect(loc.x, loc.y, 50, 5);
   }
   void shoot(Player p)
   {
-    fill(0, 255, 0);
-    stroke(1);
-    line(mouseX, mouseY, p.loc.x, p.loc.y);
-    float rise = mouseY-p.loc.y;
-    float run = mouseX-p.loc.x;
-    for(int i =0; i < 20; i++)
+    stroke(0, 255, 0);
+    strokeWeight(1);
+    float rise = (mouseY-p.loc.y)/5;
+    float run = (mouseX-p.loc.x)/5;
+    while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) == color(195))
     {
-    ellipse(p.loc.x + (run*i), p.loc.y+ (rise*i), 30, 30);
+      // ellipse(p.loc.x+(run*wut), p.loc.y+(rise*wut), 30, 30);
+      wut+=.1;
+      shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
     }
+    fill(255, 0, 0);
+    if (mousePressed)
+    {
+    }
+    println(wut);
+    wut = 0;
+    for (int i =0; i < 20; i++)
+    {
+      // line(p.loc.x, p.loc.y, p.loc.x+(run*i), p.loc.y+(rise*i));
+    }
+  }
+  void shoot2()
+  {
+
+    loc = shootLoc;
   }
   void checkObject(Cube c, Portal partner)
   {
