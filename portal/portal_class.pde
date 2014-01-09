@@ -50,7 +50,6 @@ class Portal {
       shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
     }
     fill(255, 0, 0);
-    println(wut);
     wut = 0;
     for (int i =0; i < 20; i++)
     {
@@ -89,11 +88,12 @@ class Portal {
     {
       if (partner.orient == 0)
       {
-        p.loc.set(partner.loc.x, partner.loc.y-25);
+        p.vel.y*=-1;
+        p.loc.set(partner.loc.x, partner.loc.y-27);
       }
       else if (partner.orient == 3)
       {
-        p.loc.set(partner.loc.x, partner.loc.y+25);
+        p.loc.set(partner.loc.x, partner.loc.y+27);
       }
     }
   }

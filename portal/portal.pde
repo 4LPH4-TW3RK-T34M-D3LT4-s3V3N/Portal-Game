@@ -22,7 +22,6 @@ void draw()
   level1.display();
   cube.fall();
   cube.hitPlayer(player);
-  player.hitCeiling();
   cube.display();
   blue.display();
   orange.display();
