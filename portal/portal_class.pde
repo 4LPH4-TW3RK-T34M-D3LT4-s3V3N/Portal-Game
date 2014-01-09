@@ -26,8 +26,17 @@ class Portal {
     }
     rect(loc.x, loc.y, 50, 5);
   }
-  void shoot()
+  void shoot(Player p)
   {
+    fill(0, 255, 0);
+    stroke(1);
+    line(mouseX, mouseY, p.loc.x, p.loc.y);
+    float rise = mouseY-p.loc.y;
+    float run = mouseX-p.loc.x;
+    for(int i =0; i < 20; i++)
+    {
+    ellipse(p.loc.x + (run*i), p.loc.y+ (rise*i), 30, 30);
+    }
   }
   void checkObject(Cube c, Portal partner)
   {

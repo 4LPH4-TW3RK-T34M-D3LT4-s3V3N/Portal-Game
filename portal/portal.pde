@@ -26,6 +26,7 @@ void draw()
   cube.display();
   blue.display();
   orange.display();
+  orange.shoot(player);
   orange.checkObject(cube, blue);
   orange.checkPlayer(player, blue);  
   player.fall();
