@@ -2,9 +2,10 @@ class Portal {
   PVector loc;
   PVector shootLoc;
   int size;
-  boolean touching;
+  boolean appear = false;
   color c;
   int orient;
+  boolean justPortaled = false;
   /*
   0 = portal is on the floor
    1 = wall (right)
@@ -29,13 +30,16 @@ class Portal {
   }
   void display()
   {
-    fill(c);
-    //if(!mousePressed)
-    //{
-    // loc = new PVector(mouseX, 490);
-    // }
+    if (appear)
+    {
+      fill(c);
+      //if(!mousePressed)
+      //{
+      // loc = new PVector(mouseX, 490);
+      // }
 
-    rect(loc.x, loc.y, 50, 5);
+      rect(loc.x, loc.y, 50, 5);
+    }
   }
   void shoot(Player p)
   {
@@ -56,8 +60,9 @@ class Portal {
       // line(p.loc.x, p.loc.y, p.loc.x+(run*i), p.loc.y+(rise*i));
     }
   }
-  void shoot2()
+  void appear()
   {
+    appear = true;
     loc = shootLoc;
     if (mouseY < shootLoc.y)
     {
@@ -68,32 +73,45 @@ class Portal {
       orient = 3;
     }
   }
+  void dissapear()
+  {
+    if (key == 'r' || key == 'R')
+    {
+      appear = false;
+    }
+  }
   void checkObject(Cube c, Portal partner)
   {
-    if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 15)
+    if (appear && partner.appear)
     {
-      if (partner.orient == 0)
+      if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 15 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 15)
       {
-        c.loc.set(partner.loc.x, partner.loc.y-15);
-      }
-      else if (partner.orient == 3)
-      {
-        c.loc.set(partner.loc.x, partner.loc.y+15);
+        if (partner.orient == 0)
+        {
+          c.loc.set(partner.loc.x, partner.loc.y-15);
+        }
+        else if (partner.orient == 3)
+        {
+          c.loc.set(partner.loc.x, partner.loc.y+15);
+        }
       }
     }
   }
   void checkPlayer(Player p, Portal partner)
   {
-    if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25)
+    if (appear && partner.appear)
     {
-      if (partner.orient == 0)
+      if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25 || dist(p.loc.x+p.vel.x, p.loc.y+p.vel.y, loc.x, loc.y) < 25)
       {
-        p.vel.y*=-1;
-        p.loc.set(partner.loc.x, partner.loc.y-27);
-      }
-      else if (partner.orient == 3)
-      {
-        p.loc.set(partner.loc.x, partner.loc.y+27);
+        if (partner.orient == 0)
+        {
+          p.vel.y*=-1;
+          p.loc.set(partner.loc.x, partner.loc.y-27);
+        }
+        else if (partner.orient == 3)
+        {
+          p.loc.set(partner.loc.x, partner.loc.y+27);
+        }
       }
     }
   }

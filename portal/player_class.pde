@@ -10,6 +10,17 @@ class Player {
     acc = new PVector(0, .1);
     velSet = 20;
   }
+  color terminalVel()
+  {
+    for(int i = 0; i < vel.y; i++)
+    {
+      if(get(int(loc.x+7.5), int(loc.y+19+i)) != color(195))
+      {
+        return get(int(loc.x+7.5), int(loc.y+19+i));
+      }
+    }
+    return color(195);
+  }
   boolean onGround() 
   {
     if (get(int(loc.x+7.5), int(loc.y+20)) == color(0) || get(int(loc.x+7.5), int(loc.y+20)) == color(255, 0, 255))
@@ -20,6 +31,7 @@ class Player {
       }
       return true;
     }
+
     else if (get(int(loc.x+7.5), int(loc.y+20)) == color(195))
     {
       return false;
@@ -27,7 +39,7 @@ class Player {
     else {
       return true;
     }
-  } 
+  }
   boolean hitCeiling()
   {
     if (get(int(loc.x+7.5), int(loc.y-24)) == color(0))
@@ -43,7 +55,7 @@ class Player {
     }
   }
   void display() {
-    println(hitCeiling());
+    println(onGround());
     fill(255, 0, 0);
     noStroke();
     rectMode(CENTER);
@@ -51,7 +63,7 @@ class Player {
   }
   void fall()
   {
-    if (get(int(loc.x), int(loc.y+24)) == color(195))
+    if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
     {
       vel.add(acc);
       limitVel();
@@ -71,7 +83,6 @@ class Player {
   }
 
   void move() {
-
 
     if (keys[0]) {
       vel.x = 1;
