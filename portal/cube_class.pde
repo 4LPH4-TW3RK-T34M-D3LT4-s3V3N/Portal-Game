@@ -43,24 +43,39 @@ class Cube
       vel.set(0, 0);
     }
   }
+  boolean hitWall()
+  {
+    if (get(int(loc.x+16), int(loc.y)) == color(0) || get(int(loc.x-15), int(loc.y)) == color(0))
+    {
+      return true;
+    }
+    else
+      return false;
+  }
   void hitPlayer(Player p)
   {
     if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x > p.loc.x && p.loc.y > loc.y-15)
     {
       //if (loc.x > p.loc.x && p.loc.y > loc.y-15)
-     // {
-       // loc.x = p.loc.x+21;
-     // }
-     // else  
-    // if (loc.x < p.loc.x && p.loc.y > loc.y-15)
-     // {
-     //   loc.x = p.loc.x-21;
-    //  }
-      loc.x = p.loc.x+23;
+      // {
+      // loc.x = p.loc.x+21;
+      // }
+      // else  
+      // if (loc.x < p.loc.x && p.loc.y > loc.y-15)
+      // {
+      //   loc.x = p.loc.x-21;
+      //  }
+      if (!hitWall())
+      {
+        loc.x = p.loc.x+23;
+      }
     }
     else if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x < p.loc.x && p.loc.y > loc.y-15)
     {   
-      loc.x = p.loc.x-23;
+      if (!hitWall())
+      {
+        loc.x = p.loc.x-23;
+      }
     }
   }
 }

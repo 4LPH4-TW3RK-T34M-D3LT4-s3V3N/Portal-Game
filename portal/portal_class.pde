@@ -75,22 +75,22 @@ class Portal {
     {
       if (get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(195))
       {
-        if (mouseX < shootLoc.x)
+        if (mouseX > player.loc.x)
         {
           orient = 2;
         }
-        else if (mouseX > shootLoc.x)
+        else if (mouseX < player.loc.x)
         {
           orient = 1;
         }
         return;
       }
       else
-        if (mouseY < shootLoc.y)
+        if (mouseY > player.loc.y)
         {
           orient = 0;
         }
-        else if (mouseY > shootLoc.y)
+        else if (mouseY < player.loc.y)
         {
           orient = 3;
         }
@@ -111,15 +111,39 @@ class Portal {
       {
         if (partner.orient == 0)
         {
+          if (c.vel.y > 0)
+          {
+            c.vel.y*=1;
+          }
           c.loc.set(partner.loc.x, partner.loc.y-15);
         }
         else if (partner.orient == 3)
         {
+          if (c.vel.y < 0)
+          {
+            c.vel.y*=1;
+          }
           c.loc.set(partner.loc.x, partner.loc.y+15);
+        }
+        else if (partner.orient == 1)
+        {
+          if (orient == 0 || orient == 3)
+          {
+            c.vel.x = c.vel.y;
+          }
+          c.loc.set(partner.loc.x+16, partner.loc.y);
+        }
+        else if (partner.orient == 2)
+        {
+          if (orient == 4)
+          {
+          }
+          c.loc.set(partner.loc.x-16, partner.loc.y);
         }
       }
     }
   }
+
   void checkPlayer(Player p, Portal partner)
   {
     if (appear && partner.appear)
@@ -136,7 +160,7 @@ class Portal {
         }
         else if (partner.orient == 3)
         {
-          if(p.vel.y < 0)
+          if (p.vel.y < 0)
           {
             p.vel.y*=-1;
           }
@@ -152,10 +176,6 @@ class Portal {
         }
         else if (partner.orient == 2)
         {
-          if(orient == 4)
-          {
-            
-          }
           p.loc.set(partner.loc.x-26, partner.loc.y);
         }
       }
