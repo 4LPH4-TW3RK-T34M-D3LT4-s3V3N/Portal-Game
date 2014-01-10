@@ -22,6 +22,7 @@ void setup()
 }
 void draw()
 {
+  println("BLUE: " + blue.orient + " ORANGE: " + orange.orient);
   //level1.display();
   //level2.display();
   level3.display();

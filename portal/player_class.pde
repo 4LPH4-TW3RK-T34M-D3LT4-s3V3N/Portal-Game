@@ -81,7 +81,6 @@ class Player {
     }
   }
   void display() {
-    println(onGround());
     fill(255, 0, 0);
     noStroke();
     rectMode(CENTER);

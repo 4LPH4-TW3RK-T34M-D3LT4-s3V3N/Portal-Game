@@ -128,12 +128,35 @@ class Portal {
       {
         if (partner.orient == 0)
         {
-          p.vel.y*=-1;
+          if (p.vel.y > 0)
+          {
+            p.vel.y*=-1;
+          }
           p.loc.set(partner.loc.x, partner.loc.y-27);
         }
         else if (partner.orient == 3)
         {
+          if(p.vel.y < 0)
+          {
+            p.vel.y*=-1;
+          }
           p.loc.set(partner.loc.x, partner.loc.y+27);
+        }
+        else if (partner.orient == 1)
+        {
+          if (orient == 0 || orient == 3)
+          {
+            p.vel.x = p.vel.y;
+          }
+          p.loc.set(partner.loc.x+26, partner.loc.y);
+        }
+        else if (partner.orient == 2)
+        {
+          if(orient == 4)
+          {
+            
+          }
+          p.loc.set(partner.loc.x-26, partner.loc.y);
         }
       }
     }
