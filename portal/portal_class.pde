@@ -33,20 +33,22 @@ class Portal {
     if (appear)
     {
       fill(c);
-      //if(!mousePressed)
-      //{
-      // loc = new PVector(mouseX, 490);
-      // }
-
-      rect(loc.x, loc.y, 50, 5);
+      if (orient == 0 || orient == 3)
+      {
+        rect(loc.x, loc.y, 50, 5);
+      }
+      if (orient == 2 || orient == 1)
+      {
+        rect(loc.x, loc.y, 5, 50);
+      }
     }
   }
   void shoot(Player p)
   {
     stroke(0, 255, 0);
     strokeWeight(1);
-    float rise = (mouseY-p.loc.y)/5;
-    float run = (mouseX-p.loc.x)/5;
+    float rise = (mouseY-p.loc.y)/10;
+    float run = (mouseX-p.loc.x)/10;
     while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) == color(195))
     {
       // ellipse(p.loc.x+(run*wut), p.loc.y+(rise*wut), 30, 30);
@@ -64,13 +66,34 @@ class Portal {
   {
     appear = true;
     loc = shootLoc;
-    if (mouseY < shootLoc.y)
+
+    checkOrient();
+  }
+  void checkOrient()
+  {
+    for (int i = 0; i < 50; i++)
     {
-      orient = 0;
-    }
-    else if (mouseY > shootLoc.y)
-    {
-      orient = 3;
+      if (get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(195))
+      {
+        if (mouseX < shootLoc.x)
+        {
+          orient = 2;
+        }
+        else if (mouseX > shootLoc.x)
+        {
+          orient = 1;
+        }
+        return;
+      }
+      else
+        if (mouseY < shootLoc.y)
+        {
+          orient = 0;
+        }
+        else if (mouseY > shootLoc.y)
+        {
+          orient = 3;
+        }
     }
   }
   void dissapear()

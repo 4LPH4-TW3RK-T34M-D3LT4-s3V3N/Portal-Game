@@ -12,9 +12,9 @@ class Player {
   }
   color terminalVel()
   {
-    for(int i = 0; i < vel.y; i++)
+    for (int i = 0; i < vel.y; i++)
     {
-      if(get(int(loc.x+7.5), int(loc.y+19+i)) != color(195))
+      if (get(int(loc.x+7.5), int(loc.y+19+i)) != color(195))
       {
         return get(int(loc.x+7.5), int(loc.y+19+i));
       }
@@ -37,7 +37,33 @@ class Player {
       return false;
     }
     else {
+     return true;
+    }
+  }
+  boolean hitWall()
+  {
+    if (get(int(loc.x-6), int(loc.y)) == color(0))
+    {
+      while (get (int (loc.x-6), int(loc.y)) == color(0))
+      {
+        loc.x++;
+      }
       return true;
+    }
+    else if (get(int(loc.x+10), int(loc.y)) == color(0))
+    {
+      while (get(int (loc.x+10), int(loc.y)) == color(0))
+      {
+        loc.x--;
+      }
+      return true;
+    }
+   // else if (get(int(loc.x-6), int(loc.y+20)) == color(195))
+   // {
+   //   return false;
+   // }
+    else {
+      return false;
     }
   }
   boolean hitCeiling()
@@ -72,6 +98,10 @@ class Player {
     if (hitCeiling() || onGround())
     {
       vel.y = 0;
+    }
+    if (hitWall())
+    {
+      vel.x = 0;
     }
   }
   void limitVel()

@@ -1,7 +1,8 @@
+//#MOTOWNFOREVA!  #TWERKIN  #DOABACKFLIP
 Cube cube;
 Portal orange;
 Portal blue;
-Level level1, level2;
+Level level1, level2, level3;
 Player player;
 boolean[] keys;
 void setup()
@@ -10,6 +11,7 @@ void setup()
   cube = new Cube(width/2, height/2);
   level1 = new Level(1, "Level 1.png");
   level2 = new Level(1, "Level 2.png");
+  level3 = new Level(1, "Level 3.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 20);
@@ -20,8 +22,9 @@ void setup()
 }
 void draw()
 {
-  level1.display();
+  //level1.display();
   //level2.display();
+  level3.display();
   cube.fall();
   cube.hitPlayer(player);
   cube.display();
