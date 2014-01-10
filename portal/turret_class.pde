@@ -19,7 +19,7 @@ class Turret
   }
   void display()
   {
-    fill(255);
+    fill(250);
     noStroke();
     rectMode(CENTER);
     rect(loc.x, loc.y, 20, 40);

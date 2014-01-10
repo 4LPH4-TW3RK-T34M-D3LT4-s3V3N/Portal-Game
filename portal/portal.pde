@@ -5,6 +5,7 @@ Level level1, level2;
 Player player;
 Turret[] turret=new Turret[2];
 boolean[] keys;
+
 ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
 void setup()
@@ -48,16 +49,16 @@ void draw()
     turret[i].hitPlayer(player);
   }
   for (int i = bullet.size()-1; i >=0; i--) {
-    //Declare a new Particle called p and assign it the current object in the ArrayList
     Bullet b = bullet.get(i);
     b.display();
     b.update();
-    //if the particle's life is less than or equal to 0, remove the particle
+    b.hit();
     if (b.life <= 0) {
       bullet.remove(i);
     }
   }
-  bullet.add(new Bullet(turret[0].loc.x,turret[0].loc.y));
+  bullet.add(new Bullet(turret[0].loc.x,turret[0].loc.y,player.loc.x,player.loc.y));
+  bullet.add(new Bullet(turret[1].loc.x,turret[1].loc.y,player.loc.x,player.loc.y));
 }
 void keyPressed()
 {
