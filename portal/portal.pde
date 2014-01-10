@@ -3,13 +3,14 @@ Portal orange;
 Portal blue;
 Level level1, level2;
 Player player;
+int currentLevel = 1;
 boolean[] keys;
 void setup()
 {
   size(800, 500);
   cube = new Cube(width/2, height/2);
   level1 = new Level(1, "Level 1.png");
-  level2 = new Level(1, "Level 2.png");
+  level2 = new Level(2, "Level 2.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 20);
@@ -20,22 +21,28 @@ void setup()
 }
 void draw()
 {
-  level1.display();
-  //level2.display();
+  if (currentLevel == 1) {
+    level1.display();
+  }
+  else if (currentLevel == 2) {
+    level2.display();
+  }
   cube.fall();
   cube.hitPlayer(player);
   cube.display();
+  player.checkDoor();
   blue.display();
   orange.display();
   orange.checkObject(cube, blue);
   orange.checkPlayer(player, blue);  
-  blue.checkPlayer(player,orange);
+  blue.checkPlayer(player, orange);
   player.fall();
   orange.shoot(player);
   blue.shoot(player);
   //  blue.checkPlayer(player, orange);
   player.display();
   player.move();
+  //  128,255,255
 }
 void keyPressed()
 {

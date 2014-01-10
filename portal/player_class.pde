@@ -81,7 +81,14 @@ class Player {
       vel.y = velSet;
     }
   }
-
+  void checkDoor(){
+    if (get(int(loc.x), int(loc.y)) == color(128,255,255)){
+      textSize(40);
+      textAlign(CENTER);
+      text("LEVEL\nCOMPLETE",width/2,height/2);
+      nextLevel();
+    }
+  }
   void move() {
 
     if (keys[0]) {
@@ -98,6 +105,9 @@ class Player {
       vel.y = -3;
     }      
     loc.add(vel);
+  }
+  void nextLevel(){
+    currentLevel++;
   }
 }
 
