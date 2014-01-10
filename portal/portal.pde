@@ -22,7 +22,7 @@ void setup()
 }
 void draw()
 {
-  println("BLUE: " + blue.orient + " ORANGE: " + orange.orient);
+  println("BLUE: " + blue.orient + " ORANGE: " + orange.orient + " Player Vel " + player.vel.x);
   //level1.display();
   //level2.display();
   level3.display();
@@ -41,6 +41,7 @@ void draw()
   //  blue.checkPlayer(player, orange);
   player.display();
   player.move();
+  player.friction();
 }
 void keyPressed()
 {
