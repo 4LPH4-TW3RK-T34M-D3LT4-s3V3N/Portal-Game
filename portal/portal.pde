@@ -33,8 +33,8 @@ void draw()
   orange.display();
   orange.checkObject(cube, blue);
   orange.checkPlayer(player, blue);  
-  blue.checkPlayer(player,orange);
-  blue.checkObject(cube,orange);
+  blue.checkPlayer(player, orange);
+  blue.checkObject(cube, orange);
   player.fall();
   orange.shoot(player);
   blue.shoot(player);

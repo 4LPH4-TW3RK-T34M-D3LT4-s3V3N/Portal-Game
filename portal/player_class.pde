@@ -103,11 +103,11 @@ class Player {
     }
     if (hitCeiling() || onGround())
     {
-      vel.y = 0;
+      vel.y*=-.5;
     }
     if (hitWall())
     {
-      vel.x = 0;
+      vel.x*=-.5;
     }
   }
   void limitVel()
