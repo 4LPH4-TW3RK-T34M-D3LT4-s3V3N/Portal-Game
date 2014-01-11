@@ -45,7 +45,7 @@ class Cube
   }
   boolean hitWall()
   {
-    if (get(int(loc.x+16), int(loc.y)) == color(0) || get(int(loc.x-15), int(loc.y)) == color(0))
+    if (get(int(loc.x+16), int(loc.y)) == color(0) || get(int(loc.x-15), int(loc.y)) == color(255))
     {
       return true;
     }

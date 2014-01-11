@@ -49,12 +49,13 @@ class Portal {
     strokeWeight(1);
     float rise = (mouseY-p.loc.y)/10;
     float run = (mouseX-p.loc.x)/10;
-    while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) == color(195))
+    while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(255) && get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(0))
     {
       // ellipse(p.loc.x+(run*wut), p.loc.y+(rise*wut), 30, 30);
       wut+=.1;
       shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
     }
+
     fill(255, 0, 0);
     wut = 0;
     for (int i =0; i < 20; i++)
@@ -66,7 +67,10 @@ class Portal {
   {
     appear = true;
     loc = shootLoc;
-
+    if (get(int(shootLoc.x), int(shootLoc.y)) == color(0))
+    {
+      appear = false;
+    }
     checkOrient();
   }
   void checkOrient()

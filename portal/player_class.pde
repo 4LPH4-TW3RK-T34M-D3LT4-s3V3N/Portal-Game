@@ -49,17 +49,17 @@ class Player {
   }
   boolean hitWall()
   {
-    if (get(int(loc.x-6), int(loc.y)) == color(0))
+    if (get(int(loc.x-6), int(loc.y)) == color(0) || get(int(loc.x-6), int(loc.y)) == color(255))
     {
-      while (get (int (loc.x-6), int(loc.y)) == color(0))
+      while (get (int (loc.x-6), int(loc.y)) == color(0) || get (int (loc.x-6), int(loc.y)) == color(255))
       {
         loc.x++;
       }
       return true;
     }
-    else if (get(int(loc.x+10), int(loc.y)) == color(0))
+    else if (get(int(loc.x+10), int(loc.y)) == color(0) || get(int(loc.x+10), int(loc.y)) == color(255))
     {
-      while (get (int (loc.x+10), int(loc.y)) == color(0))
+      while (get (int (loc.x+10), int(loc.y)) == color(0) || get (int (loc.x+10), int(loc.y)) == color(255))
       {
         loc.x--;
       }
@@ -75,9 +75,9 @@ class Player {
   }
   boolean hitCeiling()
   {
-    if (get(int(loc.x+7.5), int(loc.y-24)) == color(0))
+    if (get(int(loc.x+7.5), int(loc.y-24)) == color(0) || get(int(loc.x+7.5), int(loc.y-24)) == color(255))
     {
-      while (get (int (loc.x+7.5), int(loc.y-23)) == color(0))
+      while (get (int (loc.x+7.5), int(loc.y-23)) == color(0) || get (int (loc.x+7.5), int(loc.y-23)) == color(255))
       {
         loc.y++;
       }
