@@ -28,65 +28,9 @@ class Player {
     }
     return color(195);
   }
-  boolean onGround() 
-  {
-    if (get(int(loc.x+7.5), int(loc.y+20)) == color(0) || get(int(loc.x+7.5), int(loc.y+20)) == color(255, 0, 255))
-    {
-      while (get (int (loc.x+7.5), int(loc.y+19)) == color(0) || get (int (loc.x+7.5), int(loc.y+19)) == color(255, 0, 255))
-      {
-        loc.y--;
-      }
-      return true;
-    }
 
-    else if (get(int(loc.x+7.5), int(loc.y+20)) == color(195))
-    {
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
-  boolean hitWall()
-  {
-    if (get(int(loc.x-6), int(loc.y)) == color(0) || get(int(loc.x-6), int(loc.y)) == color(255))
-    {
-      while (get (int (loc.x-6), int(loc.y)) == color(0) || get (int (loc.x-6), int(loc.y)) == color(255))
-      {
-        loc.x++;
-      }
-      return true;
-    }
-    else if (get(int(loc.x+10), int(loc.y)) == color(0) || get(int(loc.x+10), int(loc.y)) == color(255))
-    {
-      while (get (int (loc.x+10), int(loc.y)) == color(0) || get (int (loc.x+10), int(loc.y)) == color(255))
-      {
-        loc.x--;
-      }
-      return true;
-    }
-    // else if (get(int(loc.x-6), int(loc.y+20)) == color(195))
-    // {
-    //   return false;
-    // }
-    else {
-      return false;
-    }
-  }
-  boolean hitCeiling()
-  {
-    if (get(int(loc.x+7.5), int(loc.y-24)) == color(0) || get(int(loc.x+7.5), int(loc.y-24)) == color(255))
-    {
-      while (get (int (loc.x+7.5), int(loc.y-23)) == color(0) || get (int (loc.x+7.5), int(loc.y-23)) == color(255))
-      {
-        loc.y++;
-      }
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
+
+
   void display() {
     fill(255, 0, 0);
     noStroke();
@@ -95,18 +39,43 @@ class Player {
   }
   void fall()
   {
-    if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
+    print(goGround(loc, 12, 45));
+    //  if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
+    if (!goGround(loc, 12, 45) && terminalVel() == color(195))
     {
       vel.add(acc);
       limitVel();
       loc.add(vel);
     }
-    if (hitCeiling() || onGround())
+    if (goCeil(loc, 12, 45) || goGround(loc, 12, 45))
     {
+      while (get (int (loc.x), int(loc.y+(45/2)+1)) != color(195))
+      {
+        loc.y--;
+      }
+      while (get (int (loc.x), int(loc.y-(45/2)-1)) != color(195))
+      {
+        loc.y++;
+      }
       vel.y*=-.5;
     }
-    if (hitWall())
+    //if (hitWall())
+    if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)
     {
+      if (goWall(loc, 12, 45) == 1)
+      {
+        while (get (int (loc.x-3), int(loc.y)) != color(195))
+        {
+          loc.x++;
+        }
+      }
+      if (goWall(loc, 12, 45) == 2)
+      {
+        while (get (int (loc.x+4), int(loc.y)) != color(195))
+        {
+          loc.x--;
+        }
+      }
       vel.x*=-.5;
     }
   }
@@ -138,13 +107,13 @@ class Player {
   }
   void move() {
 
-    if (keys[0]) {
+    if (keys[0] && goWall(loc, 12, 45) != 2) {
       if (vel.x >= 0 && vel.x < 1)
       {
         vel.x = 1;
       }
     } 
-    else if (keys[1]) {
+    else if (keys[1] && goWall(loc, 12, 45) != 1) {
       if (vel.x <= 0 && vel.x > -1)
       {
         vel.x = -1;
@@ -158,7 +127,7 @@ class Player {
     //  vel.x = 0;
     // }
 
-    if (keys[2] && onGround() == true) {
+    if (keys[2] && goGround(loc, 12, 45)) {
       vel.y = -3;
     }      
     loc.add(vel);

@@ -26,26 +26,49 @@ class Cube
       vel.y = velSet;
     }
   }
+  void friction()
+  {
+    if (vel.x > 0)
+    {
+      vel.x-=0.1;
+      if (vel.x < .01)
+      {
+        vel.x = 0;
+      }
+    }
+    if (vel.x < 0)
+    {
+      vel.x+=.1;
+      if (vel.x > -.01)
+      {
+        vel.x = 0;
+      }
+    }
+  }
   void fall()
   {
-    if (get(int(loc.x+15), int(loc.y+15)) == color(195))
+    if (!goGround(loc, 30, 30))
     {
       vel.add(acc);
       limitVel();
       loc.add(vel);
     }
-    else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
+    else
     {
-      while (get (int (loc.x+15), int(loc.y+14)) == color(0) || get(int (loc.x+15), int(loc.y+14)) == color(255))
+      vel.y = 0;
+      while (get (int (loc.x+15), int(loc.y+14)) != color(195))
       {
         loc.y--;
       }
-      vel.set(0, 0);
     }
   }
   boolean hitWall()
   {
-    if (get(int(loc.x+16), int(loc.y)) == color(0) || get(int(loc.x-15), int(loc.y)) == color(255))
+    if (get(int(loc.x+16), int(loc.y)) != color(195))
+    {
+      return true;
+    }
+    else if (get(int(loc.x-16), int(loc.y)) != color(195))
     {
       return true;
     }
@@ -54,27 +77,18 @@ class Cube
   }
   void hitPlayer(Player p)
   {
-    if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x > p.loc.x && p.loc.y > loc.y-15)
+    if (get(int(loc.x-22), int(loc.y)) == color(255, 0, 0))
     {
-      //if (loc.x > p.loc.x && p.loc.y > loc.y-15)
-      // {
-      // loc.x = p.loc.x+21;
-      // }
-      // else  
-      // if (loc.x < p.loc.x && p.loc.y > loc.y-15)
-      // {
-      //   loc.x = p.loc.x-21;
-      //  }
       if (!hitWall())
       {
-        loc.x = p.loc.x+23;
+        loc.x = p.loc.x+27;
       }
     }
-    else if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x < p.loc.x && p.loc.y > loc.y-15)
-    {   
+    else if (get(int(loc.x+22), int(loc.y)) == color(255, 0, 0))
+    {
       if (!hitWall())
       {
-        loc.x = p.loc.x-23;
+        loc.x = p.loc.x-27;
       }
     }
   }
