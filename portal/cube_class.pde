@@ -56,7 +56,7 @@ class Cube
     else
     {
       vel.y = 0;
-      while (get (int (loc.x+15), int(loc.y+14)) != color(195))
+      while (get (int (loc.x), int(loc.y-16)) != color(195))
       {
         loc.y--;
       }

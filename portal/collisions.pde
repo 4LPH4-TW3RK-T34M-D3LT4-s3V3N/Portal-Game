@@ -46,7 +46,6 @@ boolean goGround(PVector _loc, float _w, float _h)
   float h = _h/2;
   if (get(int(loc.x), int(loc.y+h+1)) != color(195))
   {
-    
     return true;
   }
   else 

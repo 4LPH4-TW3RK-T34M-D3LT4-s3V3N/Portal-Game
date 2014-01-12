@@ -7,9 +7,12 @@ class Level
     whichLevel = _whichLevel;
     design = loadImage(designName);
   }
- void display()
+  void display()
   {
-    image(design, 0, 0);
+    if (currentLevel == whichLevel)
+    {
+      image(design, 0, 0);
+    }
   }
 }
 
