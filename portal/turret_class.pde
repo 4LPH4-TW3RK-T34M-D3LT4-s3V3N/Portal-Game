@@ -9,8 +9,6 @@ class Turret
   int velSet = 30;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
-  
-  
   Turret(float x, float y)
   {
     loc = new PVector(x, y);
