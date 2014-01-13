@@ -1,11 +1,24 @@
 class Bullet {
-  PVector loc, vel, acc;
+  PVector loc, vel, acc, ploc;
   int size;
   int life;
-
+  float rise, run;
   Bullet(float x, float y, float px, float py) {
     loc = new PVector(x, y);
-    vel = new PVector();
+    ploc=new PVector(px, py);
+    line(px, py, x, y);
+    rise = (y-py);
+    run = (x-px); 
+    while (run > 5)
+    {
+      run/=2;
+    }
+    while (rise > 5)
+    {
+      rise/=2;
+    }
+    vel = new PVector(-run, -rise);
+
     acc = new PVector(0, 0);
     size = 1;
     life = 1000;
@@ -19,7 +32,7 @@ class Bullet {
   }
 
   void update() {
-    vel.add(acc);
+    //vel.add(acc);
     loc.add(vel);
     life--;
   }
