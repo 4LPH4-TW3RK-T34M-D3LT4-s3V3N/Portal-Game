@@ -17,8 +17,8 @@ class Bullet {
   }
 
   void display() {
-    fill(0);
-    stroke(0);
+    fill(1);
+    stroke(1);
     strokeWeight(2);
     ellipse(loc.x, loc.y, size, size);
   }
@@ -29,7 +29,7 @@ class Bullet {
     life--;
   }
   void hit() {
-    if (get(int(loc.x), int(loc.y)) == color(0) || get(int(loc.x), int(loc.y)) == color(255)||get(int(loc.x), int(loc.y)) == color(255, 0, 255) ) {
+    if (get(int(loc.x), int(loc.y)) == color(0) || get(int(loc.x), int(loc.y)) == color(255)||get(int(loc.x), int(loc.y)) == color(255, 0, 255) ||get(int(loc.x), int(loc.y)) == color(255, 0, 0)) {
       life=0;
     }
   }

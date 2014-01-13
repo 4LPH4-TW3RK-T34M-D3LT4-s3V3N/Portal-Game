@@ -48,27 +48,28 @@ void draw()
     turret[i].limitVel();
     turret[i].fall();
     turret[i].hitPlayer(player);
+    turret[i].shoot(player);
   }
-  for (int i = bullet1.size()-1; i >=0; i--) {
-    Bullet b = bullet1.get(i);
-    b.display();
-    b.update();
-    b.hit();
-    if (b.life <= 0) {
-      bullet1.remove(i);
-    }
-  }
-  for (int i = bullet2.size()-1; i >=0; i--) {
-    Bullet b = bullet2.get(i);
-    b.display();
-    b.update();
-    b.hit();
-    if (b.life <= 0) {
-      bullet2.remove(i);
-    }
-  }
-  bullet1.add(new Bullet(turret[0].loc.x, turret[0].loc.y, player.loc.x, player.loc.y));
-  bullet2.add(new Bullet(turret[1].loc.x, turret[1].loc.y, player.loc.x, player.loc.y));
+//  for (int i = bullet1.size()-1; i >=0; i--) {
+//    Bullet b = bullet1.get(i);
+//    b.display();
+//    b.update();
+//    b.hit();
+//    if (b.life <= 0) {
+//      bullet1.remove(i);
+//    }
+//  }
+//  for (int i = bullet2.size()-1; i >=0; i--) {
+//    Bullet b = bullet2.get(i);
+//    b.display();
+//    b.update();
+//    b.hit();
+//    if (b.life <= 0) {
+//      bullet2.remove(i);
+//    }
+//  }
+//  bullet1.add(new Bullet(turret[0].loc.x, turret[0].loc.y, player.loc.x, player.loc.y));
+//  bullet2.add(new Bullet(turret[1].loc.x, turret[1].loc.y, player.loc.x, player.loc.y));
 }
 void keyPressed()
 {
