@@ -6,19 +6,9 @@ class Bullet {
   Bullet(float x, float y, float px, float py) {
     loc = new PVector(x, y);
     ploc=new PVector(px, py);
-    line(px, py, x, y);
     rise = (y-py);
     run = (x-px); 
-    while (run > 5)
-    {
-      run/=2;
-    }
-    while (rise > 5)
-    {
-      rise/=2;
-    }
-    vel = new PVector(-run, -rise);
-
+    vel = new PVector(-run/50, -rise/50);
     acc = new PVector(0, 0);
     size = 1;
     life = 1000;

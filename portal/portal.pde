@@ -6,7 +6,8 @@ Player player;
 Turret[] turret=new Turret[2];
 boolean[] keys;
 
-ArrayList<Bullet> bullet = new ArrayList<Bullet>();
+ArrayList<Bullet> bullet1 = new ArrayList<Bullet>();
+ArrayList<Bullet> bullet2 = new ArrayList<Bullet>();
 
 void setup()
 {
@@ -48,17 +49,26 @@ void draw()
     turret[i].fall();
     turret[i].hitPlayer(player);
   }
-  for (int i = bullet.size()-1; i >=0; i--) {
-    Bullet b = bullet.get(i);
+  for (int i = bullet1.size()-1; i >=0; i--) {
+    Bullet b = bullet1.get(i);
     b.display();
     b.update();
     b.hit();
     if (b.life <= 0) {
-      bullet.remove(i);
+      bullet1.remove(i);
     }
   }
-  bullet.add(new Bullet(turret[0].loc.x,turret[0].loc.y,player.loc.x,player.loc.y));
-  bullet.add(new Bullet(turret[1].loc.x,turret[1].loc.y,player.loc.x,player.loc.y));
+  for (int i = bullet2.size()-1; i >=0; i--) {
+    Bullet b = bullet2.get(i);
+    b.display();
+    b.update();
+    b.hit();
+    if (b.life <= 0) {
+      bullet2.remove(i);
+    }
+  }
+  bullet1.add(new Bullet(turret[0].loc.x, turret[0].loc.y, player.loc.x, player.loc.y));
+  bullet2.add(new Bullet(turret[1].loc.x, turret[1].loc.y, player.loc.x, player.loc.y));
 }
 void keyPressed()
 {
