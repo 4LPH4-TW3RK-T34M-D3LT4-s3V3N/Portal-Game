@@ -47,15 +47,18 @@ class Portal {
   {
     stroke(0, 255, 0);
     strokeWeight(1);
-    float rise = (mouseY-p.loc.y)/10;
-    float run = (mouseX-p.loc.x)/10;
+    float rise = (mouseY-p.loc.y)/100;
+    float run = (mouseX-p.loc.x)/100;
     while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(255) && get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(0))
     {
       // ellipse(p.loc.x+(run*wut), p.loc.y+(rise*wut), 30, 30);
       wut+=.1;
       shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
+      if (shootLoc.x > width || shootLoc.x < 0  || shootLoc.y > height || shootLoc.y < 0)
+      {
+        return;
+      }
     }
-
     fill(255, 0, 0);
     wut = 0;
     for (int i =0; i < 20; i++)
@@ -67,7 +70,7 @@ class Portal {
   {
     appear = true;
     loc = shootLoc;
-    if (get(int(shootLoc.x), int(shootLoc.y)) == color(0))
+    if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))
     {
       appear = false;
     }
@@ -111,15 +114,29 @@ class Portal {
   {
     if (appear && partner.appear)
     {
-      if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 15 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 15)
+      if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 20 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 20)
       {
         if (partner.orient == 0)
         {
-          if (c.vel.y > 0)
+          if (orient == 0)
           {
-            c.vel.y*=1;
+            if (c.vel.y > 0)
+            {
+              c.vel.y*=-1;
+            }
+            else if (c.vel.y == 0)
+            {
+              c.vel.y = -2;
+            }
           }
-          c.loc.set(partner.loc.x, partner.loc.y-15);
+          if (orient == 1 || orient == 2)
+          {
+            if (c.vel.y >= 0)
+            {
+              c.vel.y = -2;
+            }
+          }
+          c.loc.set(partner.loc.x, partner.loc.y-20);
         }
         else if (partner.orient == 3)
         {
@@ -127,7 +144,7 @@ class Portal {
           {
             c.vel.y*=1;
           }
-          c.loc.set(partner.loc.x, partner.loc.y+15);
+          c.loc.set(partner.loc.x, partner.loc.y+20);
         }
         else if (partner.orient == 1)
         {
@@ -135,14 +152,14 @@ class Portal {
           {
             c.vel.x = c.vel.y;
           }
-          c.loc.set(partner.loc.x+16, partner.loc.y);
+          c.loc.set(partner.loc.x+20, partner.loc.y);
         }
         else if (partner.orient == 2)
         {
           if (orient == 4)
           {
           }
-          c.loc.set(partner.loc.x-16, partner.loc.y);
+          c.loc.set(partner.loc.x-20, partner.loc.y);
         }
       }
     }
@@ -156,9 +173,23 @@ class Portal {
       {
         if (partner.orient == 0)
         {
-          if (p.vel.y > 0)
+          if (orient == 0)
           {
-            p.vel.y*=-1;
+            if (p.vel.y > 0)
+            {
+              p.vel.y*=-1;
+            }
+            else if (p.vel.y == 0)
+            {
+              p.vel.y = -2;
+            }
+          }
+          if (orient == 1 || orient == 2)
+          {
+            if (p.vel.y >= 0)
+            {
+              p.vel.y = -2;
+            }
           }
           p.loc.set(partner.loc.x, partner.loc.y-27);
         }
