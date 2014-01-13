@@ -111,7 +111,7 @@ class Portal {
   {
     if (appear && partner.appear)
     {
-      if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 16 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 15)
+      if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 15 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 15)
       {
         if (partner.orient == 0)
         {
@@ -119,7 +119,7 @@ class Portal {
           {
             c.vel.y*=1;
           }
-          c.loc.set(partner.loc.x, partner.loc.y-17);
+          c.loc.set(partner.loc.x, partner.loc.y-15);
         }
         else if (partner.orient == 3)
         {
@@ -127,7 +127,7 @@ class Portal {
           {
             c.vel.y*=1;
           }
-          c.loc.set(partner.loc.x, partner.loc.y+17);
+          c.loc.set(partner.loc.x, partner.loc.y+15);
         }
         else if (partner.orient == 1)
         {
@@ -135,19 +135,14 @@ class Portal {
           {
             c.vel.x = c.vel.y;
           }
-          c.loc.set(partner.loc.x+17, partner.loc.y);
+          c.loc.set(partner.loc.x+16, partner.loc.y);
         }
         else if (partner.orient == 2)
         {
-          if (orient == 0)
+          if (orient == 4)
           {
-            c.vel.x = -c.vel.y;
           }
-          else if(orient == 3)
-          {
-            c.vel.x = c.vel.y;
-          }
-          c.loc.set(partner.loc.x-17, partner.loc.y);
+          c.loc.set(partner.loc.x-16, partner.loc.y);
         }
       }
     }
@@ -177,26 +172,14 @@ class Portal {
         }
         else if (partner.orient == 1)
         {
-          if (orient == 0)
+          if (orient == 0 || orient == 3)
           {
             p.vel.x = p.vel.y;
-          }
-          else if(orient == 3)
-          {
-            p.vel.x = -p.vel.y;
           }
           p.loc.set(partner.loc.x+26, partner.loc.y);
         }
         else if (partner.orient == 2)
         {
-          if (orient == 0)
-          {
-            p.vel.x = -p.vel.y;
-          }
-          else if(orient == 3)
-          {
-            p.vel.x = p.vel.y;
-          }
           p.loc.set(partner.loc.x-26, partner.loc.y);
         }
       }
