@@ -8,9 +8,6 @@ class Turret
   boolean shoot;
   int velSet = 30;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
-
-  
-  
   Turret(float x, float y)
   {
     loc = new PVector(x, y);
@@ -64,6 +61,4 @@ class Turret
     
   }
   }
-  
-  
 }
