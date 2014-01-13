@@ -6,10 +6,12 @@ class Bullet {
   Bullet(float x, float y, float px, float py) {
     loc = new PVector(x, y);
     ploc=new PVector(px, py);
+
     rise = (y-py);
     run = (x-px); 
-    vel = new PVector(-run/50, -rise/50);
-    acc = new PVector(0, 0);
+    
+    vel = new PVector(-run/50, -rise/50);// the /50 makes it go slower
+    acc = new PVector(0, 0);// acc is unecessary
     size = 1;
     life = 1000;
   }
