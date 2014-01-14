@@ -35,7 +35,7 @@ void setup()
   player = new Player("P34CH35", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
-  button = new Button(100, 485,0);
+  button = new Button(100, 485, 0);
   cubes = new Cube[0];
   keys=new boolean[3];
   keys[0]=false;
@@ -44,7 +44,6 @@ void setup()
 }
 void draw()
 {
-  print(button.checkPress());
   if (currentLevel == 0)
   {
     if (Screen) {
@@ -145,7 +144,7 @@ void draw()
 
     player.display();
     cube.hitPlayer(player);
-button.press();
+    button.press();
     player.move();
     player.friction();
     cube.friction();
