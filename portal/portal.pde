@@ -3,6 +3,8 @@ boolean Options = false;
 boolean Credits = false;
 boolean Physics = false;
 boolean Screen = true;
+boolean lose = false;
+boolean win;
 color Brandon = color(0, 100, 255);
 color AJ = color(255, 100, 0);
 color Irek = color(100, 255, 100);
@@ -10,6 +12,7 @@ color Clayton = color(65, 0, 125);
 color RaceWhite = color(240, 230, 175); 
 color RaceBlack = color(125, 75, 50);
 Cube cube;
+Cube[] cubes;
 Portal orange;
 Portal blue;
 Level level1, level2, level3;
@@ -31,6 +34,7 @@ void setup()
   player = new Player("P34CH35", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
+  cubes = new Cube[0];
   keys=new boolean[3];
   keys[0]=false;
   keys[1]=false;
@@ -64,9 +68,10 @@ void draw()
         Physics = true;
         Screen = false;
       }
-      if(inbetween(width/2, height/2+10, 40, 80))
+      if (inbetween(width/2, height/2+10, 40, 80))
       {
         currentLevel++;
+        initializeLevel();
       }
       fill(0, 0, 255);
       rect(width/2, 425, 200, 75);
@@ -148,19 +153,27 @@ void draw()
       turret[i].limitVel();
       turret[i].fall();
       turret[i].hitPlayer(player);
+      turret[i].shoot(player);
+      blue.checkTurret(turret[i], orange);
+      orange.checkTurret(turret[i], blue);
     }
-    for (int i = bullet.size()-1; i >=0; i--) {
-      Bullet b = bullet.get(i);
-      b.display();
-      b.update();
-      b.hit();
-      if (b.life <= 0) {
-        bullet.remove(i);
-      }
+    if (lose)
+    {
+      textAlign(CENTER);
+      fill(255, 0, 0);
+      textSize(30);
+      text("YOU LOSE, Press ENTER to restart level", width/2, height/2);
+      noLoop();
+    }
+    if (win)
+    {
+      textAlign(CENTER);
+      fill(255, 0, 0);
+      textSize(30);
+      text("YOU WIN, Press ENTER to go to next level", width/2, height/2);
+      noLoop();
     }
   }
-  // bullet.add(new Bullet(turret[0].loc.x, turret[0].loc.y, player.loc.x, player.loc.y));
-  //bullet.add(new Bullet(turret[1].loc.x, turret[1].loc.y, player.loc.x, player.loc.y));
 }
 void keyPressed()
 {
@@ -174,6 +187,18 @@ void keyPressed()
     }
     if (key==' ') {
       keys[2]=true;
+    }
+    if (keyCode == ENTER && lose)
+    {
+      initializeLevel();
+      lose = false;
+      loop();
+    }
+    else if (keyCode == ENTER && win)
+    {
+      initializeLevel();
+      win = false;
+      loop();
     }
   }
 }
@@ -216,8 +241,16 @@ void initializeLevel()
   {
     orange = new Portal(color(255, 115, 0));
     blue = new Portal(color(0, 0, 255));
+    if (currentLevel == 1)
+    {
+      turret[0]= new Turret(200, 300);
+      turret[1]= new Turret(600, 300);
+      player = new Player("P34CH35", 20, 50);
+      cube = new Cube(width/2, height/2);
+    }
     if (currentLevel == 2)
     {
+      turret = new Turret[0];
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
     }
@@ -228,5 +261,4 @@ void initializeLevel()
     }
   }
 }
-
 

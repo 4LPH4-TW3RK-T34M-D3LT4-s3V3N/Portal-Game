@@ -216,5 +216,56 @@ class Portal {
       }
     }
   }
+  void checkTurret(Turret t, Portal partner)
+  {
+    if (appear && partner.appear)
+    {
+      if (dist(t.loc.x, t.loc.y, loc.x, loc.y) < 25 || dist(t.loc.x+t.vel.x, t.loc.y+t.vel.y, loc.x, loc.y) < 25)
+      {
+        if (partner.orient == 0)
+        {
+          if (orient == 0)
+          {
+            if (t.vel.y > 0)
+            {
+              t.vel.y*=-1;
+            }
+            else if (t.vel.y == 0)
+            {
+              t.vel.y = -2;
+            }
+          }
+          if (orient == 1 || orient == 2)
+          {
+            if (t.vel.y >= 0)
+            {
+              t.vel.y = -2;
+            }
+          }
+          t.loc.set(partner.loc.x, partner.loc.y-27);
+        }
+        else if (partner.orient == 3)
+        {
+          if (t.vel.y < 0)
+          {
+            t.vel.y*=-1;
+          }
+          t.loc.set(partner.loc.x, partner.loc.y+27);
+        }
+        else if (partner.orient == 1)
+        {
+          if (orient == 0 || orient == 3)
+          {
+           t.vel.x = t.vel.y;
+          }
+          t.loc.set(partner.loc.x+26, partner.loc.y);
+        }
+        else if (partner.orient == 2)
+        {
+          t.loc.set(partner.loc.x-26, partner.loc.y);
+        }
+      }
+    }
+  }
 }
 

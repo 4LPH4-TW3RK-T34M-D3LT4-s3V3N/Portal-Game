@@ -56,9 +56,12 @@ class Cube
     else
     {
       vel.y = 0;
-      while (get (int (loc.x), int(loc.y-16)) != color(195))
+      if (goCeil(loc, 30, 30))
       {
-        loc.y--;
+        while (get (int (loc.x), int(loc.y-31)) != color(195))
+        {
+          loc.y++;
+        }
       }
     }
   }
@@ -93,5 +96,4 @@ class Cube
     }
   }
 }
-
 
