@@ -6,7 +6,7 @@ boolean Screen = true;
 boolean lose = false;
 boolean win;
 color Brandon = color(0, 100, 255);
-color AJ = color(255, 100, 0);
+color AJ = color(125, 75, 50);
 color Irek = color(100, 255, 100);
 color Clayton = color(65, 0, 125);
 color RaceWhite = color(240, 230, 175); 
@@ -151,6 +151,7 @@ void draw()
     blue.shoot(player);
 
     player.display();
+    cube.killPlayer(player);
     cube.hitPlayer(player);
     button.press();
     player.move();
