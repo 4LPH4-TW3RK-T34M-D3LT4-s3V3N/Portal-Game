@@ -49,7 +49,6 @@ class Player {
 
   void fall()
   {
-    print(goGround(loc, 12, 45));
     //  if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
     if (!goGround(loc, 12, 45)) //&& terminalVel() == color(195))
     {
@@ -67,7 +66,7 @@ class Player {
       {
         loc.y++;
       }
-      vel.y*=-.5;
+      //vel.y*=-.5;
     }
     if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)
     {

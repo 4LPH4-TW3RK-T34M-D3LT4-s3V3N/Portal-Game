@@ -17,6 +17,7 @@ Portal orange;
 Portal blue;
 Level level1, level2, level3;
 Player player;
+Button button;
 boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
@@ -34,6 +35,7 @@ void setup()
   player = new Player("P34CH35", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
+  button = new Button(100, 485,0);
   cubes = new Cube[0];
   keys=new boolean[3];
   keys[0]=false;
@@ -42,6 +44,7 @@ void setup()
 }
 void draw()
 {
+  print(button.checkPress());
   if (currentLevel == 0)
   {
     if (Screen) {
@@ -133,7 +136,7 @@ void draw()
     player.checkDoor();
 
     cube.display();
-
+    button.display();
     cube.fall();
     player.fall();
 
@@ -142,21 +145,21 @@ void draw()
 
     player.display();
     cube.hitPlayer(player);
-
+button.press();
     player.move();
     player.friction();
     cube.friction();
     blue.display();
     orange.display();
-    for (int i=0;i<turret.length;i++) {
-      turret[i].display();
-      turret[i].limitVel();
-      turret[i].fall();
-      turret[i].hitPlayer(player);
-      turret[i].shoot(player);
-      blue.checkTurret(turret[i], orange);
-      orange.checkTurret(turret[i], blue);
-    }
+    //    for (int i=0;i<turret.length;i++) {
+    //      turret[i].display();
+    //      turret[i].limitVel();
+    //      turret[i].fall();
+    //      turret[i].hitPlayer(player);
+    //      turret[i].shoot(player);
+    //      blue.checkTurret(turret[i], orange);
+    //      orange.checkTurret(turret[i], blue);
+    //    }
     if (lose)
     {
       textAlign(CENTER);
