@@ -10,10 +10,10 @@ class Bullet {
     rise = (y-py);
     run = (x-px); 
     
-    vel = new PVector(-run/50, -rise/50);// the /50 makes it go slower
+    vel = new PVector(-run/20, -rise/20);// the /50 makes it go slower
     acc = new PVector(0, 0);// acc is unecessary
     size = 1;
-    life = 1000;
+    life = 200;
   }
 
   void display() {

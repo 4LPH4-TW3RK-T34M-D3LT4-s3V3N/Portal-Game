@@ -4,9 +4,10 @@ class Turret
   PVector vel;
   PVector acc;
   int size;
-  boolean hello;
+  float startTime;
   boolean shoot = true;
   int velSet = 30;
+  boolean timer=true;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
   Turret(float x, float y)
@@ -59,6 +60,15 @@ class Turret
   }
   boolean checkPlayer(Player p)
   {
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15) {
+      if (timer==true) {
+        startTime=millis();
+        timer=false;
+      }
+    }
+    else {
+      timer=true;
+    }
     if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15)
     {
       return true;
@@ -72,7 +82,14 @@ class Turret
   void shoot(Player p) {
     if (checkPlayer(p))
     {
+      
+      stroke(250,0,0);
+      strokeWeight(2);
+      line(p.loc.x, p.loc.y, loc.x, loc.y);
+      println(millis()-startTime);
+      if (((millis()-startTime))>800) {
         shoot = true;
+      }
     }
     else
     {
