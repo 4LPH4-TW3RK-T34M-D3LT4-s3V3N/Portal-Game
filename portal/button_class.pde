@@ -43,6 +43,7 @@ class Button {
     }
     else
     {
+      pressed = false;
       if (h < 10)
       {
         h++;

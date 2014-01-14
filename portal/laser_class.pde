@@ -5,6 +5,8 @@ class Laser
   boolean moving;
   int wut;
   int moveLength;
+  boolean buttonPress  = false;
+  Button b;
   int move = 1;
   int moveSpeed = 1;
   Laser(int x, int y, boolean _vertical)
@@ -13,6 +15,14 @@ class Laser
     vertical = _vertical;
     moving = false;
   }
+  Laser(int x, int y, boolean _vertical, Button _b)
+  {
+    loc = new PVector(x, y);
+    vertical = _vertical;
+    moving = false;
+    buttonPress = true;
+    b = _b;
+  }
   Laser(int x, int y, boolean _vertical, int _moveLength)
   {
     loc = new PVector(x, y);
@@ -20,69 +30,99 @@ class Laser
     moving = true;
     moveLength = _moveLength;
   }
-  void display()
+  Laser(int x, int y, boolean _vertical, int _moveLength, Button _b)
   {
-    if (!vertical)
-    {
-      wut = 0;
-      while (get (int (loc.x+wut), int(loc.y)) == color(195))
+    loc = new PVector(x, y);
+    vertical = _vertical;
+    moving = true;
+    moveLength = _moveLength;
+    buttonPress = true;
+    b = _b;
+  }
+  void display(Button b)
+  {
+    if (!b.pressed && buttonPress || !buttonPress) {   
+      if (!vertical)
       {
-        fill(254, 0, 0);
-        noStroke();
-        ellipse(loc.x+wut, loc.y, 1, 1);
-        wut++;
+        wut = 0;
+        while (get (int (loc.x+wut), int(loc.y)) == color(195))
+        {
+          fill(254, 0, 0);
+          noStroke();
+          ellipse(loc.x+wut, loc.y, 5, 5);
+          wut+=5;
+        }
+        wut = 0;
+        while (get (int (loc.x+wut-6), int(loc.y)) == color(195))
+        {
+          fill(254, 0, 0);
+          noStroke();
+          ellipse(loc.x+wut-2, loc.y, 5, 5);
+          wut-=5;
+        }
       }
-      wut = 0;
-      while (get (int (loc.x+wut-2), int(loc.y)) == color(195))
+      else if (vertical)
       {
-        fill(254, 0, 0);
-        noStroke();
-        ellipse(loc.x+wut-2, loc.y, 1, 1);
-        wut--;
-      }
-      print(wut);
-    }
-    else if (vertical)
-    {
-      wut = 0;
-      while (get (int (loc.x), int(loc.y+wut)) == color(195))
-      {
-        fill(254, 0, 0);
-        noStroke();
-        ellipse(loc.x, loc.y+wut, 1, 1);
-        wut++;
-      }
-      wut = 0;
-      while (get (int (loc.x), int(loc.y+wut-2)) == color(195))
-      {
-        fill(254, 0, 0);
-        noStroke();
-        ellipse(loc.x, loc.y+wut, 1, 1);
-        wut--;
+        wut = 0;
+        while (get (int (loc.x), int(loc.y+wut)) == color(195))
+        {
+          fill(254, 0, 0);
+          noStroke();
+          ellipse(loc.x, loc.y+wut, 5, 5);
+          wut+=5;
+        }
+        wut = 0;
+        while (get (int (loc.x), int(loc.y+wut-6)) == color(195))
+        {
+          fill(254, 0, 0);
+          noStroke();
+          ellipse(loc.x, loc.y+wut, 5, 5);
+          wut-=5;
+        }
       }
     }
   }
-  void move()
+  void hitPlayer(Player p)
   {
-    if (moving)
+    if (checkPlayer(p))
     {
-      if (!vertical)
+      lose = true;
+    }
+  }
+  boolean checkPlayer(Player p)
+  {
+    for (int i = -10; i < 15; i++)
+    {
+      if (get(int(p.loc.x+i), int(p.loc.y)) == color(254, 0, 0))
       {
-        loc.y+=moveSpeed;
-        move+=moveSpeed;
-        if (move >= moveLength || move <= 0)
-        {
-          moveSpeed*=-1;
-        }
+        return true;
       }
-      else
+    }
+    return false;
+  }
+  void move(Button b)
+  {
+    if (!b.pressed && buttonPress || !buttonPress)
+    {
+      if (moving)
       {
-        loc.x+=moveSpeed;
-        move+=moveSpeed;
-        println(move);
-        if (move >= moveLength || move <= 0)
+        if (!vertical)
         {
-          moveSpeed*=-1;
+          loc.y+=moveSpeed;
+          move+=moveSpeed;
+          if (move >= moveLength || move <= 0)
+          {
+            moveSpeed*=-1;
+          }
+        }
+        else
+        {
+          loc.x+=moveSpeed;
+          move+=moveSpeed;
+          if (move >= moveLength || move <= 0)
+          {
+            moveSpeed*=-1;
+          }
         }
       }
     }

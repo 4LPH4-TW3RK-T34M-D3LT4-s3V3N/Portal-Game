@@ -4,6 +4,8 @@ class movingWall
   boolean white;
   int h;
   int w;
+  Button b;  
+  boolean buttonPress = false;
   int moveLength;
   boolean vertical;
   int moveSpeed = 1;
@@ -17,6 +19,17 @@ class movingWall
     moveLength = _moveLength;
     vertical = _vertical;
   }
+  movingWall(int x, int y, int _w, int _h, boolean _white, boolean _vertical, int _moveLength, Button _b)
+  {
+    loc = new PVector(x, y);
+    w = _w;
+    h = _h;
+    white = _white;
+    moveLength = _moveLength;
+    vertical = _vertical;
+    b = _b;
+    buttonPress = true;
+  }
   void display()
   {
     rectMode(CENTER);
@@ -28,24 +41,27 @@ class movingWall
     noStroke();
     rect(loc.x, loc.y, w, h);
   }
-  void move()
+  void move(Button b)
   {
-    if (!vertical)
+    if (b.pressed && buttonPress || !buttonPress)
     {
-      loc.y+=moveSpeed;
-      move+=moveSpeed;
-      if (move >= moveLength || move <= 0)
+      if (!vertical)
       {
-        moveSpeed*=-1;
+        loc.y+=moveSpeed;
+        move+=moveSpeed;
+        if (move >= moveLength || move <= 0)
+        {
+          moveSpeed*=-1;
+        }
       }
-    }
-    else if (vertical)
-    {
-      loc.x+=moveSpeed;
-      move+=moveSpeed;
-      if (move >= moveLength || move <= 0)
+      else if (vertical)
       {
-        moveSpeed*=-1;
+        loc.x+=moveSpeed;
+        move+=moveSpeed;
+        if (move >= moveLength || move <= 0)
+        {
+          moveSpeed*=-1;
+        }
       }
     }
   }

@@ -18,6 +18,7 @@ Portal blue;
 Level level1, level2, level3;
 Player player;
 Button button;
+Laser laser;
 boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
@@ -36,7 +37,8 @@ void setup()
   player = new Player("P34CH35", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
-  wall = new movingWall(100, 100, 75, 50, false, true, 100);
+  wall = new movingWall(100, 100, 75, 50, false, true, 100, button);
+  laser = new Laser(500, 100, true, 100, button);
   button = new Button(100, 485, 0);
   cubes = new Cube[0];
   keys=new boolean[3];
@@ -129,7 +131,7 @@ void draw()
     level2.display();
     level3.display();
     wall.display();
-    wall.move();
+    wall.move(button);
 
     orange.checkObject(cube, blue);
     orange.checkPlayer(player, blue);  
@@ -141,7 +143,10 @@ void draw()
     button.display();
     cube.fall();
     player.fall();
-
+    laser.display(button);
+    print(laser.checkPlayer(player));
+    laser.hitPlayer(player);
+    laser.move(button);
     orange.shoot(player);
     blue.shoot(player);
 
@@ -252,15 +257,19 @@ void initializeLevel()
       turret[1]= new Turret(600, 300);
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
+      button = new Button(100, 485, 0);
     }
     if (currentLevel == 2)
     {
       turret = new Turret[0];
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
+      button = new Button(100, 485, 0);
     }
     if (currentLevel == 3)
     {
+      button = new Button(100, 485, 0);
+
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
     }
