@@ -31,7 +31,7 @@ void setup()
   level3 = new Level(3, "Level 3.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
-  player = new Player("P34CH35", 20, 50);
+  player = new Player("p34cH3s", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
   cubes = new Cube[0];
@@ -256,7 +256,7 @@ void initializeLevel()
     }
     if (currentLevel == 3)
     {
-      player = new Player("P34CH35", 20, 50);
+      player = new Player("P34CH35", 20, height/2);
       cube = new Cube(width/2, height/2);
     }
   }
