@@ -1,40 +1,101 @@
-//////////////////////
-// 4LPHA-TW3RK-T34M //
-//   D3LT4-s3V3N    //
-//     STUDIO       //
-//    PRESENTS      //
-//////////////////////
-
 Cube cube;
 Portal orange;
 Portal blue;
-Level level1;
+Level level1, level2;
 Player player;
+Turret[] turret=new Turret[2];
+boolean[] keys;
+ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
 void setup()
 {
   size(800, 500);
   cube = new Cube(width/2, height/2);
   level1 = new Level(1, "Level 1.png");
+  level2 = new Level(1, "Level 2.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
-  player = new Player("p34Ch3S", width/2, height/2);
+  player = new Player("P34CH35", 20, 20);
+  turret[0]= new Turret(200, 300);
+  turret[1]= new Turret(600, 300);
+  keys=new boolean[3];
+  keys[0]=false;
+  keys[1]=false;
+  keys[2]=false;
 }
 void draw()
 {
   level1.display();
-  player.display();
+  //level2.display();
   cube.fall();
   cube.hitPlayer(player);
-  player.fall();
-  player.onGround();
-  player.hitCeiling();
   cube.display();
   blue.display();
   orange.display();
   orange.checkObject(cube, blue);
-  orange.checkPlayer(player, blue);
+  orange.checkPlayer(player, blue);  
+  blue.checkPlayer(player, orange);
+  player.fall();
+  orange.shoot(player);
+  blue.shoot(player);
   //  blue.checkPlayer(player, orange);
+  player.display();
   player.move();
+  for (int i=0;i<turret.length;i++) {
+    turret[i].display();
+    turret[i].limitVel();
+    turret[i].fall();
+    turret[i].hitPlayer(player);
+  }
+  for (int i = bullet.size()-1; i >=0; i--) {
+    //Declare a new Particle called p and assign it the current object in the ArrayList
+    Bullet b = bullet.get(i);
+    b.display();
+    b.update();
+    //if the particle's life is less than or equal to 0, remove the particle
+    if (b.life <= 0) {
+      bullet.remove(i);
+    }
+  }
+  bullet.add(new Bullet(turret[0].loc.x,turret[0].loc.y));
+}
+void keyPressed()
+{
+  if (key=='d') {
+    keys[0]=true;
+  }
+  if (key=='a') {
+    keys[1]=true;
+  }
+  if (key==' ') {
+    keys[2]=true;
+  }
+}
+
+void keyReleased()
+{
+  if (key=='d') {
+    keys[0]=false;
+  }
+  if (key=='a') {
+    keys[1]=false;
+  }
+  if (key==' ') {
+    keys[2]=false;
+  }
+  orange.dissapear();
+  blue.dissapear();
+} 
+
+void mousePressed()
+{
+  if (mouseButton == LEFT)
+  {
+    orange.appear();
+  }
+  if (mouseButton == RIGHT)
+  {
+    blue.appear();
+  }
 }
 

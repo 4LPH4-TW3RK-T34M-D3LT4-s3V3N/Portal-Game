@@ -8,33 +8,30 @@ class Player {
     loc = new PVector(locx, locy);
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
-    velSet = 10;
+    velSet = 20;
   }
-
-  void display() {
-    fill(255, 0, 0);
-    rectMode(CENTER);
-    rect(loc.x, loc.y, 12, 45);
-    loc.add(vel);
-  }
-  void fall()
+  color terminalVel()
   {
-    if (get(int(loc.x+7.5), int(loc.y+24)) == color(195))
+    for(int i = 0; i < vel.y; i++)
     {
-      vel.add(acc);
-      limitVel();
+      if(get(int(loc.x+7.5), int(loc.y+19+i)) != color(195))
+      {
+        return get(int(loc.x+7.5), int(loc.y+19+i));
+      }
     }
+    return color(195);
   }
   boolean onGround() 
   {
-    if (get(int(loc.x+7.5), int(loc.y+20)) == color(0))
+    if (get(int(loc.x+7.5), int(loc.y+20)) == color(0) || get(int(loc.x+7.5), int(loc.y+20)) == color(255, 0, 255))
     {
-      while (get (int (loc.x+7.5), int(loc.y+19)) == color(0))
+      while (get (int (loc.x+7.5), int(loc.y+19)) == color(0) || get (int (loc.x+7.5), int(loc.y+19)) == color(255, 0, 255))
       {
         loc.y--;
       }
       return true;
     }
+
     else if (get(int(loc.x+7.5), int(loc.y+20)) == color(195))
     {
       return false;
@@ -42,7 +39,7 @@ class Player {
     else {
       return true;
     }
-  } 
+  }
   boolean hitCeiling()
   {
     if (get(int(loc.x+7.5), int(loc.y-24)) == color(0))
@@ -57,6 +54,26 @@ class Player {
       return false;
     }
   }
+  void display() {
+    println(onGround());
+    fill(255, 0, 0);
+    noStroke();
+    rectMode(CENTER);
+    rect(loc.x, loc.y, 12, 45);
+  }
+  void fall()
+  {
+    if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
+    {
+      vel.add(acc);
+      limitVel();
+      loc.add(vel);
+    }
+    if (hitCeiling() || onGround())
+    {
+      vel.y = 0;
+    }
+  }
   void limitVel()
   {
     if (vel.y > velSet)
@@ -64,20 +81,23 @@ class Player {
       vel.y = velSet;
     }
   }
+
   void move() {
-    if (keyPressed && key == 'd') {
+
+    if (keys[0]) {
       vel.x = 1;
     } 
-    else if (keyPressed && key == 'a') {
+    else if (keys[1]) {
       vel.x = -1;
     } 
     else {
       vel.x = 0;
     }
 
-    if (keyPressed && key == ' ' && onGround() == true) {
+    if (keys[2] && onGround() == true) {
       vel.y = -3;
-    }
+    }      
+    loc.add(vel);
   }
 }
 

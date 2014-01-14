@@ -14,7 +14,7 @@ class Cube
   }
   void display()
   {
-    fill(0, 0, 255);
+    fill(255, 0, 255);
     noStroke();
     rectMode(CENTER);
     rect(loc.x, loc.y, 30, 30);
@@ -28,7 +28,6 @@ class Cube
   }
   void fall()
   {
-    println(dist(loc.x,loc.y,player.loc.x,player.loc.y));
     if (get(int(loc.x+15), int(loc.y+15)) == color(195))
     {
       vel.add(acc);
@@ -37,7 +36,7 @@ class Cube
     }
     else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
-      while (get(int (loc.x+15), int(loc.y+14)) == color(0) || get(int (loc.x+15), int(loc.y+14)) == color(255))
+      while (get (int (loc.x+15), int(loc.y+14)) == color(0) || get(int (loc.x+15), int(loc.y+14)) == color(255))
       {
         loc.y--;
       }
@@ -46,20 +45,22 @@ class Cube
   }
   void hitPlayer(Player p)
   {
-    if(dist(loc.x,loc.y,p.loc.x,p.loc.y) < 22)
+    if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x > p.loc.x && p.loc.y > loc.y-15)
     {
-      if(loc.x > p.loc.x)
-      {
-        loc.x = p.loc.x+22;
-      }
-      if(loc.x < p.loc.x)
-      {
-        loc.x = p.loc.x-22;
-      }
-      //if(loc.y > p.loc.y)
-      //{
-       // p.loc.y = loc.y-22;
-      //}
+      //if (loc.x > p.loc.x && p.loc.y > loc.y-15)
+     // {
+       // loc.x = p.loc.x+21;
+     // }
+     // else  
+    // if (loc.x < p.loc.x && p.loc.y > loc.y-15)
+     // {
+     //   loc.x = p.loc.x-21;
+    //  }
+      loc.x = p.loc.x+23;
+    }
+    else if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x < p.loc.x && p.loc.y > loc.y-15)
+    {   
+      loc.x = p.loc.x-23;
     }
   }
 }
