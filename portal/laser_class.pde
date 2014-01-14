@@ -61,13 +61,16 @@ class Laser
         wut--;
       }
     }
+  }
+  void move()
+  {
     if (moving)
     {
       if (!vertical)
       {
         loc.y+=moveSpeed;
         move+=moveSpeed;
-        if (move >= moveLength || move == 0)
+        if (move >= moveLength || move <= 0)
         {
           moveSpeed*=-1;
         }

@@ -21,6 +21,7 @@ Button button;
 boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
+movingWall wall;
 ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
 void setup()
@@ -35,6 +36,7 @@ void setup()
   player = new Player("P34CH35", 20, 50);
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
+  wall = new movingWall(100, 100, 75, 50, false, true, 100);
   button = new Button(100, 485, 0);
   cubes = new Cube[0];
   keys=new boolean[3];
@@ -126,7 +128,8 @@ void draw()
     level1.display();
     level2.display();
     level3.display();
-
+    wall.display();
+    wall.move();
 
     orange.checkObject(cube, blue);
     orange.checkPlayer(player, blue);  
