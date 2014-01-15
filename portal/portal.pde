@@ -155,16 +155,20 @@ void draw()
 
     orange.shoot(player);
     blue.shoot(player);
+    player.display();
     for (int i = 0; i < cubes.length; i++)
     {
       cubes[i].killPlayer(player);
       cubes[i].hitPlayer(player);
-      cubes[i].friction();
     }
-    player.display();
 
     player.move();
     player.friction();
+    for (int i = 0; i < cubes.length; i++)
+    {
+      cubes[i].friction();
+    }
+
     blue.display();
     orange.display();
     for (int i = 0; i < walls.length; i++)
