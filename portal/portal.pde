@@ -14,7 +14,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[6];
+Level[] levels = new Level[7];
 Player player;
 Laser[] lasers;
 boolean[] keys;
@@ -71,7 +71,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel++;
+        currentLevel = changeLevel;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -337,7 +337,15 @@ void initializeLevel()
       walls[0] = new movingWall(144, 104, 131, 25, false, false, 300);
       lasers[0].assignButton(702, 79);
       walls[0].assignButton(535, 485);
-
+      player = new Player("P34CH35", 20, 50);
+    }
+    if (currentLevel == 5)
+    {  
+      turret = new Turret[1];
+      turret[0] = new Turret(389, 456);
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
     }
   }
