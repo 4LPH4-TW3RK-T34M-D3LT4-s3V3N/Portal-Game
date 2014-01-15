@@ -66,7 +66,7 @@ class Player {
       {
         loc.y++;
       }
-      //vel.y*=-.5;
+      vel.y*=-.25;
     }
     if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)
     {

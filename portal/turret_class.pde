@@ -4,9 +4,10 @@ class Turret
   PVector vel;
   PVector acc;
   int size;
-  boolean hello;
+  float startTime;
   boolean shoot = true;
   int velSet = 30;
+  boolean timer=true;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
   Turret(float x, float y)
@@ -31,22 +32,19 @@ class Turret
   }
   void fall()
   {
-    if (!goGround(loc, 20, 40))
+    if (get(int(loc.x+10), int(loc.y+20)) == color(195))
     {
       vel.add(acc);
       limitVel();
       loc.add(vel);
     }
-    else
+    else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
-      vel.y = 0;
-      if (goCeil(loc, 20, 40))
+      while (get (int (loc.x+10), int(loc.y+19)) == color(0) || get(int (loc.x+10), int(loc.y+19)) == color(255))
       {
-        while (get (int (loc.x), int(loc.y-21)) != color(195))
-        {
-          loc.y++;
-        }
+        loc.y--;
       }
+      vel.set(0, 0);
     }
   }
   void hitPlayer(Player p)
@@ -62,7 +60,16 @@ class Turret
   }
   boolean checkPlayer(Player p)
   {
-    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15 && p.loc.y > loc.y-100)
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y >= loc.y-200) {
+      if (timer==true) {
+        startTime=millis();
+        timer=false;
+      }
+    }
+    else {
+      timer=true;
+    }
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y >= loc.y-200)
     {
       return true;
     }
@@ -74,8 +81,14 @@ class Turret
 
   void shoot(Player p) {
     if (checkPlayer(p))
-    {
-      shoot = true;
+    { 
+      stroke(250,0,0);
+      strokeWeight(2);
+      line(p.loc.x, p.loc.y, loc.x, loc.y);
+      println(millis()-startTime);
+      if (((millis()-startTime))>800) {
+        shoot = true;
+      }
     }
     else
     {

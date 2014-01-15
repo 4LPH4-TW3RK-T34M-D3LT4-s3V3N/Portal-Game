@@ -134,6 +134,11 @@ void draw()
       blue.checkObject(cubes[i], orange);
       orange.checkObject(cubes[i], blue);
     }
+    for (int i=0;i<turret.length;i++) 
+    {
+      blue.checkTurret(turret[i], orange);
+      orange.checkTurret(turret[i], blue);
+    }
     orange.checkPlayer(player, blue);  
     blue.checkPlayer(player, orange);
     player.checkDoor();
@@ -143,7 +148,11 @@ void draw()
       cubes[i].display();
       cubes[i].fall();
     }
-
+    for (int i=0;i<turret.length;i++) {
+      turret[i].display();
+      turret[i].limitVel();
+      turret[i].fall();
+    }
     player.fall();
     for (int i = 0; i < lasers.length; i++)
     {
@@ -160,7 +169,10 @@ void draw()
       cubes[i].onPlayer(player);
       cubes[i].hitPlayer(player);
     }
-
+    for (int i=0;i<turret.length;i++) {
+      turret[i].hitPlayer(player);
+      turret[i].shoot(player);
+    }
     player.move();
     player.friction();
     for (int i = 0; i < cubes.length; i++)
@@ -189,15 +201,7 @@ void draw()
       orange.wallMove(walls[i]);
     }
 
-    //    for (int i=0;i<turret.length;i++) {
-    //      turret[i].display();
-    //      turret[i].limitVel();
-    //      turret[i].fall();
-    //      turret[i].hitPlayer(player);
-    //      turret[i].shoot(player);
-    //      blue.checkTurret(turret[i], orange);
-    //      orange.checkTurret(turret[i], blue);
-    //    }
+
     if (lose)
     {
       textAlign(CENTER);

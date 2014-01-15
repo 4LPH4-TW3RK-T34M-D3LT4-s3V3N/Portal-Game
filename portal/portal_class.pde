@@ -30,6 +30,7 @@ class Portal {
   }
   void display()
   {
+    noStroke();
     if (appear)
     {
       fill(c);
@@ -210,14 +211,26 @@ class Portal {
         }
         else if (partner.orient == 1)
         {
-          if (orient == 0 || orient == 3)
+          if (orient == 0)
           {
             p.vel.x = p.vel.y;
+          }
+          if(orient == 3)
+          {
+            p.vel.x = -p.vel.y;
           }
           p.loc.set(partner.loc.x+26, partner.loc.y);
         }
         else if (partner.orient == 2)
         {
+          if (orient == 0)
+          {
+            p.vel.x = -p.vel.y;
+          }
+          if (orient == 3)
+          {
+            p.vel.x = p.vel.y;
+          }
           p.loc.set(partner.loc.x-26, partner.loc.y);
         }
       }
