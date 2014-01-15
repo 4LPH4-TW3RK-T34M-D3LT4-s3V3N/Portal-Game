@@ -9,6 +9,7 @@ class Level
   }
   void display()
   {
+    imageMode(CORNER);
     if (currentLevel == whichLevel)
     {
       image(design, 0, 0);
