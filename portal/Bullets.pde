@@ -7,10 +7,10 @@ class Bullet {
     loc = new PVector(x, y);
     ploc=new PVector(px, py);
 
-    rise = (y-py);
-    run = (x-px); 
-    
-    vel = new PVector(-run/10, -rise/10);// the /50 makes it go slower
+    rise = (py-y);
+    run = (px-x); 
+
+    vel = new PVector(run/10, rise/10);// the /50 makes it go slower
     size = 1;
     life = 100;
   }
@@ -19,7 +19,16 @@ class Bullet {
     fill(1);
     stroke(1);
     strokeWeight(2);
-    ellipse(loc.x, loc.y, size, size);
+    if (rTrue) {
+      if (run>0) {
+        ellipse(loc.x, loc.y, size, size);
+      }
+    }
+    if (lTrue) {
+      if (run<0) {
+        ellipse(loc.x, loc.y, size, size);
+      }
+    }
   }
 
   void update() {
