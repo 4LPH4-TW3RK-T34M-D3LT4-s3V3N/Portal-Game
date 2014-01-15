@@ -1,5 +1,5 @@
 class Bullet {
-  PVector loc, vel, acc, ploc;
+  PVector loc, vel, ploc;
   int size;
   int life;
   float rise, run;
@@ -10,10 +10,9 @@ class Bullet {
     rise = (y-py);
     run = (x-px); 
     
-    vel = new PVector(-run/20, -rise/20);// the /50 makes it go slower
-    acc = new PVector(0, 0);// acc is unecessary
+    vel = new PVector(-run/10, -rise/10);// the /50 makes it go slower
     size = 1;
-    life = 200;
+    life = 100;
   }
 
   void display() {
@@ -24,7 +23,6 @@ class Bullet {
   }
 
   void update() {
-    //vel.add(acc);
     loc.add(vel);
     life--;
   }
