@@ -81,7 +81,6 @@ void draw()
 
       fill(0);
       textAlign(CENTER);
-      textMode(CENTER);
       textSize(50);
       text("Physics", width/2-250, 438);
       text("Options", width/2+250, 438); 
