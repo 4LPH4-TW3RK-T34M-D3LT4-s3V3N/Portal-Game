@@ -41,7 +41,6 @@ class Player {
     if (get(int(loc.x+15), int(loc.y)) == color(128, 255, 255)) {
       textSize(40);
       textAlign(CENTER);
-      currentLevel++;
       win = true;
       //initializeLevel();
     }

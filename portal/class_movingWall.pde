@@ -19,6 +19,7 @@ class movingWall
     white = _white;
     moveLength = _moveLength;
     vertical = _vertical;
+    b = new Button(-100, -100);
   }
   void assignButton(int x, int y)
   {
@@ -109,7 +110,7 @@ class movingWall
     if (b.pressed && buttonPress || !buttonPress)
     {
       moving = true;
-      if (!vertical)
+      if (vertical)
       {
         loc.y+=moveSpeed;
         move+=moveSpeed;
@@ -118,7 +119,7 @@ class movingWall
           moveSpeed*=-1;
         }
       }
-      else if (vertical)
+      else if (!vertical)
       {
         loc.x+=moveSpeed;
         move+=moveSpeed;

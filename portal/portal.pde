@@ -14,7 +14,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level level1, level2, level3;
+Level level1, level2, level3, level4;
 Player player;
 Laser[] lasers;
 boolean[] keys;
@@ -29,6 +29,7 @@ void setup()
   level1 = new Level(1, "Level 1.png");
   level2 = new Level(2, "Level 2.png");
   level3 = new Level(3, "Level 3.png");
+  level4 = new Level(4, "Level 4.png");
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 50);
@@ -122,6 +123,7 @@ void draw()
     level1.display();
     level2.display();
     level3.display();
+    level4.display();
     for (int i = 0; i < walls.length; i++)
     {
       walls[i].display();
@@ -241,6 +243,7 @@ void keyPressed()
     }
     else if (keyCode == ENTER && win)
     {
+      currentLevel++;
       initializeLevel();
       win = false;
       loop();
@@ -288,12 +291,8 @@ void initializeLevel()
     blue = new Portal(color(0, 0, 255));
     if (currentLevel == 1)
     {
-      walls = new movingWall[1];
-      walls[0] = new movingWall(100, 100, 75, 50, true, true, 100);
-      walls[0].assignButton(200, 485);
-      lasers = new Laser[1];
-      lasers[0] = new Laser(500, 100, true, 100);
-      lasers[0].assignButton(100, 485);
+      walls = new movingWall[0];
+      lasers = new Laser[0];
       turret = new Turret[2];
       turret[0]= new Turret(200, 300);
       turret[1]= new Turret(600, 300);
@@ -305,19 +304,40 @@ void initializeLevel()
     {
       turret = new Turret[0];
       walls = new movingWall[0];
-      cubes = new Cube[1];
+      cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
-      cubes[0] = new Cube(width/2, height/2);
     }
     if (currentLevel == 3)
     {
       turret = new Turret[0];
       walls = new movingWall[0];
-      cubes = new Cube[1];
+      cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
-      cubes[0] = new Cube(width/2, height/2);
+    }
+    if (currentLevel == 3)
+    {
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 20, 50);
+    }
+    if (currentLevel == 4)
+    {
+      turret = new Turret[0];
+      walls = new movingWall[1];
+      cubes = new Cube[2];
+      cubes[0] = new Cube(650, 39);
+      cubes[1] = new Cube(218, 390);
+      lasers = new Laser[1];
+      lasers[0] = new Laser(733, 491, true);
+      walls[0] = new movingWall(144, 104, 131, 25, false, false, 300);
+      lasers[0].assignButton(702, 79);
+      walls[0].assignButton(535, 485);
+
+      player = new Player("P34CH35", 20, 50);
     }
   }
 }

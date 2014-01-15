@@ -14,6 +14,7 @@ class Laser
     loc = new PVector(x, y);
     vertical = _vertical;
     moving = false;
+    b = new Button(-100, -100);
   }
   Laser(int x, int y, boolean _vertical, Button _b)
   {
@@ -29,6 +30,7 @@ class Laser
     vertical = _vertical;
     moving = true;
     moveLength = _moveLength;
+    b = new Button(-100, -100);
   }
   void assignButton(int x, int y)
   {
