@@ -5,12 +5,15 @@ boolean Options = false;
 boolean Credits = false;
 boolean Physics = false;
 boolean Screen = true;
+boolean Sound = true;
+boolean Reset = false;
+boolean Warning = false;
 color Brandon = color(0, 100, 255);
 color AJ = color(255, 100, 0);
-color Irek = color(100,255,100);
-color Clayton = color(65,0,125);
+color Irek = color(100, 255, 100);
+color Clayton = color(65, 0, 125);
 color RaceWhite = color(240, 230, 175); 
-color RaceBlack = color(125,75,50);
+color RaceBlack = color(125, 75, 50);
 void draw() {
   if (Screen) {
     background(250);
@@ -79,6 +82,47 @@ void draw() {
     if (back(inbetween(50, 50, 50, 50))) {
       Screen = true;
       Options = false;
+    }
+
+
+
+    if (Sound) {
+      fill(0, 255, 0);
+    } 
+    else if (!Sound) {
+      fill(255, 0, 0);
+    }
+    rect(150, 200, 200, 200);
+    if (inbetween(150, 200, 200, 200)) {
+      Sound = !Sound;
+    }
+
+    fill(0);
+    rect(450, 200, 200, 200);
+    if (inbetween(450, 200, 200, 200)) {
+      Options = false;
+      Warning = true;
+    }
+  }
+
+  if (Warning) {
+    background(0);
+    fill(255);
+    rect(150,200,200,200);
+    rect(width/2,425,600,50);
+    textSize(40);
+    text("DO YOU REALLY\nWANT TO RESET?\nALL DATA WILL\nBE LOST!",550,150);
+    fill(0);
+    text("YES!",150,215);
+    text("NO!",width/2,440);
+    if (inbetween(150,200,200,200)) {
+      Warning = false;
+      Reset = true;
+      Screen = true;
+    }
+    if (inbetween(width/2,425,600,50)){
+      Warning = false;
+      Options = true; 
     }
   }
 }
