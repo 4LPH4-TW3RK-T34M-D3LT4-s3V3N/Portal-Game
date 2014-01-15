@@ -6,6 +6,7 @@ class movingWall
   int w;
   Button b;  
   boolean buttonPress = false;
+  boolean moving;
   int moveLength;
   boolean vertical;
   int moveSpeed = 1;
@@ -36,6 +37,68 @@ class movingWall
     noStroke();
     rect(loc.x, loc.y, w, h);
   }
+  boolean checkPlayer()
+  {
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x+i), int(loc.y-(h/2)-5)) == color(255, 0, 0))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  boolean checkPortal(color c)
+  {
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x+i), int(loc.y-(h/2)-1)) == color(c))
+      {
+        return true;
+      }
+    }
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x+i), int(loc.y+(h/2)+1)) == color(c))
+      {
+        return true;
+      }
+    }
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x+(w/2)+1), int(loc.y+i)) == color(c))
+      {
+        return true;
+      }
+    }
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x-(w/2)-1), int(loc.y+i)) == color(c))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  boolean checkCube()
+  {
+    for (int i = int(-w/2); i < int(w/2); i++)
+    {
+      if (get(int(loc.x+i), int(loc.y-(h/2)-5)) == color(255, 0, 0))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  void carryPlayer(Player p)
+  {
+    print(checkPlayer());
+    if (checkPlayer())
+    {
+      p.loc.x+=moveSpeed;
+    }
+  }
   void checkButton()
   {
     b.display();
@@ -45,6 +108,7 @@ class movingWall
   {      
     if (b.pressed && buttonPress || !buttonPress)
     {
+      moving = true;
       if (!vertical)
       {
         loc.y+=moveSpeed;
@@ -63,6 +127,10 @@ class movingWall
           moveSpeed*=-1;
         }
       }
+    }
+    else
+    {
+      moving = false;
     }
   }
 }

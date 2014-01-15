@@ -43,6 +43,13 @@ class Portal {
       }
     }
   }
+  void wallMove(movingWall w)
+  {
+    if (w.checkPortal(c) && w.moving)
+    {
+      loc.x+=w.moveSpeed;
+    }
+  }
   void shoot(Player p)
   {
     stroke(0, 255, 0);
@@ -256,7 +263,7 @@ class Portal {
         {
           if (orient == 0 || orient == 3)
           {
-           t.vel.x = t.vel.y;
+            t.vel.x = t.vel.y;
           }
           t.loc.set(partner.loc.x+26, partner.loc.y);
         }

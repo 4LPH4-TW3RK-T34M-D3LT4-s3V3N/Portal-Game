@@ -11,23 +11,21 @@ color Irek = color(100, 255, 100);
 color Clayton = color(65, 0, 125);
 color RaceWhite = color(240, 230, 175); 
 color RaceBlack = color(125, 75, 50);
-Cube cube;
 Cube[] cubes;
 Portal orange;
 Portal blue;
 Level level1, level2, level3;
 Player player;
-Button button;
-Laser laser;
+Laser[] lasers;
 boolean[] keys;
 int currentLevel = 0;
-Turret[] turret=new Turret[2];
-movingWall wall;
+Turret[] turret;
+movingWall[] walls;
+
 
 void setup()
 {
   size(800, 500);
-  cube = new Cube(width/2, height/2);
   level1 = new Level(1, "Level 1.png");
   level2 = new Level(2, "Level 2.png");
   level3 = new Level(3, "Level 3.png");
@@ -125,35 +123,69 @@ void draw()
     level1.display();
     level2.display();
     level3.display();
-    wall.display();
-    wall.move();
+    for (int i = 0; i < walls.length; i++)
+    {
+      walls[i].display();
+      walls[i].move();
+    }
 
-    orange.checkObject(cube, blue);
+
+    for (int i = 0; i < cubes.length; i++)
+    {
+      blue.checkObject(cubes[i], orange);
+      orange.checkObject(cubes[i], blue);
+    }
     orange.checkPlayer(player, blue);  
     blue.checkPlayer(player, orange);
-    blue.checkObject(cube, orange);
     player.checkDoor();
 
-    cube.display();
-    cube.fall();
+    for (int i = 0; i < cubes.length; i++)
+    {
+      cubes[i].display();
+      cubes[i].fall();
+    }
+
     player.fall();
-    laser.display();
-    laser.hitPlayer(player);
-    laser.move();
+    for (int i = 0; i < lasers.length; i++)
+    {
+      lasers[i].display();
+      lasers[i].hitPlayer(player);
+      lasers[i].move();
+    }
+
     orange.shoot(player);
     blue.shoot(player);
-
+    for (int i = 0; i < cubes.length; i++)
+    {
+      cubes[i].killPlayer(player);
+      cubes[i].hitPlayer(player);
+      cubes[i].friction();
+    }
     player.display();
-    cube.killPlayer(player);
-    cube.hitPlayer(player);
+
     player.move();
     player.friction();
-    cube.friction();
     blue.display();
     orange.display();
-    wall.checkButton();
-    laser.checkButton();
-    cube.displayPic();
+    for (int i = 0; i < walls.length; i++)
+    {
+      walls[i].checkButton();
+    }
+    for (int i = 0; i < lasers.length; i++)
+    {
+      lasers[i].checkButton();
+    }
+    for (int i = 0; i < cubes.length; i++)
+    {
+      cubes[i].displayPic();
+    }
+    for (int i = 0; i < walls.length; i++)
+    {
+      walls[i].carryPlayer(player);
+      blue.wallMove(walls[i]);
+      orange.wallMove(walls[i]);
+    }
+
     //    for (int i=0;i<turret.length;i++) {
     //      turret[i].display();
     //      turret[i].limitVel();
@@ -249,28 +281,36 @@ void initializeLevel()
     blue = new Portal(color(0, 0, 255));
     if (currentLevel == 1)
     {
-      wall = new movingWall(100, 100, 75, 50, false, true, 100);
-      wall.assignButton(200, 485);
-      laser = new Laser(500, 100, true, 100);
-      laser.assignButton(100,485);
+      walls = new movingWall[1];
+      walls[0] = new movingWall(100, 100, 75, 50, true, true, 100);
+      walls[0].assignButton(200, 485);
+      lasers = new Laser[1];
+      lasers[0] = new Laser(500, 100, true, 100);
+      lasers[0].assignButton(100, 485);
+      turret = new Turret[2];
       turret[0]= new Turret(200, 300);
       turret[1]= new Turret(600, 300);
       player = new Player("P34CH35", 20, 50);
-      cube = new Cube(width/2, height/2);
+      cubes = new Cube[1];
+      cubes[0] = new Cube(width/2, height/2);
     }
     if (currentLevel == 2)
     {
       turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[1];
+      lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
-      cube = new Cube(width/2, height/2);
-      button = new Button(100, 485);
+      cubes[0] = new Cube(width/2, height/2);
     }
     if (currentLevel == 3)
     {
-      button = new Button(100, 485);
-
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[1];
+      lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
-      cube = new Cube(width/2, height/2);
+      cubes[0] = new Cube(width/2, height/2);
     }
   }
 }
