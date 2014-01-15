@@ -30,16 +30,12 @@ class Laser
     moving = true;
     moveLength = _moveLength;
   }
-  Laser(int x, int y, boolean _vertical, int _moveLength, Button _b)
+  void assignButton(int x, int y)
   {
-    loc = new PVector(x, y);
-    vertical = _vertical;
-    moving = true;
-    moveLength = _moveLength;
     buttonPress = true;
-    b = _b;
+    b = new Button(x, y);
   }
-  void display(Button b)
+  void display()
   {
     if (!b.pressed && buttonPress || !buttonPress) {   
       if (!vertical)
@@ -82,6 +78,11 @@ class Laser
       }
     }
   }
+  void checkButton()
+  {
+    b.display();
+    b.press();
+  }
   void hitPlayer(Player p)
   {
     if (checkPlayer(p))
@@ -91,7 +92,7 @@ class Laser
   }
   boolean checkPlayer(Player p)
   {
-    for (int i = -10; i < 15; i++)
+    for (int i = -6; i < 6; i++)
     {
       if (get(int(p.loc.x+i), int(p.loc.y)) == color(254, 0, 0))
       {
@@ -100,7 +101,7 @@ class Laser
     }
     return false;
   }
-  void move(Button b)
+  void move()
   {
     if (!b.pressed && buttonPress || !buttonPress)
     {

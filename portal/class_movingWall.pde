@@ -19,19 +19,14 @@ class movingWall
     moveLength = _moveLength;
     vertical = _vertical;
   }
-  movingWall(int x, int y, int _w, int _h, boolean _white, boolean _vertical, int _moveLength, Button _b)
+  void assignButton(int x, int y)
   {
-    loc = new PVector(x, y);
-    w = _w;
-    h = _h;
-    white = _white;
-    moveLength = _moveLength;
-    vertical = _vertical;
-    b = _b;
+    b = new Button(x, y);
     buttonPress = true;
   }
   void display()
   {
+
     rectMode(CENTER);
     fill(255);
     if (!white)
@@ -41,8 +36,13 @@ class movingWall
     noStroke();
     rect(loc.x, loc.y, w, h);
   }
-  void move(Button b)
+  void checkButton()
   {
+    b.display();
+    b.press();
+  }
+  void move()
+  {      
     if (b.pressed && buttonPress || !buttonPress)
     {
       if (!vertical)

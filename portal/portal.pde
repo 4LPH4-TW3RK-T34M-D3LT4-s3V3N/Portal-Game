@@ -23,7 +23,6 @@ boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
 movingWall wall;
-ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
 void setup()
 {
@@ -35,11 +34,7 @@ void setup()
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 50);
-  turret[0]= new Turret(200, 300);
-  turret[1]= new Turret(600, 300);
-  wall = new movingWall(100, 100, 75, 50, false, true, 100, button);
-  laser = new Laser(500, 100, true, 100, button);
-  button = new Button(100, 485, 0);
+
   cubes = new Cube[0];
   keys=new boolean[3];
   keys[0]=false;
@@ -131,7 +126,7 @@ void draw()
     level2.display();
     level3.display();
     wall.display();
-    wall.move(button);
+    wall.move();
 
     orange.checkObject(cube, blue);
     orange.checkPlayer(player, blue);  
@@ -140,25 +135,25 @@ void draw()
     player.checkDoor();
 
     cube.display();
-    button.display();
     cube.fall();
     player.fall();
-    laser.display(button);
-    print(laser.checkPlayer(player));
+    laser.display();
     laser.hitPlayer(player);
-    laser.move(button);
+    laser.move();
     orange.shoot(player);
     blue.shoot(player);
 
     player.display();
     cube.killPlayer(player);
     cube.hitPlayer(player);
-    button.press();
     player.move();
     player.friction();
     cube.friction();
     blue.display();
     orange.display();
+    wall.checkButton();
+    laser.checkButton();
+    cube.displayPic();
     //    for (int i=0;i<turret.length;i++) {
     //      turret[i].display();
     //      turret[i].limitVel();
@@ -254,22 +249,25 @@ void initializeLevel()
     blue = new Portal(color(0, 0, 255));
     if (currentLevel == 1)
     {
+      wall = new movingWall(100, 100, 75, 50, false, true, 100);
+      wall.assignButton(200, 485);
+      laser = new Laser(500, 100, true, 100);
+      laser.assignButton(100,485);
       turret[0]= new Turret(200, 300);
       turret[1]= new Turret(600, 300);
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
-      button = new Button(100, 485, 0);
     }
     if (currentLevel == 2)
     {
       turret = new Turret[0];
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
-      button = new Button(100, 485, 0);
+      button = new Button(100, 485);
     }
     if (currentLevel == 3)
     {
-      button = new Button(100, 485, 0);
+      button = new Button(100, 485);
 
       player = new Player("P34CH35", 20, 50);
       cube = new Cube(width/2, height/2);
