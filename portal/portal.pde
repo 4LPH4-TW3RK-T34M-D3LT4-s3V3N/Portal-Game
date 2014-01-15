@@ -158,7 +158,7 @@ void draw()
     player.display();
     for (int i = 0; i < cubes.length; i++)
     {
-      cubes[i].killPlayer(player);
+      cubes[i].onPlayer(player);
       cubes[i].hitPlayer(player);
     }
 
