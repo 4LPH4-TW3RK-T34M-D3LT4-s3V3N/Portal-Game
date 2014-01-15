@@ -14,22 +14,23 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level level1, level2, level3, level4;
+Level[] levels = new Level[6];
 Player player;
 Laser[] lasers;
 boolean[] keys;
 int currentLevel = 0;
 Turret[] turret;
 movingWall[] walls;
-
+int changeLevel = 5;
 
 void setup()
 {
   size(800, 500);
-  level1 = new Level(1, "Level 1.png");
-  level2 = new Level(2, "Level 2.png");
-  level3 = new Level(3, "Level 3.png");
-  level4 = new Level(4, "Level 4.png");
+  for (int i = 1; i < levels.length; i++)
+  {
+    levels[i-1] = new Level(i, "Level " + i + ".png");
+    print(i);
+  }
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 50);
@@ -120,10 +121,10 @@ void draw()
   }
   else
   {
-    level1.display();
-    level2.display();
-    level3.display();
-    level4.display();
+    for (int i = 1; i < levels.length; i++)
+    {
+      levels[i-1].display();
+    }
     for (int i = 0; i < walls.length; i++)
     {
       walls[i].display();
