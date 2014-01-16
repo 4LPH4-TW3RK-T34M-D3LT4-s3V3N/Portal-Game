@@ -5,7 +5,6 @@ class Portal {
   boolean appear = false;
   color c;
   int orient;
-  boolean justPortaled = false;
   /*
   0 = portal is on the floor
    1 = wall (right)
@@ -83,6 +82,26 @@ class Portal {
       appear = false;
     }
     checkOrient();
+    if (orient == 0 || orient == 3)
+    {
+      for (int i = 0; i < 50; i++)
+      {
+        if (get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(0) || get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(195))
+        {
+          appear = false;
+        }
+      }
+    }
+    if (orient == 2 || orient == 1)
+    {
+      for (int i = 0; i < 50; i++)
+      {
+        if (get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(0) || get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(195))
+        {
+          appear = false;
+        }
+      }
+    }
   }
   void checkOrient()
   {
@@ -215,7 +234,7 @@ class Portal {
           {
             p.vel.x = p.vel.y;
           }
-          if(orient == 3)
+          if (orient == 3)
           {
             p.vel.x = -p.vel.y;
           }

@@ -14,14 +14,14 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[7];
+Level[] levels = new Level[9];
 Player player;
 Laser[] lasers;
 boolean[] keys;
 int currentLevel = 0;
 Turret[] turret;
 movingWall[] walls;
-int changeLevel = 6;
+int changeLevel = 1;
 
 void setup()
 {
@@ -173,7 +173,7 @@ void draw()
     }
     for (int i=0;i<turret.length;i++) {
       turret[i].hitPlayer(player);
-      turret[i].shoot(player);
+      turret[i].shoot(player, player.loc.x);
     }
     player.move();
     player.friction();
@@ -294,8 +294,8 @@ void initializeLevel()
       walls = new movingWall[0];
       lasers = new Laser[0];
       turret = new Turret[2];
-      turret[0]= new Turret(200, 300);
-      turret[1]= new Turret(600, 300);
+      turret[0]= new Turret(200, 300, true);
+      turret[1]= new Turret(600, 300, false);
       player = new Player("P34CH35", 20, 50);
       cubes = new Cube[1];
       cubes[0] = new Cube(width/2, height/2);
@@ -341,19 +341,35 @@ void initializeLevel()
     if (currentLevel == 5)
     {  
       turret = new Turret[1];
-      turret[0] = new Turret(389, 456);
+      turret[0] = new Turret(389, 456, true);
       walls = new movingWall[0];
       cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
     }
-     if (currentLevel == 6)
+    if (currentLevel == 6)
     {  
       turret = new Turret[0];
       walls = new movingWall[0];
       cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 20, 50);
+    }
+    if (currentLevel == 7)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 20, 400);
+    }
+    if (currentLevel == 8)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 760, 36);
     }
   }
 }

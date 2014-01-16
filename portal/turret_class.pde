@@ -4,17 +4,28 @@ class Turret
   PVector vel;
   PVector acc;
   int size;
+  float run;
   float startTime;
   boolean shoot = true;
   int velSet = 30;
   boolean timer=true;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
+  boolean rTrue = false;
+  boolean lTrue = false;
 
-  Turret(float x, float y)
+  Turret(float x, float y, boolean leftorRight)
   {
     loc = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
+    if (leftorRight)
+    {
+      lTrue = true;
+    }
+    if (!leftorRight)
+    {
+      rTrue = true;
+    }
   }
   void display()
   {
@@ -32,7 +43,7 @@ class Turret
   }
   void fall()
   {
-    if (get(int(loc.x), int(loc.y+21)) == color(195))
+    if (get(int(loc.x+10), int(loc.y+20)) == color(195))
     {
       vel.add(acc);
       limitVel();
@@ -47,6 +58,12 @@ class Turret
       vel.set(0, 0);
     }
   }
+  void faceLeft() {
+    lTrue=true;
+  }
+  void faceRight() {
+    rTrue=true;
+  }
   void hitPlayer(Player p)
   {
     if (dist(loc.x, loc.y, p.loc.x, p.loc.y) <17 && loc.x > p.loc.x && p.loc.y > loc.y-20)
@@ -60,7 +77,7 @@ class Turret
   }
   boolean checkPlayer(Player p)
   {
-    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y >= loc.y-200) {
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15) {
       if (timer==true) {
         startTime=millis();
         timer=false;
@@ -69,7 +86,7 @@ class Turret
     else {
       timer=true;
     }
-    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y >= loc.y-200)
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15)
     {
       return true;
     }
@@ -79,12 +96,23 @@ class Turret
     }
   }
 
-  void shoot(Player p) {
-
-
-    if (shoot) {
-      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+  void shoot(Player p, float px) {
+    run=(px-loc.x);
+    if (checkPlayer(p))
+    {
+      stroke(250, 0, 0);
+      strokeWeight(2);
+      line(p.loc.x, p.loc.y, loc.x, loc.y); 
+      println(millis()-startTime);
+      if (((millis()-startTime))>800) {
+        shoot = true;
+      }
     }
+    else
+    {
+      shoot = false;
+    }
+
     for (int i = bullet.size()-1; i >=0; i--) {
       Bullet b = bullet.get(i);
       b.hit();
@@ -94,19 +122,18 @@ class Turret
         bullet.remove(i);
       }
     }
-    if (checkPlayer(p))
-    { 
-      stroke(250, 0, 0);
-      strokeWeight(2);
-      line(p.loc.x, p.loc.y, loc.x, loc.y);
-      // println(millis()-startTime);
-      if (((millis()-startTime))>800) {
-        shoot = true;
+    if (shoot) {
+      if (rTrue) {
+        if (run>0) {
+          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+        }
       }
-    }
-    else
-    {
-      shoot = false;
+      if (lTrue) {
+        if (run<0) {
+
+          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+        }
+      }
     }
   }
 }
