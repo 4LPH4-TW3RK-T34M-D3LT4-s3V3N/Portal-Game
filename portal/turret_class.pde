@@ -32,7 +32,7 @@ class Turret
   }
   void fall()
   {
-    if (get(int(loc.x+10), int(loc.y+20)) == color(195))
+    if (get(int(loc.x), int(loc.y+21)) == color(195))
     {
       vel.add(acc);
       limitVel();
@@ -80,21 +80,11 @@ class Turret
   }
 
   void shoot(Player p) {
-    if (checkPlayer(p))
-    { 
-      stroke(250,0,0);
-      strokeWeight(2);
-      line(p.loc.x, p.loc.y, loc.x, loc.y);
-      println(millis()-startTime);
-      if (((millis()-startTime))>800) {
-        shoot = true;
-      }
-    }
-    else
-    {
-      shoot = false;
-    }
 
+
+    if (shoot) {
+      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+    }
     for (int i = bullet.size()-1; i >=0; i--) {
       Bullet b = bullet.get(i);
       b.hit();
@@ -104,8 +94,19 @@ class Turret
         bullet.remove(i);
       }
     }
-    if (shoot) {
-      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+    if (checkPlayer(p))
+    { 
+      stroke(250, 0, 0);
+      strokeWeight(2);
+      line(p.loc.x, p.loc.y, loc.x, loc.y);
+      // println(millis()-startTime);
+      if (((millis()-startTime))>800) {
+        shoot = true;
+      }
+    }
+    else
+    {
+      shoot = false;
     }
   }
 }

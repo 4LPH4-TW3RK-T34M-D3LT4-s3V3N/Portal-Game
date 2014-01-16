@@ -94,7 +94,6 @@ class movingWall
   }
   void carryPlayer(Player p)
   {
-    print(checkPlayer());
     if (checkPlayer() && moving)
     {
       p.loc.x+=moveSpeed;

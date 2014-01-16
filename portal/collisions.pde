@@ -31,7 +31,7 @@ boolean goCeil(PVector _loc, float _w, float _h)
   float h = _h/2;
   if (get(int(loc.x), int(loc.y-h+1)) != color(195))
   {
-    
+
     return true;
   }
   else 
@@ -44,13 +44,12 @@ boolean goGround(PVector _loc, float _w, float _h)
   PVector loc = new PVector(_loc.x, _loc.y);
   float w = _w/2;
   float h = _h/2;
+
+
   if (get(int(loc.x), int(loc.y+h+1)) != color(195))
   {
     return true;
   }
-  else 
-  {
-    return false;
-  }
+  return false;
 }
 

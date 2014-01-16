@@ -29,7 +29,6 @@ void setup()
   for (int i = 1; i < levels.length; i++)
   {
     levels[i-1] = new Level(i, "Level " + i + ".png");
-    print(i);
   }
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
