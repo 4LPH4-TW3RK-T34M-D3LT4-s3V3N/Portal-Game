@@ -55,3 +55,5 @@ void character(int x1, int y1, String name, color shirt,color race, String job){
   rect(x1-25, 100, 50, 50);
   
 }
+
+

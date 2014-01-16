@@ -31,11 +31,11 @@ void draw() {
     fill(255, 125, 0);
     rect(width/2-250, 425, 200, 75);
     rect(width/2+250, 425, 200, 75);
-    if (inbetween(width/2-250, 425, 200, 75)) {
+    if (inbetween(width/2+250, 425, 200, 75)) {
       Options = true;
       Screen = false;
     }
-    if (inbetween(width/2+250, 425, 200, 75)) {
+    if (inbetween(width/2-250, 425, 200, 75)) {
       Physics = true;
       Screen = false;
     }
@@ -92,14 +92,17 @@ void draw() {
     else if (!Sound) {
       fill(255, 0, 0);
     }
-    rect(150, 200, 200, 200);
-    if (inbetween(150, 200, 200, 200)) {
+    rect(250, 300, 200, 200);
+
+    if (inbetween(250, 300, 200, 200)) {
       Sound = !Sound;
     }
 
     fill(0);
-    rect(450, 200, 200, 200);
-    if (inbetween(450, 200, 200, 200)) {
+    rect(550, 300, 200, 200);
+    text("Reset Data", 550, 175);
+    text("Sound", 250, 175);
+    if (inbetween(550, 300, 200, 200)) {
       Options = false;
       Warning = true;
     }
@@ -108,21 +111,21 @@ void draw() {
   if (Warning) {
     background(0);
     fill(255);
-    rect(150,200,200,200);
-    rect(width/2,425,600,50);
+    rect(150, 200, 200, 200);
+    rect(width/2, 425, 600, 50);
     textSize(40);
-    text("DO YOU REALLY\nWANT TO RESET?\nALL DATA WILL\nBE LOST!",550,150);
+    text("DO YOU REALLY\nWANT TO RESET?\nALL DATA WILL\nBE LOST!", 550, 150);
     fill(0);
-    text("YES!",150,215);
-    text("NO!",width/2,440);
-    if (inbetween(150,200,200,200)) {
+    text("YES!", 150, 215);
+    text("NO!", width/2, 440);
+    if (inbetween(150, 200, 200, 200)) {
       Warning = false;
       Reset = true;
       Screen = true;
     }
-    if (inbetween(width/2,425,600,50)){
+    if (inbetween(width/2, 425, 600, 50)) {
       Warning = false;
-      Options = true; 
+      Options = true;
     }
   }
 }
