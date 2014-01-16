@@ -5,8 +5,8 @@ Level level1, level2;
 Player player;
 Turret[] turret=new Turret[2];
 boolean[] keys;
-float rise,run;
-PImage portalCursor,portalBlue,portalOrange,portalNone;
+float rise, run;
+PImage portalCursor, portalBlue, portalOrange, portalNone;
 
 
 ArrayList<Bullet> bullet1 = new ArrayList<Bullet>();
@@ -34,7 +34,18 @@ void setup()
 }
 void draw()
 {
-  cursor(portalCursor);
+  if (orange.appear && blue.appear) {
+    cursor(portalNone);
+  }
+  else if (orange.appear) {
+    cursor(portalBlue);
+  }
+  else if (blue.appear) {
+    cursor(portalOrange);
+  }
+  else {
+    cursor(portalCursor);
+  }
   level1.display();
   //level2.display();
   cube.fall();
@@ -56,7 +67,7 @@ void draw()
     turret[i].limitVel();
     turret[i].fall();
     turret[i].hitPlayer(player);
-    turret[i].shoot(player,player.loc.x);
+    turret[i].shoot(player, player.loc.x);
   }
   turret[0].faceLeft();
   turret[1].faceRight();
