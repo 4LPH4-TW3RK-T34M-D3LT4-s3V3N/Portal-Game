@@ -4,11 +4,14 @@ class Turret
   PVector vel;
   PVector acc;
   int size;
+  float run;
   float startTime;
   boolean shoot = true;
   int velSet = 30;
   boolean timer=true;
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
+  boolean rTrue;
+  boolean lTrue;
 
   Turret(float x, float y)
   {
@@ -47,11 +50,11 @@ class Turret
       vel.set(0, 0);
     }
   }
-  void faceLeft(){
-  lTrue=true;
+  void faceLeft() {
+    lTrue=true;
   }
-  void faceRight(){
-  rTrue=true;
+  void faceRight() {
+    rTrue=true;
   }
   void hitPlayer(Player p)
   {
@@ -85,10 +88,11 @@ class Turret
     }
   }
 
-  void shoot(Player p) {
+  void shoot(Player p, float px) {
+    run=(px-loc.x);
     if (checkPlayer(p))
     {
-      stroke(250,0,0);
+      stroke(250, 0, 0);
       strokeWeight(2);
       line(p.loc.x, p.loc.y, loc.x, loc.y); 
       println(millis()-startTime);
@@ -111,8 +115,18 @@ class Turret
       }
     }
     if (shoot) {
-      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));}
-    
+      if (rTrue) {
+        if (run>0) {
+          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+        }
+      }
+      if (lTrue) {
+        if (run<0) {
+
+          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+        }
+      }
+    }
   }
 }
 

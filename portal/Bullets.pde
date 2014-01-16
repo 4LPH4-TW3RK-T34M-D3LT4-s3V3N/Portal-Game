@@ -19,16 +19,7 @@ class Bullet {
     fill(1);
     stroke(1);
     strokeWeight(2);
-    if (rTrue) {
-      if (run>0) {
-        ellipse(loc.x, loc.y, size, size);
-      }
-    }
-    if (lTrue) {
-      if (run<0) {
-        ellipse(loc.x, loc.y, size, size);
-      }
-    }
+    ellipse(loc.x, loc.y, size, size);
   }
 
   void update() {
