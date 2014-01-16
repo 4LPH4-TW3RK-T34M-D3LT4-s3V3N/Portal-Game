@@ -75,7 +75,7 @@ void draw()
         Physics = true;
         Screen = false;
         tutorial = true;
-        whichTLevel = 4;
+        whichTLevel = 1;
         initialzeTLevel();
       }
       if (inbetween(width/2, height/2+10, 40, 80))
@@ -252,9 +252,18 @@ void keyPressed()
     }
     if (keyCode == ENTER && lose)
     {
-      initializeLevel();
-      lose = false;
-      loop();
+      if (!tutorial)
+      {
+        initializeLevel();
+        lose = false;
+        loop();
+      }
+      else
+      {
+        win = false;
+        initialzeTLevel();
+        loop();
+      }
     }
     else if (keyCode == ENTER && win)
     {
@@ -339,9 +348,12 @@ void initialzeTLevel()
   {
     turret = new Turret[0];
     walls = new movingWall[0];
-    cubes = new Cube[0];
-    lasers = new Laser[0];
+    cubes = new Cube[1];
+    lasers = new Laser[1];
     player = new Player("P34CH35", 20, 200);
+    cubes[0] = new Cube(100, 300);
+    lasers[0] = new Laser(546, 100, true);
+    lasers[0].assignButton(445, 490);
   }
   if (whichTLevel == 3)
   {
@@ -353,11 +365,12 @@ void initialzeTLevel()
   }
   if (whichTLevel == 4)
   {
-    turret = new Turret[0];
+    turret = new Turret[1];
     walls = new movingWall[0];
     cubes = new Cube[0];
     lasers = new Laser[0];
     player = new Player("P34CH35", 20, 200);
+    turret[0] = new Turret(400, 460, true);
   }
   if (whichTLevel == 5)
   {
