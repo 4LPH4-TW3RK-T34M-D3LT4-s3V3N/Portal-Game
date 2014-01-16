@@ -21,7 +21,7 @@ boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
 ArrayList<Bullet> bullet = new ArrayList<Bullet>();
-
+PImage door, doorclosed;
 void setup()
 {
   size(800, 500);
@@ -39,6 +39,8 @@ void setup()
   keys[0]=false;
   keys[1]=false;
   keys[2]=false;
+  door=loadImage("door.png");
+  doorclosed=loadImage("doorclosed.png");
 }
 void draw()
 {
@@ -47,19 +49,28 @@ void draw()
     if (Screen) {
       background(250);
       rectMode(CENTER);
+      imageMode(CENTER);
       fill(0);
-      rect(width/2, height/2+10, 40, 80);
+      rect(width/2, height/2, 40, 80);
       stroke(5);
       line(0, 0, width/2-75, height/2-50);
       line(width, 0, width/2+75, height/2-50);
       line(0, height, width/2-75, height/2+50);
       line(width, height, width/2+75, height/2+50);
       noFill();
+      image(door, width/2, height/2, 200, 130);
       rect(width/2, height/2, 150, 100);
       noStroke();
       fill(255, 125, 0);
       rect(width/2-250, 425, 200, 75);
       rect(width/2+250, 425, 200, 75);
+      if (dist(width/2, height/2, mouseX, mouseY)<50) {
+        image(door, width/2, height/2,200, 130);
+      }
+      else {
+        image(doorclosed, width/2, height/2,200, 130);
+      }
+
       if (inbetween(width/2-250, 425, 200, 75)) {
         Options = true;
         Screen = false;
