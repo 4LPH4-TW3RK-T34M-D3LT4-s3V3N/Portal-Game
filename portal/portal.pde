@@ -6,7 +6,7 @@ Player player;
 Turret[] turret=new Turret[2];
 boolean[] keys;
 float rise,run;
-
+PImage portalCursor,portalBlue,portalOrange,portalNone;
 
 
 ArrayList<Bullet> bullet1 = new ArrayList<Bullet>();
@@ -27,9 +27,14 @@ void setup()
   keys[0]=false;
   keys[1]=false;
   keys[2]=false;
+  portalCursor=loadImage("portal cursor.png");
+  portalBlue=loadImage("portalbluecursor.png");
+  portalOrange=loadImage("portalorangecursor.png");
+  portalNone=loadImage("portalnonecursor.png");
 }
 void draw()
 {
+  cursor(portalCursor);
   level1.display();
   //level2.display();
   cube.fall();
@@ -58,10 +63,10 @@ void draw()
 }
 void keyPressed()
 {
-  if (key=='d') {
+  if (key=='d'|| key == 'D') {
     keys[0]=true;
   }
-  if (key=='a') {
+  if (key=='a'||key == 'A') {
     keys[1]=true;
   }
   if (key==' ') {
@@ -71,10 +76,10 @@ void keyPressed()
 
 void keyReleased()
 {
-  if (key=='d') {
+  if (key=='d'|| key == 'D') {
     keys[0]=false;
   }
-  if (key=='a') {
+  if (key=='a'||key == 'A') {
     keys[1]=false;
   }
   if (key==' ') {
