@@ -4,7 +4,6 @@ boolean inbetween(int x, int y, int x1, int y1) {
     return true;
   } 
   else {
-    println("try again");
     return false;
   }
 }
