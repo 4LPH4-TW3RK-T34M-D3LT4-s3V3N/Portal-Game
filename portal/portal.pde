@@ -3,6 +3,8 @@ Portal orange;
 Portal blue;
 Level level1, level2;
 Player player;
+boolean rTrue;
+boolean lTrue;
 Turret[] turret=new Turret[2];
 boolean[] keys;
 
@@ -18,6 +20,8 @@ void setup()
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   player = new Player("P34CH35", 20, 20);
+  rTrue=false;
+  lTrue=false;
   turret[0]= new Turret(200, 300);
   turret[1]= new Turret(600, 300);
   keys=new boolean[3];
@@ -50,26 +54,7 @@ void draw()
     turret[i].hitPlayer(player);
     turret[i].shoot(player);
   }
-//  for (int i = bullet1.size()-1; i >=0; i--) {
-//    Bullet b = bullet1.get(i);
-//    b.display();
-//    b.update();
-//    b.hit();
-//    if (b.life <= 0) {
-//      bullet1.remove(i);
-//    }
-//  }
-//  for (int i = bullet2.size()-1; i >=0; i--) {
-//    Bullet b = bullet2.get(i);
-//    b.display();
-//    b.update();
-//    b.hit();
-//    if (b.life <= 0) {
-//      bullet2.remove(i);
-//    }
-//  }
-//  bullet1.add(new Bullet(turret[0].loc.x, turret[0].loc.y, player.loc.x, player.loc.y));
-//  bullet2.add(new Bullet(turret[1].loc.x, turret[1].loc.y, player.loc.x, player.loc.y));
+  turret[0].faceLeft();
 }
 void keyPressed()
 {

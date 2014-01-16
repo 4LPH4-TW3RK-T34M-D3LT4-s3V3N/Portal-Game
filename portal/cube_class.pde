@@ -47,15 +47,6 @@ class Cube
   {
     if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x > p.loc.x && p.loc.y > loc.y-15)
     {
-      //if (loc.x > p.loc.x && p.loc.y > loc.y-15)
-     // {
-       // loc.x = p.loc.x+21;
-     // }
-     // else  
-    // if (loc.x < p.loc.x && p.loc.y > loc.y-15)
-     // {
-     //   loc.x = p.loc.x-21;
-    //  }
       loc.x = p.loc.x+23;
     }
     else if (dist(loc.x, loc.y, p.loc.x, p.loc.y) < 24 && loc.x < p.loc.x && p.loc.y > loc.y-15)

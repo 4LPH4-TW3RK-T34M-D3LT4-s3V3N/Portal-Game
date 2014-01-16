@@ -47,6 +47,12 @@ class Turret
       vel.set(0, 0);
     }
   }
+  void faceLeft(){
+  lTrue=true;
+  }
+  void faceRight(){
+  rTrue=true;
+  }
   void hitPlayer(Player p)
   {
     if (dist(loc.x, loc.y, p.loc.x, p.loc.y) <17 && loc.x > p.loc.x && p.loc.y > loc.y-20)
@@ -82,10 +88,9 @@ class Turret
   void shoot(Player p) {
     if (checkPlayer(p))
     {
-      
       stroke(250,0,0);
       strokeWeight(2);
-      line(p.loc.x, p.loc.y, loc.x, loc.y);
+      line(p.loc.x, p.loc.y, loc.x, loc.y); 
       println(millis()-startTime);
       if (((millis()-startTime))>800) {
         shoot = true;
@@ -106,8 +111,8 @@ class Turret
       }
     }
     if (shoot) {
-      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
-    }
+      bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));}
+    
   }
 }
 
