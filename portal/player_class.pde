@@ -32,7 +32,6 @@ class Player {
 
 
   void display() {
-    print(goGround(loc,12,45));
     fill(255, 0, 0);
     noStroke();
     rectMode(CENTER);

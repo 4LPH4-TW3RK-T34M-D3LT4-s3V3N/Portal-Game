@@ -4,6 +4,7 @@ boolean Credits = false;
 boolean Physics = false;
 boolean Screen = true;
 boolean lose = false;
+boolean tutorial = false;
 boolean win;
 color Brandon = color(0, 100, 255);
 color AJ = color(125, 75, 50);
@@ -48,7 +49,7 @@ void setup()
 }
 void draw()
 {
-  if (currentLevel == 0)
+  if (currentLevel == 0 && whichTLevel == 0)
   {
     if (Screen) {
       background(250);
@@ -66,13 +67,16 @@ void draw()
       fill(255, 125, 0);
       rect(width/2-250, 425, 200, 75);
       rect(width/2+250, 425, 200, 75);
-      if (inbetween(width/2-250, 425, 200, 75)) {
+      if (inbetween(width/2+250, 425, 200, 75)) {
         Options = true;
         Screen = false;
       }
-      if (inbetween(width/2+250, 425, 200, 75)) {
+      if (inbetween(width/2-250, 425, 200, 75)) {
         Physics = true;
         Screen = false;
+        tutorial = true;
+        whichTLevel = 1;
+        initialzeTLevel();
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
@@ -85,7 +89,6 @@ void draw()
         Credits = true;
         Screen = false;
       }
-
       fill(0);
       textAlign(CENTER);
       textSize(50);
@@ -126,16 +129,25 @@ void draw()
   }
   else
   {
-    for (int i = 1; i < levels.length; i++)
+    if (!tutorial)
     {
-      levels[i-1].display();
+      for (int i = 1; i < levels.length; i++)
+      {
+        levels[i-1].display();
+      }
+    }
+    else
+    {
+      for (int i = 1; i < tLevels.length; i++)
+      {
+        tLevels[i-1].display();
+      }
     }
     for (int i = 0; i < walls.length; i++)
     {
       walls[i].display();
       walls[i].move();
     }
-
 
     for (int i = 0; i < cubes.length; i++)
     {
@@ -230,7 +242,7 @@ void draw()
 }
 void keyPressed()
 {
-  if (currentLevel != 0)
+  if (currentLevel != 0 || whichTLevel != 0)
   {
     if (key=='d') {
       keys[0]=true;
@@ -291,6 +303,16 @@ void mousePressed()
 }
 void initialzeTLevel()
 {
+  orange = new Portal(color(255, 115, 0));
+  blue = new Portal(color(0, 0, 255));
+  if (whichTLevel == 1)
+  {
+    turret = new Turret[0];
+    walls = new movingWall[0];
+    cubes = new Cube[0];
+    lasers = new Laser[0];
+    player = new Player("P34CH35", 20, 200);
+  }
 }
 void initializeLevel()
 {

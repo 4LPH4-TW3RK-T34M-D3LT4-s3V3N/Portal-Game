@@ -28,7 +28,7 @@ class tLevel
   void display()
   {
     imageMode(CORNER);
-    if (currentLevel == whichLevel)
+    if (whichTLevel == whichLevel)
     {
       image(design, 0, 0);
     }

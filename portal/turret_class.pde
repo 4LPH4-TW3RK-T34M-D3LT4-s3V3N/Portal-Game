@@ -43,7 +43,7 @@ class Turret
   }
   void fall()
   {
-    if (get(int(loc.x+10), int(loc.y+20)) == color(195))
+    if (get(int(loc.x+10), int(loc.y+21)) == color(195))
     {
       vel.add(acc);
       limitVel();
@@ -103,7 +103,6 @@ class Turret
       stroke(250, 0, 0);
       strokeWeight(2);
       line(p.loc.x, p.loc.y, loc.x, loc.y); 
-      println(millis()-startTime);
       if (((millis()-startTime))>800) {
         shoot = true;
       }
