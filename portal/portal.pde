@@ -15,6 +15,7 @@ Cube[] cubes;
 Portal orange;
 Portal blue;
 Level[] levels = new Level[9];
+tLevel[] tLevels = new tLevel[5];
 Player player;
 Laser[] lasers;
 boolean[] keys;
@@ -30,6 +31,10 @@ void setup()
   for (int i = 1; i < levels.length; i++)
   {
     levels[i-1] = new Level(i, "Level " + i + ".png");
+  }
+  for (int i = 1; i < tLevels.length; i++)
+  {
+    tLevels[i-1] = new tLevel(i, "Tutorial" + i + ".png");
   }
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
@@ -286,7 +291,6 @@ void mousePressed()
 }
 void initialzeTLevel()
 {
-  
 }
 void initializeLevel()
 {
