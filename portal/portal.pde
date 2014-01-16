@@ -19,6 +19,7 @@ Player player;
 Laser[] lasers;
 boolean[] keys;
 int currentLevel = 0;
+int whichTLevel = 0;
 Turret[] turret;
 movingWall[] walls;
 int changeLevel = 1;
@@ -282,6 +283,10 @@ void mousePressed()
       blue.appear();
     }
   }
+}
+void initialzeTLevel()
+{
+  
 }
 void initializeLevel()
 {
