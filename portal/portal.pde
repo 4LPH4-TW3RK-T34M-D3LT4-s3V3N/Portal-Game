@@ -75,7 +75,7 @@ void draw()
         Physics = true;
         Screen = false;
         tutorial = true;
-        whichTLevel = 1;
+        whichTLevel = 4;
         initialzeTLevel();
       }
       if (inbetween(width/2, height/2+10, 40, 80))
@@ -98,7 +98,6 @@ void draw()
       text("Portal: The Second Dimension", width/2, 100);
     }
     if (Credits) {
-
       background(0, 0, 255); 
       strokeWeight(1);
       stroke(0);
@@ -162,6 +161,7 @@ void draw()
     orange.checkPlayer(player, blue);  
     blue.checkPlayer(player, orange);
     player.checkDoor();
+    player.move();
 
     for (int i = 0; i < cubes.length; i++)
     {
@@ -180,7 +180,6 @@ void draw()
       lasers[i].hitPlayer(player);
       lasers[i].move();
     }
-
     orange.shoot(player);
     blue.shoot(player);
     player.display();
@@ -193,7 +192,6 @@ void draw()
       turret[i].hitPlayer(player);
       turret[i].shoot(player, player.loc.x);
     }
-    player.move();
     player.friction();
     for (int i = 0; i < cubes.length; i++)
     {
@@ -220,8 +218,6 @@ void draw()
       blue.wallMove(walls[i]);
       orange.wallMove(walls[i]);
     }
-
-
     if (lose)
     {
       textAlign(CENTER);
@@ -239,6 +235,7 @@ void draw()
       noLoop();
     }
   }
+  print(Credits);
 }
 void keyPressed()
 {
@@ -261,17 +258,42 @@ void keyPressed()
     }
     else if (keyCode == ENTER && win)
     {
-      currentLevel++;
-      initializeLevel();
-      win = false;
-      loop();
+      if (!tutorial)
+      {
+        currentLevel++;
+        initializeLevel();
+        win = false;
+        loop();
+      }
+      else
+      {
+        whichTLevel++;
+        win = false;
+        if (whichTLevel == 5)
+        {
+          turret = new Turret[0];
+          walls = new movingWall[0];
+          cubes = new Cube[0];
+          lasers = new Laser[0];
+          player = new Player("P34CH35", 20, 200);
+          Screen = true;
+          tutorial = false;
+          Physics = false;
+          whichTLevel = 0;
+        }
+        else
+        {
+          initialzeTLevel();
+        }
+        loop();
+      }
     }
   }
 }
 
 void keyReleased()
 {
-  if (currentLevel != 0)
+  if (currentLevel != 0 || whichTLevel != 0)
   {
     if (key=='d') {
       keys[0]=false;
@@ -289,7 +311,7 @@ void keyReleased()
 
 void mousePressed()
 {
-  if (currentLevel != 0)
+  if (currentLevel != 0 || whichTLevel != 0)
   {
     if (mouseButton == LEFT)
     {
@@ -306,6 +328,38 @@ void initialzeTLevel()
   orange = new Portal(color(255, 115, 0));
   blue = new Portal(color(0, 0, 255));
   if (whichTLevel == 1)
+  {
+    turret = new Turret[0];
+    walls = new movingWall[0];
+    cubes = new Cube[0];
+    lasers = new Laser[0];
+    player = new Player("P34CH35", 20, 200);
+  }
+  if (whichTLevel == 2)
+  {
+    turret = new Turret[0];
+    walls = new movingWall[0];
+    cubes = new Cube[0];
+    lasers = new Laser[0];
+    player = new Player("P34CH35", 20, 200);
+  }
+  if (whichTLevel == 3)
+  {
+    turret = new Turret[0];
+    walls = new movingWall[0];
+    cubes = new Cube[0];
+    lasers = new Laser[0];
+    player = new Player("P34CH35", 20, 200);
+  }
+  if (whichTLevel == 4)
+  {
+    turret = new Turret[0];
+    walls = new movingWall[0];
+    cubes = new Cube[0];
+    lasers = new Laser[0];
+    player = new Player("P34CH35", 20, 200);
+  }
+  if (whichTLevel == 5)
   {
     turret = new Turret[0];
     walls = new movingWall[0];
