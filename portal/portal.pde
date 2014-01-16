@@ -21,7 +21,7 @@ boolean[] keys;
 int currentLevel = 0;
 Turret[] turret;
 movingWall[] walls;
-int changeLevel = 5;
+int changeLevel = 6;
 
 void setup()
 {
@@ -342,6 +342,14 @@ void initializeLevel()
     {  
       turret = new Turret[1];
       turret[0] = new Turret(389, 456);
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 20, 50);
+    }
+     if (currentLevel == 6)
+    {  
+      turret = new Turret[0];
       walls = new movingWall[0];
       cubes = new Cube[0];
       lasers = new Laser[0];
