@@ -1,3 +1,11 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+
 boolean Options = false;
 boolean Credits = false;
 boolean Physics = false;
@@ -30,6 +38,8 @@ boolean pause;
 int pausedTime;
 int newTime;
 int resultTime;
+  Minim minim;
+  AudioPlayer buttonPlayer;
 void setup()
 {
   size(800, 500);
@@ -56,6 +66,9 @@ void setup()
   portalNone=loadImage("portalnonecursor.png");
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
+      minim = new Minim(this);
+    buttonPlayer = minim.loadFile("Portal2_sfx_button_positive.mp3");
+
 }
 void draw()
 {
@@ -206,7 +219,8 @@ void draw()
       turret[i].die();
       print(turret[0].die);
     }
-    player.fall();    orange.checkPlayer(player, blue);  
+    player.fall();    
+    orange.checkPlayer(player, blue);  
     blue.checkPlayer(player, orange);
     for (int i = 0; i < lasers.length; i++)
     {

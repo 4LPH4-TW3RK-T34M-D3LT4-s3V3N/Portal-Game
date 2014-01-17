@@ -1,8 +1,12 @@
+
 class Button {
+
   PVector loc;
   boolean pressed;
+  boolean play = true;
   int h;
   int w;
+
   Button(int x, int y)
   {
     loc = new PVector(x, y);
@@ -29,7 +33,13 @@ class Button {
   void press()
   {
     if (checkPress())
-    {
+    {    
+      if (play)
+      {
+        buttonPlayer = minim.loadFile("Portal2_sfx_button_positive.mp3");
+      }
+      play = false;
+      buttonPlayer.play();
       pressed = true;
       if (h > 5)
       {
@@ -43,6 +53,12 @@ class Button {
     }
     else
     {
+      if (!play)
+      {
+        buttonPlayer = minim.loadFile("Portal2_sfx_button_negative.mp3");
+      }
+      play = true;
+      buttonPlayer.play();
       pressed = false;
       if (h < 10)
       {
@@ -56,3 +72,4 @@ class Button {
     }
   }
 }
+
