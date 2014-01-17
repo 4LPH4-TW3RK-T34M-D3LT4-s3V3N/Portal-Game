@@ -232,7 +232,7 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = p.vel.y;
+            p.vel.x = -p.vel.y;
           }
           if (orient == 3)
           {
@@ -244,7 +244,7 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = -p.vel.y;
+            p.vel.x = p.vel.y;
           }
           if (orient == 3)
           {

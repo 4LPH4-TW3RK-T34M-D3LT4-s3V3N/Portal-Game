@@ -110,7 +110,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel = 1;
+        currentLevel = 6;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -190,8 +190,7 @@ void draw()
       blue.checkTurret(turret[i], orange);
       orange.checkTurret(turret[i], blue);
     }
-    orange.checkPlayer(player, blue);  
-    blue.checkPlayer(player, orange);
+
     player.checkDoor();
     player.move();
 
@@ -207,7 +206,8 @@ void draw()
       turret[i].die();
       print(turret[0].die);
     }
-    player.fall();
+    player.fall();    orange.checkPlayer(player, blue);  
+    blue.checkPlayer(player, orange);
     for (int i = 0; i < lasers.length; i++)
     {
       lasers[i].display();
