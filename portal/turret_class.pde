@@ -12,7 +12,8 @@ class Turret
   ArrayList<Bullet> bullet = new ArrayList<Bullet>();
   boolean rTrue = false;
   boolean lTrue = false;
-
+  boolean die;
+  int life = 255;
   Turret(float x, float y, boolean leftorRight)
   {
     loc = new PVector(x, y);
@@ -29,9 +30,13 @@ class Turret
   }
   void display()
   {
-    fill(250);
+    fill(250, life);
     noStroke();
     rectMode(CENTER);
+    if(life <= 0)
+    {
+      loc.set(-100,-100);
+    }
     rect(loc.x, loc.y, 20, 40);
   }
   void limitVel()
@@ -51,6 +56,10 @@ class Turret
     }
     else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
+      if(vel.y >= velSet)
+      {
+        die = true;
+      }
       while (get (int (loc.x+10), int(loc.y+19)) == color(0) || get(int (loc.x+10), int(loc.y+19)) == color(255))
       {
         loc.y--;
@@ -93,6 +102,13 @@ class Turret
     else
     {
       return false;
+    }
+  }
+  void die()
+  {
+    if(die)
+    {
+      life-=10;
     }
   }
 

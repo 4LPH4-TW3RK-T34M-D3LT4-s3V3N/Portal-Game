@@ -77,7 +77,7 @@ void draw()
       background(250);
       rectMode(CENTER);
       fill(0);
-      rect(width/2, height/2+10, 40, 80);
+      rect(width/2, height/2, 40, 80);
       stroke(5);
       line(0, 0, width/2-75, height/2-50);
       line(width, 0, width/2+75, height/2-50);
@@ -204,6 +204,8 @@ void draw()
       turret[i].display();
       turret[i].limitVel();
       turret[i].fall();
+      turret[i].die();
+      print(turret[0].die);
     }
     player.fall();
     for (int i = 0; i < lasers.length; i++)
@@ -343,25 +345,28 @@ void keyPressed()
     }
     if (key == 'p' || key == 'P')
     {
-      pause = !pause;
-      if (pause)
+      if (!win && !lose)
       {
-        textAlign(CENTER);
-        fill(255, 0, 0);
-        textSize(30);
-        text("PAUSED, Press P to resume, press R to go to menu", width/2, height/2);
-        pausedTime = millis();
-        noLoop();
-      }
-      if (!pause)
-      {
-        newTime = millis();
-        resultTime = newTime-pausedTime;
-        for(int i = 0; i < turret.length; i++)
+        pause = !pause;
+        if (pause)
         {
-          turret[i].startTime = resultTime + turret[i].startTime;
+          textAlign(CENTER);
+          fill(255, 0, 0);
+          textSize(30);
+          text("PAUSED, Press P to resume, press R to go to menu", width/2, height/2);
+          pausedTime = millis();
+          noLoop();
         }
-        loop();
+        if (!pause)
+        {
+          newTime = millis();
+          resultTime = newTime-pausedTime;
+          for (int i = 0; i < turret.length; i++)
+          {
+            turret[i].startTime = resultTime + turret[i].startTime;
+          }
+          loop();
+        }
       }
     }
   }
