@@ -24,6 +24,9 @@ int whichTLevel = 0;
 Turret[] turret;
 movingWall[] walls;
 int changeLevel = 1;
+PImage portalCursor, portalBlue, portalOrange, portalNone;
+PImage door, doorclosed;
+
 
 void setup()
 {
@@ -45,9 +48,27 @@ void setup()
   keys[0]=false;
   keys[1]=false;
   keys[2]=false;
+  portalCursor=loadImage("portal cursor.png");
+  portalBlue=loadImage("portalbluecursor.png");
+  portalOrange=loadImage("portalorangecursor.png");
+  portalNone=loadImage("portalnonecursor.png");
+  door=loadImage("door.png");
+  doorclosed=loadImage("doorclosed.png");
 }
 void draw()
 {
+  if (orange.appear && blue.appear) {
+    cursor(portalNone);
+  }
+  else if (orange.appear) {
+    cursor(portalBlue);
+  }
+  else if (blue.appear) {
+    cursor(portalOrange);
+  }
+  else {
+    cursor(portalCursor);
+  }
   if (currentLevel == 0 && whichTLevel == 0)
   {
     if (Screen) {
@@ -66,6 +87,14 @@ void draw()
       fill(255, 125, 0);
       rect(width/2-250, 425, 200, 75);
       rect(width/2+250, 425, 200, 75);
+      if (dist(width/2, height/2, mouseX, mouseY)<50) {
+        imageMode(CENTER);
+        image(door, width/2, height/2, 200, 130);
+      }
+      else {
+        imageMode(CENTER);
+        image(doorclosed, width/2, height/2, 200, 130);
+      }
       if (inbetween(width/2+250, 425, 200, 75)) {
         Options = true;
         Screen = false;
@@ -259,7 +288,7 @@ void keyPressed()
       }
       else
       {
-        win = false;
+        lose = false;
         initialzeTLevel();
         loop();
       }
@@ -470,3 +499,4 @@ void initializeLevel()
     }
   }
 }
+
