@@ -29,6 +29,11 @@ class Bullet {
   void hit() {
     if (get(int(loc.x), int(loc.y)) == color(0) || get(int(loc.x), int(loc.y)) == color(255)||get(int(loc.x), int(loc.y)) == color(255, 0, 255) ||get(int(loc.x), int(loc.y)) == color(255, 0, 0)) {
       life=0;
+      if (get(int(loc.x), int(loc.y)) == color(255, 0, 0))
+      {
+        lose =true;
+      }
+      }
     }
   }
-}
+

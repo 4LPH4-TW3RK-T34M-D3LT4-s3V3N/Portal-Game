@@ -22,7 +22,7 @@ class Cube
   void displayPic()
   {
     imageMode(CENTER);
-    image(loadImage("cube.png"),loc.x, loc.y, 35,35);
+    image(loadImage("companion_cube__update__by_neorame-d52nf9a.png"),loc.x, loc.y, 35,35);
   }
   boolean killPlayer(Player p)
   {
@@ -70,7 +70,7 @@ class Cube
   }
   void fall()
   {
-    if (!goGround(loc, 30, 30))
+    if (!goGround(loc, 30, 36))
     {
       vel.add(acc);
       limitVel();
