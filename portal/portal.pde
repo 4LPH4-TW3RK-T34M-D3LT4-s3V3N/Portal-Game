@@ -27,7 +27,9 @@ int changeLevel = 1;
 PImage portalCursor, portalBlue, portalOrange, portalNone;
 PImage door, doorclosed;
 boolean pause;
-
+int pausedTime;
+int newTime;
+int resultTime;
 void setup()
 {
   size(800, 500);
@@ -348,10 +350,17 @@ void keyPressed()
         fill(255, 0, 0);
         textSize(30);
         text("PAUSED, Press P to resume, press R to go to menu", width/2, height/2);
+        pausedTime = millis();
         noLoop();
       }
       if (!pause)
       {
+        newTime = millis();
+        resultTime = newTime-pausedTime;
+        for(int i = 0; i < turret.length; i++)
+        {
+          turret[i].startTime = resultTime + turret[i].startTime;
+        }
         loop();
       }
     }
