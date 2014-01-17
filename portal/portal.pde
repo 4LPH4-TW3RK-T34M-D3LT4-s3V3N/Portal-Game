@@ -15,7 +15,7 @@ Cube[] cubes;
 Portal orange;
 Portal blue;
 Level[] levels = new Level[9];
-tLevel[] tLevels = new tLevel[5];
+tLevel[] tLevels = new tLevel[6];
 Player player;
 Laser[] lasers;
 boolean[] keys;
@@ -26,7 +26,7 @@ movingWall[] walls;
 int changeLevel = 1;
 PImage portalCursor, portalBlue, portalOrange, portalNone;
 PImage door, doorclosed;
-
+boolean pause;
 
 void setup()
 {
@@ -108,7 +108,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel = changeLevel;
+        currentLevel = 1;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -124,6 +124,8 @@ void draw()
       text("Options", width/2+250, 438); 
       text("Credits", width/2, 438);
       text("Portal: The Second Dimension", width/2, 100);
+      textSize(20);
+      text("Press P at any time during the game to pause", width/2, 490);
     }
     if (Credits) {
       background(0, 0, 255); 
@@ -263,21 +265,33 @@ void draw()
       noLoop();
     }
   }
-  print(Credits);
 }
 void keyPressed()
 {
+  if (key == 'r' || key == 'R')
+  {
+    if (pause)
+    {
+      whichTLevel = 0;
+      currentLevel = 0;
+      tutorial = false;
+      Screen = true;
+      pause = false;
+      loop();
+    }
+  }
   if (currentLevel != 0 || whichTLevel != 0)
   {
-    if (key=='d') {
+    if (key=='d' || key=='d') {
       keys[0]=true;
     }
-    if (key=='a') {
+    if (key=='a' || key=='A') {
       keys[1]=true;
     }
     if (key==' ') {
       keys[2]=true;
     }
+
     if (keyCode == ENTER && lose)
     {
       if (!tutorial)
@@ -306,7 +320,7 @@ void keyPressed()
       {
         whichTLevel++;
         win = false;
-        if (whichTLevel == 5)
+        if (whichTLevel == 6)
         {
           turret = new Turret[0];
           walls = new movingWall[0];
@@ -325,6 +339,22 @@ void keyPressed()
         loop();
       }
     }
+    if (key == 'p' || key == 'P')
+    {
+      pause = !pause;
+      if (pause)
+      {
+        textAlign(CENTER);
+        fill(255, 0, 0);
+        textSize(30);
+        text("PAUSED, Press P to resume, press R to go to menu", width/2, height/2);
+        noLoop();
+      }
+      if (!pause)
+      {
+        loop();
+      }
+    }
   }
 }
 
@@ -332,10 +362,10 @@ void keyReleased()
 {
   if (currentLevel != 0 || whichTLevel != 0)
   {
-    if (key=='d') {
+    if (key=='d' || key=='D') {
       keys[0]=false;
     }
-    if (key=='a') {
+    if (key=='a' || key=='A') {
       keys[1]=false;
     }
     if (key==' ') {
