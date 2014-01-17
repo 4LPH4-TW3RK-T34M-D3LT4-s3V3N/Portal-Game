@@ -3,7 +3,7 @@ class Button {
   boolean pressed;
   int h;
   int w;
-  Button(int x, int y, int buttonType)
+  Button(int x, int y)
   {
     loc = new PVector(x, y);
     w = 75;
@@ -43,6 +43,7 @@ class Button {
     }
     else
     {
+      pressed = false;
       if (h < 10)
       {
         h++;
@@ -55,4 +56,3 @@ class Button {
     }
   }
 }
-

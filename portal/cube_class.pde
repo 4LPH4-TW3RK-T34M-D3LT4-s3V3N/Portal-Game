@@ -19,6 +19,29 @@ class Cube
     rectMode(CENTER);
     rect(loc.x, loc.y, 30, 30);
   }
+  void displayPic()
+  {
+    imageMode(CENTER);
+    image(loadImage("cube.png"),loc.x, loc.y, 35,35);
+  }
+  boolean killPlayer(Player p)
+  {
+    for (int i = -15; i < 15; i++)
+    {
+      if (get(int(loc.x+i), int(loc.y+30)) == color(255, 0, 0))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  void onPlayer(Player p)
+  {
+    if (killPlayer(p))
+    {
+      lose = true;
+    }
+  }
   void limitVel()
   {
     if (vel.y > velSet)
@@ -96,4 +119,3 @@ class Cube
     }
   }
 }
-

@@ -41,7 +41,6 @@ class Player {
     if (get(int(loc.x+15), int(loc.y)) == color(128, 255, 255)) {
       textSize(40);
       textAlign(CENTER);
-      currentLevel++;
       win = true;
       //initializeLevel();
     }
@@ -49,7 +48,6 @@ class Player {
 
   void fall()
   {
-    print(goGround(loc, 12, 45));
     //  if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
     if (!goGround(loc, 12, 45)) //&& terminalVel() == color(195))
     {
@@ -67,7 +65,7 @@ class Player {
       {
         loc.y++;
       }
-      vel.y*=-.5;
+      vel.y*=-.25;
     }
     if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)
     {
@@ -142,5 +140,4 @@ class Player {
     loc.add(vel);
   }
 }
-
 
