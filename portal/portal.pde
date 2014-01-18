@@ -38,11 +38,13 @@ boolean pause;
 int pausedTime;
 int newTime;
 int resultTime;
-  Minim minim;
-  AudioPlayer buttonPlayer;
+Minim minim, portalMinim;
+AudioPlayer soundEffects;
 void setup()
 {
   size(800, 500);
+    minim = new Minim(this);
+
   for (int i = 1; i < levels.length; i++)
   {
     levels[i-1] = new Level(i, "Level " + i + ".png");
@@ -66,9 +68,6 @@ void setup()
   portalNone=loadImage("portalnonecursor.png");
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
-      minim = new Minim(this);
-    buttonPlayer = minim.loadFile("Portal2_sfx_button_positive.mp3");
-
 }
 void draw()
 {
@@ -296,6 +295,11 @@ void keyPressed()
       Screen = true;
       pause = false;
       loop();
+    }
+    if(blue.appear || orange.appear)
+    {
+      soundEffects = minim.loadFile("portal_close" + int(random(1,3)) + ".mp3");
+      soundEffects.play();
     }
   }
   if (currentLevel != 0 || whichTLevel != 0)
