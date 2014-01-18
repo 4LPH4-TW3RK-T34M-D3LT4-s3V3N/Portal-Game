@@ -22,7 +22,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[10];
+Level[] levels = new Level[11];
 tLevel[] tLevels = new tLevel[6];
 Player player;
 Laser[] lasers;
@@ -286,7 +286,14 @@ void draw()
       textAlign(CENTER);
       fill(255, 0, 0);
       textSize(30);
-      text("YOU WIN, Press ENTER to go to next level", width/2, height/2);
+      if (currentLevel == levels.length-1 && !tutorial || whichTLevel == 5 && tutorial)
+      {
+        text("ALL LEVELS COMPLETE, \nPress ENTER to go to main menu", width/2, height/2);
+      }
+      else
+      {
+        text("YOU WIN, Press ENTER to go to next level", width/2, height/2);
+      }
       noLoop();
     }
   }
@@ -360,7 +367,17 @@ void keyPressed()
       if (!tutorial)
       {
         currentLevel++;
-        saveLevel = currentLevel;
+        if (currentLevel == levels.length)
+        {
+          currentLevel = 0;
+          changeLevel = 1;
+          saveLevel = 1;
+          Screen = true;
+        }
+        else
+        {
+          saveLevel = currentLevel;
+        }
         String[] wut = {
           currentLevel + ""
         };
@@ -601,6 +618,14 @@ void initializeLevel()
       lasers = new Laser[1];
       lasers[0] = new Laser(182, 485, true, 575);
       player = new Player("P34CH35", 61, 180);
+    }
+    if (currentLevel == 10)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 760, 36);
     }
   }
 }
