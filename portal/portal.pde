@@ -314,14 +314,14 @@ void keyPressed()
       music.loop();
       loop();
     }
+  }
+  if (key == 'r' || key == 'R')
+  {
     if (blue.appear || orange.appear)
     {
       soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
       soundEffects.play();
     }
-  }
-  if (key == 'r' || key == 'R')
-  {
     if (pause)
     {
       if (!tutorial)
