@@ -28,10 +28,11 @@ Player player;
 Laser[] lasers;
 boolean[] keys;
 int currentLevel = 0;
+String[] loadData;
 int whichTLevel = 0;
 Turret[] turret;
 movingWall[] walls;
-int changeLevel = 1;
+int changeLevel;
 PImage portalCursor, portalBlue, portalOrange, portalNone;
 PImage door, doorclosed;
 boolean pause;
@@ -73,6 +74,8 @@ void setup()
   doorclosed=loadImage("doorclosed.png");
   music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
   music.loop();
+  loadData = loadStrings("data.txt");
+  changeLevel = int(loadData[0]);
 }
 void draw()
 {
@@ -127,7 +130,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel = 9;
+        currentLevel = changeLevel;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -290,7 +293,7 @@ void draw()
 }
 void keyPressed()
 {
-  if (key == 'r' || key == 'R')
+  if (key == 'e' || key == 'E')
   {
     if (pause)
     {
@@ -308,6 +311,21 @@ void keyPressed()
     {
       soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
       soundEffects.play();
+    }
+  }
+  if (key == 'r' || key == 'R')
+  {
+    if (pause)
+    {
+      if (!tutorial)
+      {
+        initializeLevel();
+      }
+      else
+      {
+        initialzeTLevel();
+      }
+      loop();
     }
   }
   if (currentLevel != 0 || whichTLevel != 0)
@@ -384,7 +402,7 @@ void keyPressed()
           textAlign(CENTER);
           fill(255, 0, 0);
           textSize(30);
-          text("PAUSED, Press P to resume, press R to go to menu", width/2, height/2);
+          text("PAUSED, Press P to resume, press E to go to menu \n press R to restart Level", width/2, height/2);
           pausedTime = millis();
           noLoop();
         }
