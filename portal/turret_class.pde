@@ -138,6 +138,7 @@ class Turret
       }
     }
     if (shoot) {
+
       if (rTrue) {
         if (run>0) {
           bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));

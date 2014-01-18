@@ -280,10 +280,10 @@ class Portal {
   {
     if (appear && partner.appear)
     {
-      portalPlayer = minim.loadFile("portal_open" + random(1, 4) + ".mp3");
-      portalPlayer.play();
       if (dist(t.loc.x, t.loc.y, loc.x, loc.y) < 25 || dist(t.loc.x+t.vel.x, t.loc.y+t.vel.y, loc.x, loc.y) < 25)
-      {
+      {      
+        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer.play();
         if (partner.orient == 0)
         {
           if (orient == 0)

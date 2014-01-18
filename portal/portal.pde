@@ -40,10 +40,12 @@ int newTime;
 int resultTime;
 Minim minim, portalMinim;
 AudioPlayer soundEffects;
+AudioPlayer music;
+int maxMusic = 3;
 void setup()
 {
   size(800, 500);
-    minim = new Minim(this);
+  minim = new Minim(this);
 
   for (int i = 1; i < levels.length; i++)
   {
@@ -68,6 +70,8 @@ void setup()
   portalNone=loadImage("portalnonecursor.png");
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
+  music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
+  music.loop();
 }
 void draw()
 {
@@ -122,7 +126,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel = 6;
+        currentLevel = 1;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -294,11 +298,14 @@ void keyPressed()
       tutorial = false;
       Screen = true;
       pause = false;
+      music.pause();
+      music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
+      music.loop();
       loop();
     }
-    if(blue.appear || orange.appear)
+    if (blue.appear || orange.appear)
     {
-      soundEffects = minim.loadFile("portal_close" + int(random(1,3)) + ".mp3");
+      soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
       soundEffects.play();
     }
   }

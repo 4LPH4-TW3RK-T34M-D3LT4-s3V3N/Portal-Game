@@ -3,6 +3,8 @@ class Bullet {
   int size;
   int life;
   float rise, run;
+  AudioPlayer bulletPlayer;
+
   Bullet(float x, float y, float px, float py) {
     loc = new PVector(x, y);
     ploc=new PVector(px, py);
@@ -13,6 +15,8 @@ class Bullet {
     vel = new PVector(run/10, rise/10);// the /50 makes it go slower
     size = 1;
     life = 100;
+    bulletPlayer = minim.loadFile("Portal2_sfx_turret_machine_gun.mp3");
+    bulletPlayer.play();
   }
 
   void display() {
@@ -33,7 +37,7 @@ class Bullet {
       {
         lose =true;
       }
-      }
     }
   }
+}
 
