@@ -22,7 +22,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[9];
+Level[] levels = new Level[10];
 tLevel[] tLevels = new tLevel[6];
 Player player;
 Laser[] lasers;
@@ -42,6 +42,7 @@ Minim minim, portalMinim;
 AudioPlayer soundEffects;
 AudioPlayer music;
 int maxMusic = 3;
+int saveLevel;
 void setup()
 {
   size(800, 500);
@@ -126,7 +127,7 @@ void draw()
       }
       if (inbetween(width/2, height/2+10, 40, 80))
       {
-        currentLevel = 1;
+        currentLevel = 9;
         initializeLevel();
       }
       fill(0, 0, 255);
@@ -341,6 +342,11 @@ void keyPressed()
       if (!tutorial)
       {
         currentLevel++;
+        saveLevel = currentLevel;
+        String[] wut = {
+          currentLevel + ""
+        };
+        saveStrings( "data.txt", wut);
         initializeLevel();
         win = false;
         loop();
@@ -565,6 +571,18 @@ void initializeLevel()
       cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 760, 36);
+    }
+    if (currentLevel == 9)
+    {
+      turret = new Turret[0];
+      walls = new movingWall[1];
+      walls[0] = new movingWall(180, 25, 100, 30, true, false, 472);
+      walls[0].assignButton(52, 490);
+      cubes = new Cube[1];
+      cubes[0] = new Cube(606, 477);
+      lasers = new Laser[1];
+      lasers[0] = new Laser(182, 485, true, 575);
+      player = new Player("P34CH35", 61, 180);
     }
   }
 }

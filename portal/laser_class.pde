@@ -16,14 +16,6 @@ class Laser
     moving = false;
     b = new Button(-100, -100);
   }
-  Laser(int x, int y, boolean _vertical, Button _b)
-  {
-    loc = new PVector(x, y);
-    vertical = _vertical;
-    moving = false;
-    buttonPress = true;
-    b = _b;
-  }
   Laser(int x, int y, boolean _vertical, int _moveLength)
   {
     loc = new PVector(x, y);

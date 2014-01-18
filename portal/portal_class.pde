@@ -158,7 +158,7 @@ class Portal {
     {
       if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 20 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 20)
       {
-        portalPlayer = minim.loadFile("portal_open" + random(1, 4) + ".mp3");
+        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
         portalPlayer.play();
         if (partner.orient == 0)
         {
