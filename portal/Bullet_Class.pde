@@ -16,6 +16,7 @@ class Bullet {
     size = 1;
     life = 100;
     bulletPlayer = minim.loadFile("Portal2_sfx_turret_machine_gun.mp3");
+    bulletPlayer.setGain(gain);
     bulletPlayer.play();
   }
 

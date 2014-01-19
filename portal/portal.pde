@@ -44,6 +44,7 @@ AudioPlayer soundEffects;
 AudioPlayer music;
 int maxMusic = 3;
 int saveLevel;
+int gain = 0;
 void setup()
 {
   size(800, 500);
@@ -73,12 +74,14 @@ void setup()
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
   music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
+  music.setGain(gain);
   music.loop();
   loadData = loadStrings("data.txt");
   changeLevel = int(loadData[0]);
 }
 void draw()
 {
+  music.setGain(gain);
   if (orange.appear && blue.appear) {
     cursor(portalNone);
   }
@@ -300,6 +303,17 @@ void draw()
 }
 void keyPressed()
 {
+  if (key == 'm' || key == 'M')
+  {
+    if (gain == 0)
+    {
+      gain = -1000;
+    }
+    else if (gain == -1000)
+    {
+      gain = 0;
+    }
+  }
   if (key == 'e' || key == 'E')
   {
     if (pause)
@@ -311,6 +325,7 @@ void keyPressed()
       pause = false;
       music.pause();
       music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
+      music.setGain(gain);
       music.loop();
       loop();
     }
@@ -320,6 +335,7 @@ void keyPressed()
     if (blue.appear || orange.appear)
     {
       soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
+      soundEffects.setGain(gain);
       soundEffects.play();
     }
     if (pause)

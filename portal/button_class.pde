@@ -40,7 +40,7 @@ class Button {
         buttonPlayer = minim.loadFile("Portal2_sfx_button_positive.mp3");
         play = false;
       }    
-
+      buttonPlayer.setGain(gain);
       buttonPlayer.play();
       pressed = true;
       if (h > 5)
@@ -60,6 +60,7 @@ class Button {
         buttonPlayer = minim.loadFile("Portal2_sfx_button_negative.mp3");      
         play = true;
       }        
+      buttonPlayer.setGain(gain);
       buttonPlayer.play();
       pressed = false;
       if (h < 10)

@@ -71,6 +71,7 @@ class Portal {
     if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))
     {
       portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+              portalPlayer.setGain(gain);
       portalPlayer.play();
       appear = false;
     }
@@ -87,6 +88,7 @@ class Portal {
       if (!appear)
       {
         portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer.setGain(gain);
         portalPlayer.play();
       }
     }
@@ -102,6 +104,7 @@ class Portal {
       if (!appear)
       {
         portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer.setGain(gain);
         portalPlayer.play();
       }
     }
@@ -115,6 +118,7 @@ class Portal {
     }
     if (appear)
     {
+              portalPlayer.setGain(gain);
       portalPlayer.play();
     }
   }
@@ -159,6 +163,7 @@ class Portal {
       if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 20 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 20)
       {
         portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+                portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)
         {
@@ -216,6 +221,7 @@ class Portal {
       if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25 || dist(p.loc.x+p.vel.x, p.loc.y+p.vel.y, loc.x, loc.y) < 25)
       {      
         portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+                portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)
         {
@@ -283,6 +289,7 @@ class Portal {
       if (dist(t.loc.x, t.loc.y, loc.x, loc.y) < 25 || dist(t.loc.x+t.vel.x, t.loc.y+t.vel.y, loc.x, loc.y) < 25)
       {      
         portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+                portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)
         {
