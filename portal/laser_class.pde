@@ -93,6 +93,13 @@ class Laser
         return true;
       }
     }
+    for (int i = -6; i < 6; i++)
+    {
+      if (get(int(p.loc.x), int(p.loc.y+i)) == color(254, 0, 0))
+      {
+        return true;
+      }
+    }
     return false;
   }
   void move()//moves laser the same way a movingWall is moved (see movingWall class)
@@ -123,3 +130,4 @@ class Laser
     }
   }
 }
+

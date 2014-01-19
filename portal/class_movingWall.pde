@@ -93,7 +93,7 @@ class movingWall
   }
   void carryPlayer(Player p)//moves the player with the wall if it is on top of the wall
   {
-    if (checkPlayer() && moving)
+    if (checkPlayer() && moving && !vertical)
     {
       p.loc.x+=moveSpeed;
     }

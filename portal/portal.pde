@@ -637,10 +637,12 @@ void initializeLevel()
     if (currentLevel == 10)
     {  
       turret = new Turret[0];
-      walls = new movingWall[0];
+      walls = new movingWall[1];
+      walls[0] = new movingWall(283, 126, 75, 10, false, true, 350);
       cubes = new Cube[0];
-      lasers = new Laser[0];
-      player = new Player("P34CH35", 760, 36);
+      lasers = new Laser[1];
+      lasers[0] = new Laser(10, 474, false);
+      player = new Player("P34CH35", 28, 84);
     }
   }
 }
