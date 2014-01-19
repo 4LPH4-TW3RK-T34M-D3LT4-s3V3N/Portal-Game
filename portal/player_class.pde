@@ -1,8 +1,8 @@
 class Player {
 
   String name;
-  PVector loc, vel, acc;
-  int velSet;
+  PVector loc, vel, acc;//location, velocity, acceleration PVectors
+  int velSet;//velocity set so player cannot go too fast
   Player(String playername, int locx, int locy) {
     name = playername;
     loc = new PVector(locx, locy);
@@ -10,7 +10,7 @@ class Player {
     acc = new PVector(0, .1);
     velSet = 15;
   }
-  color terminalVel()
+  color terminalVel()//checks what the player will touch in the next frame using current velocity
   {
     for (int i = 0; i < vel.y; i++)
     {
@@ -37,7 +37,7 @@ class Player {
     rectMode(CENTER);
     rect(loc.x, loc.y, 12, 45);
   }
-  void checkDoor() {
+  void checkDoor() {//if the player touches the light blue color of a door from the left side, the level will be won
     if (get(int(loc.x+15), int(loc.y)) == color(128, 255, 255)) {
       textSize(40);
       textAlign(CENTER);
@@ -48,8 +48,7 @@ class Player {
 
   void fall()
   {
-    //  if (get(int(loc.x), int(loc.y+24)) == color(195) && terminalVel() == color(195))
-    if (!goGround(loc, 12, 45)) //&& terminalVel() == color(195))
+    if (!goGround(loc, 12, 45)) 
     {
       vel.add(acc);
       limitVel();
@@ -67,7 +66,7 @@ class Player {
       }
       vel.y*=-.25;
     }
-    if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)
+    if (goWall(loc, 12, 45) == 1 || goWall(loc, 12, 45) == 2)//keeps player from walking into a wall, literally
     {
       if (goWall(loc, 12, 45) == 1)
       {
@@ -86,14 +85,14 @@ class Player {
       vel.x*=-.5;
     }
   }
-  void limitVel()
+  void limitVel()//keeps player from falling too fast
   {
     if (vel.y > velSet)
     {
       vel.y = velSet;
     }
   }
-  void friction()
+  void friction()//horizontally slows down player
   {
     if (vel.x > 0)
     {
@@ -114,27 +113,20 @@ class Player {
   }
   void move() {
 
-    if (keys[0] && goWall(loc, 12, 45) != 2) {
+    if (keys[0] && goWall(loc, 12, 45) != 2) {//makes player move right if it is not touching a wall on the right side
       if (vel.x >= 0 && vel.x < 1)
       {
         vel.x = 1;
       }
     } 
-    else if (keys[1] && goWall(loc, 12, 45) != 1) {
+    else if (keys[1] && goWall(loc, 12, 45) != 1) {//makes player move left if it is not touching a wall on the left side
       if (vel.x <= 0 && vel.x > -1)
       {
         vel.x = -1;
       }
     } 
-    //else if(!keys[1] && ! keys[2] && vel.x == 1)
-    // {
-    //   vel.x = 0;
-    //  }
-    //  else {
-    //  vel.x = 0;
-    // }
 
-    if (keys[2] && goGround(loc, 12, 45)) {
+    if (keys[2] && goGround(loc, 12, 45)) {//player will "jump" if it is on the ground
       vel.y = -3;
     }      
     loc.add(vel);

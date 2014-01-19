@@ -49,7 +49,6 @@ void setup()
 {
   size(800, 500);
   minim = new Minim(this);
-
   for (int i = 1; i < levels.length; i++)
   {
     levels[i-1] = new Level(i, "Level " + i + ".png");
