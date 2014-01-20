@@ -151,7 +151,7 @@ void draw()
       textSize(20);
       text("Press P at any time during the game to pause", width/2, 490);
     }
-    if (Credits) {
+    if (Credits) {//displays credits screen
       background(0, 0, 255); 
       strokeWeight(1);
       stroke(0);
@@ -165,14 +165,14 @@ void draw()
       character(width/2-75, height/2+25, "Irek\nSciezcka", Irek, RaceWhite, "Graphics");
       character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "HeadProgrammer");
     }
-    if (Physics) {
+    if (Physics) {//make tutorial true
       background(255, 125, 0);
       if (back(inbetween(50, 50, 50, 50))) {
         Screen = true;
         Physics = false;
       }
     }
-    if (Options) {
+    if (Options) {//display options screen
       background(255, 125, 0);
       if (back(inbetween(50, 50, 50, 50))) {
         Screen = true;
@@ -182,6 +182,7 @@ void draw()
   }
   else
   {
+    //the functions of each class required for the actual levels will be executed here. They must be executed in a specific order.
     if (!tutorial)
     {
       for (int i = 1; i < levels.length; i++)
@@ -226,7 +227,6 @@ void draw()
       turret[i].limitVel();
       turret[i].fall();
       turret[i].die();
-      print(turret[0].die);
     }
     player.fall();    
     orange.checkPlayer(player, blue);  
@@ -313,7 +313,7 @@ void keyPressed()
       gain = 0;
     }
   }
-  if (key == 'e' || key == 'E')
+  if (key == 'e' || key == 'E')//goes back to the menu if the game is paused
   {
     if (pause)
     {
@@ -331,7 +331,7 @@ void keyPressed()
   }
   if (key == 'r' || key == 'R')
   {
-    if (blue.appear || orange.appear)
+    if (blue.appear || orange.appear)//this will play a sound effect when the portals dissapear
     {
       soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
       soundEffects.setGain(gain);
@@ -339,7 +339,7 @@ void keyPressed()
     }
     if (pause)
     {
-      if (!tutorial)
+      if (!tutorial)//the level will be reinitialzed if R is pressed and the game is paused
       {
         initializeLevel();
       }
@@ -366,14 +366,14 @@ void keyPressed()
     {
       if (!tutorial)
       {
-        initializeLevel();
+        initializeLevel();//reinitialize level if lost
         lose = false;
         loop();
       }
       else
       {
         lose = false;
-        initialzeTLevel();
+        initialzeTLevel();//reinitialize tutorial level if lost
         loop();
       }
     }
@@ -381,8 +381,9 @@ void keyPressed()
     {
       if (!tutorial)
       {
-        currentLevel++;
-        if (currentLevel == levels.length)
+        currentLevel++;//change current level
+        changeLevel++;//changes value of changeLevel to equal currentLevel, necessary if a level is quit by pressing "E"
+        if (currentLevel == levels.length)//goes back to menu screen if all levels are cleared
         {
           currentLevel = 0;
           changeLevel = 1;
@@ -396,22 +397,22 @@ void keyPressed()
         String[] wut = {
           currentLevel + ""
         };
-        saveStrings( "data.txt", wut);
-        initializeLevel();
+        if (currentLevel == 0)//this will keep the save level from becoming 0, which doesn't exist
+        {
+          wut = new String[1];
+          wut[0] = 1 + "";
+        }
+        saveStrings( "data.txt", wut);//saves a text file with the value of the current level
+        initializeLevel();//initialize the next level
         win = false;
         loop();
       }
       else
       {
-        whichTLevel++;
+        whichTLevel++;//change tutorial level
         win = false;
-        if (whichTLevel == 6)
+        if (whichTLevel == 6)//go back to menu screen
         {
-          turret = new Turret[0];
-          walls = new movingWall[0];
-          cubes = new Cube[0];
-          lasers = new Laser[0];
-          player = new Player("P34CH35", 20, 200);
           Screen = true;
           tutorial = false;
           Physics = false;
@@ -419,14 +420,14 @@ void keyPressed()
         }
         else
         {
-          initialzeTLevel();
+          initialzeTLevel();//initialize elements in the next tutorial Level
         }
         loop();
       }
     }
     if (key == 'p' || key == 'P')
     {
-      if (!win && !lose)
+      if (!win && !lose)//game can only be paused if the game is still looping
       {
         pause = !pause;
         if (pause)
@@ -442,7 +443,7 @@ void keyPressed()
         {
           newTime = millis();
           resultTime = newTime-pausedTime;
-          for (int i = 0; i < turret.length; i++)
+          for (int i = 0; i < turret.length; i++)//this will keep the turret timer accurate after the game is paused
           {
             turret[i].startTime = resultTime + turret[i].startTime;
           }
@@ -475,7 +476,7 @@ void mousePressed()
 {
   if (currentLevel != 0 || whichTLevel != 0)
   {
-    if (mouseButton == LEFT)
+    if (mouseButton == LEFT)//Orange portal is controlled by left mouse button, and the blue portal is controlled by the right mouse button.
     {
       orange.appear();
     }
@@ -485,6 +486,12 @@ void mousePressed()
     }
   }
 }
+/*Instead of having to make different objects for each level,
+an array of the laser, movingWall, cube, and turret classes is created.
+These arrays will change value depending on what level is currently being played.
+The number of necessary objects in each level is put, and the different objects
+can simply be initialized inside the array. Portals are always reinitialized, and the player
+only requires one of itself, so not array is needed. This works for normal and tutorial levels.*/
 void initialzeTLevel()
 {
   orange = new Portal(color(255, 115, 0));
