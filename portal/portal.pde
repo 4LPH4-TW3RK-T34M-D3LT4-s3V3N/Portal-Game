@@ -26,6 +26,7 @@ movingWall[] walls;
 int changeLevel = 1;
 PImage portalCursor, portalBlue, portalOrange, portalNone;
 PImage door, doorclosed;
+PImage turretpicr,turretpicl;
 boolean pause;
 int pausedTime;
 int newTime;
@@ -56,6 +57,8 @@ void setup()
   portalNone=loadImage("portalnonecursor.png");
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
+  turretpicr=loadImage("turret.png");
+  turretpicl=loadImage("turret2.png");
 }
 void draw()
 {
@@ -204,6 +207,7 @@ void draw()
       turret[i].display();
       turret[i].limitVel();
       turret[i].fall();
+      turret[i].show();
     }
     player.fall();
     for (int i = 0; i < lasers.length; i++)
