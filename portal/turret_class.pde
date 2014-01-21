@@ -32,7 +32,7 @@ class Turret
     fill(250);
     noStroke();
     rectMode(CENTER);
-    rect(loc.x, loc.y, 20, 40);
+    //rect(loc.x, loc.y, 20, 40);
   }
   void limitVel()
   {
@@ -51,7 +51,7 @@ class Turret
     }
     else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
-      while (get (int (loc.x+10), int(loc.y+19)) == color(0) || get(int (loc.x+10), int(loc.y+19)) == color(255))
+      while (get (int (loc.x+10), int(loc.y+30)) == color(0) || get(int (loc.x+10), int(loc.y+30)) == color(255))
       {
         loc.y--;
       }
@@ -95,14 +95,31 @@ class Turret
       return false;
     }
   }
+  void show() {
+    imageMode(CENTER);
+    if (rTrue) {
+      image(turretpicr, loc.x, loc.y-10, 50, 70);
+    }
+    if (lTrue) {
+      image(turretpicl, loc.x, loc.y-10, 50, 70);
+    }
+  }
 
   void shoot(Player p, float px) {
     run=(px-loc.x);
     if (checkPlayer(p))
     {
-      stroke(250, 0, 0);
-      strokeWeight(2);
-      line(p.loc.x, p.loc.y, loc.x, loc.y); 
+      if (rTrue) {
+        stroke(250, 0, 0);
+        strokeWeight(2);
+        line(p.loc.x, p.loc.y, loc.x+10, loc.y-13);
+      }
+
+      if (lTrue) {
+        stroke(250, 0, 0);
+        strokeWeight(2);
+        line(p.loc.x, p.loc.y, loc.x-10, loc.y-13);
+      }
       if (((millis()-startTime))>800) {
         shoot = true;
       }
@@ -124,13 +141,13 @@ class Turret
     if (shoot) {
       if (rTrue) {
         if (run>0) {
-          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+          bullet.add(new Bullet(loc.x+10, loc.y-13, p.loc.x, p.loc.y));
         }
       }
       if (lTrue) {
         if (run<0) {
 
-          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+          bullet.add(new Bullet(loc.x-10, loc.y-13, p.loc.x, p.loc.y));
         }
       }
     }
