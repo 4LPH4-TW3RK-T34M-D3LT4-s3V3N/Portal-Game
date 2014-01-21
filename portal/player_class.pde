@@ -38,7 +38,7 @@ class Player {
     rect(loc.x, loc.y, 12, 45);
   }
   void checkDoor() {//if the player touches the light blue color of a door from the left side, the level will be won
-    if (get(int(loc.x+15), int(loc.y)) == color(128, 255, 255)) {
+    if (get(int(loc.x+15), int(loc.y)) == color(128, 255, 255) || get(int(loc.x-15), int(loc.y)) == color(128, 255, 255)) {
       textSize(40);
       textAlign(CENTER);
       win = true;

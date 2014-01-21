@@ -20,7 +20,7 @@ class Cube
   void displayPic()
   {
     imageMode(CENTER);
-    image(loadImage("companion_cube__update__by_neorame-d52nf9a.png"),loc.x, loc.y, 35,35);//display a picture of a cube directly on the purple rectangle made. For asthetic purposes
+    image(loadImage("companion_cube__update__by_neorame-d52nf9a.png"),loc.x, loc.y, 35,35);//display a picture of a cube directly on the purple rectangle made. For aesthetic purposes
   }
   boolean killPlayer(Player p)
   {

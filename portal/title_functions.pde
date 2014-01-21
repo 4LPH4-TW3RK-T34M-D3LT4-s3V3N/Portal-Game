@@ -1,5 +1,6 @@
 boolean inbetween(int x, int y, int x1, int y1) {
-  if (mouseX > x-x1 && mouseX < x+x1 && mouseY > y-y1 && mouseY < y+y1 && mousePressed) {
+  //I don't have to write out button functionality now
+  if (mouseX > x-x1/2 && mouseX < x+x1/2 && mouseY > y-y1/2 && mouseY < y+y1/2 && mousePressed) {
     return true;
   } 
   else {
@@ -8,6 +9,7 @@ boolean inbetween(int x, int y, int x1, int y1) {
 }
 
 boolean back(boolean x){
+  //it's a button 
   fill(0);
   rect(50,50,50,50);
   if(x){

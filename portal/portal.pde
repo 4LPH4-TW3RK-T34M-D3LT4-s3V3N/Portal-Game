@@ -22,7 +22,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[11];
+Level[] levels = new Level[12];
 tLevel[] tLevels = new tLevel[6];
 Player player;
 Laser[] lasers;
@@ -78,225 +78,236 @@ void setup()
   loadData = loadStrings("data.txt");
   changeLevel = int(loadData[0]);
 }
+void intro()
+{
+  background(0);
+  imageMode(CENTER);
+  image(loadImage("title screen.png"), width/2, height/2);
+}
 void draw()
 {
-  music.setGain(gain);
-  if (orange.appear && blue.appear) {
-    cursor(portalNone);
-  }
-  else if (orange.appear) {
-    cursor(portalBlue);
-  }
-  else if (blue.appear) {
-    cursor(portalOrange);
-  }
-  else {
-    cursor(portalCursor);
-  }
-  if (currentLevel == 0 && whichTLevel == 0)
+  if (millis() <= 1)
   {
-    if (Screen) {
-      background(250);
-      rectMode(CENTER);
-      fill(0);
-      rect(width/2, height/2, 40, 80);
-      stroke(5);
-      line(0, 0, width/2-75, height/2-50);
-      line(width, 0, width/2+75, height/2-50);
-      line(0, height, width/2-75, height/2+50);
-      line(width, height, width/2+75, height/2+50);
-      noFill();
-      rect(width/2, height/2, 150, 100);
-      noStroke();
-      fill(255, 125, 0);
-      rect(width/2-250, 425, 200, 75);
-      rect(width/2+250, 425, 200, 75);
-      if (dist(width/2, height/2, mouseX, mouseY)<50) {
-        imageMode(CENTER);
-        image(door, width/2, height/2, 200, 130);
-      }
-      else {
-        imageMode(CENTER);
-        image(doorclosed, width/2, height/2, 200, 130);
-      }
-      if (inbetween(width/2+250, 425, 200, 75)) {
-        Options = true;
-        Screen = false;
-      }
-      if (inbetween(width/2-250, 425, 200, 75)) {
-        Physics = true;
-        Screen = false;
-        tutorial = true;
-        whichTLevel = 1;
-        initialzeTLevel();
-      }
-      if (inbetween(width/2, height/2+10, 40, 80))
-      {
-        currentLevel = changeLevel;
-        initializeLevel();
-      }
-      fill(0, 0, 255);
-      rect(width/2, 425, 200, 75);
-      if (inbetween(width/2, 425, 200, 75)) {
-        Credits = true;
-        Screen = false;
-      }
-      fill(0);
-      textAlign(CENTER);
-      textSize(50);
-      text("Physics", width/2-250, 438);
-      text("Options", width/2+250, 438); 
-      text("Credits", width/2, 438);
-      text("Portal: The Second Dimension", width/2, 100);
-      textSize(20);
-      text("Press P at any time during the game to pause", width/2, 490);
+    intro();
+  }
+  else
+  {
+    music.setGain(gain);
+    if (orange.appear && blue.appear) {
+      cursor(portalNone);
     }
-    if (Credits) {//displays credits screen
-      background(0, 0, 255); 
-      strokeWeight(1);
-      stroke(0);
-      if (back(inbetween(50, 50, 50, 50))) {
-        Screen = true;
-        Credits = false;
+    else if (orange.appear) {
+      cursor(portalBlue);
+    }
+    else if (blue.appear) {
+      cursor(portalOrange);
+    }
+    else {
+      cursor(portalCursor);
+    }
+    if (currentLevel == 0 && whichTLevel == 0)
+    {
+      if (Screen) {
+        background(250);
+        rectMode(CENTER);
+        fill(0);
+        rect(width/2, height/2, 40, 80);
+        stroke(5);
+        line(0, 0, width/2-75, height/2-50);
+        line(width, 0, width/2+75, height/2-50);
+        line(0, height, width/2-75, height/2+50);
+        line(width, height, width/2+75, height/2+50);
+        noFill();
+        rect(width/2, height/2, 150, 100);
+        noStroke();
+        fill(255, 125, 0);
+        rect(width/2-250, 425, 200, 75);
+        rect(width/2+250, 425, 200, 75);
+        if (dist(width/2, height/2, mouseX, mouseY)<50) {
+          imageMode(CENTER);
+          image(door, width/2, height/2, 200, 130);
+        }
+        else {
+          imageMode(CENTER);
+          image(doorclosed, width/2, height/2, 200, 130);
+        }
+        if (inbetween(width/2+250, 425, 200, 75)) {
+          Options = true;
+          Screen = false;
+        }
+        if (inbetween(width/2-250, 425, 200, 75)) {
+          Physics = true;
+          Screen = false;
+          tutorial = true;
+          whichTLevel = 1;
+          initialzeTLevel();
+        }
+        if (inbetween(width/2, height/2+10, 40, 80))
+        {
+          currentLevel = changeLevel;
+          initializeLevel();
+        }
+        fill(0, 0, 255);
+        rect(width/2, 425, 200, 75);
+        if (inbetween(width/2, 425, 200, 75)) {
+          Credits = true;
+          Screen = false;
+        }
+        fill(0);
+        textAlign(CENTER);
+        textSize(50);
+        text("Physics", width/2-250, 438);
+        text("Options", width/2+250, 438); 
+        text("Credits", width/2, 438);
+        text("Portal: The Second Dimension", width/2, 100);
+        textSize(20);
+        text("Press P at any time during the game to pause", width/2, 490);
       }
+      if (Credits) {//displays credits screen
+        background(0, 0, 255); 
+        strokeWeight(1);
+        stroke(0);
+        if (back(inbetween(50, 50, 50, 50))) {
+          Screen = true;
+          Credits = false;
+        }
 
-      character(width/2+75, height/2-25, "Brandon\nDonohue", Brandon, RaceWhite, "UI Designer");
-      character(width/2+225, height/2+25, "AJ\nSavoca", AJ, RaceWhite, "Monkey Boy");
-      character(width/2-75, height/2+25, "Irek\nSciezcka", Irek, RaceWhite, "Graphics");
-      character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "HeadProgrammer");
-    }
-    if (Physics) {//make tutorial true
-      background(255, 125, 0);
-      if (back(inbetween(50, 50, 50, 50))) {
-        Screen = true;
-        Physics = false;
+        character(width/2+75, height/2-25, "Brandon\nDonohue", Brandon, RaceWhite, "UI Designer");
+        character(width/2+225, height/2+25, "AJ\nSavoca", AJ, RaceWhite, "Monkey Boy");
+        character(width/2-75, height/2+25, "Irek\nSciezcka", Irek, RaceWhite, "Graphics");
+        character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "HeadProgrammer");
       }
-    }
-    if (Options) {//display options screen
-      background(255, 125, 0);
-      if (back(inbetween(50, 50, 50, 50))) {
+      if (Physics) {//make tutorial true
+        background(255, 125, 0);
+        if (back(inbetween(50, 50, 50, 50))) {
+          Screen = true;
+          Physics = false;
+        }
+      }
+      if (Options) {//display options screen
+        background(255, 125, 0);
         Screen = true;
         Options = false;
       }
     }
-  }
-  else
-  {
-    //the functions of each class required for the actual levels will be executed here. They must be executed in a specific order.
-    if (!tutorial)
-    {
-      for (int i = 1; i < levels.length; i++)
-      {
-        levels[i-1].display();
-      }
-    }
     else
     {
-      for (int i = 1; i < tLevels.length; i++)
+      //the functions of each class required for the actual levels will be executed here. They must be executed in a specific order.
+      if (!tutorial)
       {
-        tLevels[i-1].display();
-      }
-    }
-    for (int i = 0; i < walls.length; i++)
-    {
-      walls[i].display();
-      walls[i].move();
-    }
-
-    for (int i = 0; i < cubes.length; i++)
-    {
-      blue.checkObject(cubes[i], orange);
-      orange.checkObject(cubes[i], blue);
-    }
-    for (int i=0;i<turret.length;i++) 
-    {
-      blue.checkTurret(turret[i], orange);
-      orange.checkTurret(turret[i], blue);
-    }
-
-    player.checkDoor();
-    player.move();
-
-    for (int i = 0; i < cubes.length; i++)
-    {
-      cubes[i].display();
-      cubes[i].fall();
-    }
-    for (int i=0;i<turret.length;i++) {
-      turret[i].display();
-      turret[i].limitVel();
-      turret[i].fall();
-      turret[i].die();
-    }
-    player.fall();    
-    orange.checkPlayer(player, blue);  
-    blue.checkPlayer(player, orange);
-    for (int i = 0; i < lasers.length; i++)
-    {
-      lasers[i].display();
-      lasers[i].hitPlayer(player);
-      lasers[i].move();
-    }
-    orange.shoot(player);
-    blue.shoot(player);
-    player.display();
-    for (int i = 0; i < cubes.length; i++)
-    {
-      cubes[i].onPlayer(player);
-      cubes[i].hitPlayer(player);
-    }
-    for (int i=0;i<turret.length;i++) {
-      turret[i].hitPlayer(player);
-      turret[i].shoot(player, player.loc.x);
-    }
-    player.friction();
-    for (int i = 0; i < cubes.length; i++)
-    {
-      cubes[i].friction();
-    }
-
-    blue.display();
-    orange.display();
-    for (int i = 0; i < walls.length; i++)
-    {
-      walls[i].checkButton();
-    }
-    for (int i = 0; i < lasers.length; i++)
-    {
-      lasers[i].checkButton();
-    }
-    for (int i = 0; i < cubes.length; i++)
-    {
-      cubes[i].displayPic();
-    }
-    for (int i = 0; i < walls.length; i++)
-    {
-      walls[i].carryPlayer(player);
-      blue.wallMove(walls[i]);
-      orange.wallMove(walls[i]);
-    }
-    if (lose)
-    {
-      textAlign(CENTER);
-      fill(255, 0, 0);
-      textSize(30);
-      text("YOU LOSE, Press ENTER to restart level", width/2, height/2);
-      noLoop();
-    }
-    if (win)
-    {
-      textAlign(CENTER);
-      fill(255, 0, 0);
-      textSize(30);
-      if (currentLevel == levels.length-1 && !tutorial || whichTLevel == 5 && tutorial)
-      {
-        text("ALL LEVELS COMPLETE, \nPress ENTER to go to main menu", width/2, height/2);
+        for (int i = 1; i < levels.length; i++)
+        {
+          levels[i-1].display();
+        }
       }
       else
       {
-        text("YOU WIN, Press ENTER to go to next level", width/2, height/2);
+        for (int i = 1; i < tLevels.length; i++)
+        {
+          tLevels[i-1].display();
+        }
       }
-      noLoop();
+      for (int i = 0; i < walls.length; i++)
+      {
+        walls[i].display();
+        walls[i].move();
+      }
+
+      for (int i = 0; i < cubes.length; i++)
+      {
+        blue.checkObject(cubes[i], orange);
+        orange.checkObject(cubes[i], blue);
+      }
+      for (int i=0;i<turret.length;i++) 
+      {
+        blue.checkTurret(turret[i], orange);
+        orange.checkTurret(turret[i], blue);
+      }
+
+      player.checkDoor();
+      player.move();
+
+      for (int i = 0; i < cubes.length; i++)
+      {
+        cubes[i].display();
+        cubes[i].fall();
+      }
+      for (int i=0;i<turret.length;i++) {
+        turret[i].display();
+        turret[i].limitVel();
+        turret[i].fall();
+        turret[i].die();
+      }
+      player.fall();    
+      orange.checkPlayer(player, blue);  
+      blue.checkPlayer(player, orange);
+      for (int i = 0; i < lasers.length; i++)
+      {
+        lasers[i].display();
+        lasers[i].hitPlayer(player);
+        lasers[i].move();
+      }
+      orange.shoot(player);
+      blue.shoot(player);
+      player.display();
+      for (int i = 0; i < cubes.length; i++)
+      {
+        cubes[i].onPlayer(player);
+        cubes[i].hitPlayer(player);
+      }
+      for (int i=0;i<turret.length;i++) {
+        turret[i].hitPlayer(player);
+        turret[i].shoot(player, player.loc.x);
+      }
+      player.friction();
+      for (int i = 0; i < cubes.length; i++)
+      {
+        cubes[i].friction();
+      }
+
+      blue.display();
+      orange.display();
+      for (int i = 0; i < walls.length; i++)
+      {
+        walls[i].checkButton();
+      }
+      for (int i = 0; i < lasers.length; i++)
+      {
+        lasers[i].checkButton();
+      }
+      for (int i = 0; i < cubes.length; i++)
+      {
+        cubes[i].displayPic();
+      }
+      for (int i = 0; i < walls.length; i++)
+      {
+        walls[i].carryPlayer(player);
+        blue.wallMove(walls[i]);
+        orange.wallMove(walls[i]);
+      }
+      if (lose)
+      {
+        textAlign(CENTER);
+        fill(255, 0, 0);
+        textSize(30);
+        text("YOU LOSE, Press ENTER to restart level", width/2, height/2);
+        noLoop();
+      }
+      if (win)
+      {
+        textAlign(CENTER);
+        fill(255, 0, 0);
+        textSize(30);
+        if (currentLevel == levels.length-1 && !tutorial || whichTLevel == 5 && tutorial)
+        {
+          text("ALL LEVELS COMPLETE, \nPress ENTER to go to main menu", width/2, height/2);
+        }
+        else
+        {
+          text("YOU WIN, Press ENTER to go to next level", width/2, height/2);
+        }
+        noLoop();
+      }
     }
   }
 }
@@ -487,11 +498,11 @@ void mousePressed()
   }
 }
 /*Instead of having to make different objects for each level,
-an array of the laser, movingWall, cube, and turret classes is created.
-These arrays will change value depending on what level is currently being played.
-The number of necessary objects in each level is put, and the different objects
-can simply be initialized inside the array. Portals are always reinitialized, and the player
-only requires one of itself, so not array is needed. This works for normal and tutorial levels.*/
+ an array of the laser, movingWall, cube, and turret classes is created.
+ These arrays will change value depending on what level is currently being played.
+ The number of necessary objects in each level is put, and the different objects
+ can simply be initialized inside the array. Portals are always reinitialized, and the player
+ only requires one of itself, so not array is needed. This works for normal and tutorial levels.*/
 void initialzeTLevel()
 {
   orange = new Portal(color(255, 115, 0));
@@ -651,6 +662,28 @@ void initializeLevel()
       lasers[0] = new Laser(10, 474, false);
       player = new Player("P34CH35", 28, 84);
     }
+    if (currentLevel == 11)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[1];
+      walls[0] = new movingWall(750, 180, 76, 10, true, true, 300);
+      walls[0].assignButton(603, 419);
+      cubes = new Cube[1];
+      cubes[0] = new Cube(106, 456);
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 98, 234);
+    }
   }
 }
+//"How are ya sir?"
+//"Hawaii?  God damn it Bill, I'm supposed to be in California."
+//
+//"My eyes are ceramic. Caught a bazooka round at Little Big Horn. Or was it Okinawa? The one without the Indians."
+//
+//"What I wouldn't give to be 20 years younger... and a woman. You know, I've personally flown over 194 
+//missions and I was shot down on every one. Come to think of it, I've never landed a plane in my life."
+//
+//"God, I love a good funeral!"
+//
+//"Really?  12 o'clock?  That gives us abaout 25 minutes.  Think I'll go grab a burger."
 
