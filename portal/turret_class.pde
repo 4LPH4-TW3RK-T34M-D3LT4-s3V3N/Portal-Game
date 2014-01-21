@@ -71,7 +71,7 @@ class Turret
       return false;
     }
   }
-
+  
   void shoot(Player p) {
     if (checkPlayer(p))
     {

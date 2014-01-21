@@ -21,7 +21,7 @@ boolean[] keys;
 int currentLevel = 0;
 Turret[] turret=new Turret[2];
 ArrayList<Bullet> bullet = new ArrayList<Bullet>();
-PImage door, doorclosed;
+PImage door, doorclosed,turretpic,turretpicl;
 void setup()
 {
   size(800, 500);
@@ -41,6 +41,8 @@ void setup()
   keys[2]=false;
   door=loadImage("door.png");
   doorclosed=loadImage("doorclosed.png");
+  turretpic=loadImage("turret.png");
+  turretpicl=loadImage("turret2.png");
 }
 void draw()
 {
@@ -165,6 +167,7 @@ void draw()
       turret[i].fall();
       turret[i].hitPlayer(player);
       turret[i].shoot(player);
+      turret[i].show();
       blue.checkTurret(turret[i], orange);
       orange.checkTurret(turret[i], blue);
     }

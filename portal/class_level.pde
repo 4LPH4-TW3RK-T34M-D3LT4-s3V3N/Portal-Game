@@ -10,7 +10,8 @@ class Level
   void display()
   {
     if (currentLevel == whichLevel)
-    {
+    {    imageMode(CORNER);
+
       image(design, 0, 0);
     }
   }
