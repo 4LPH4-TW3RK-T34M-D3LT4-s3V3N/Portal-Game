@@ -89,9 +89,10 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 1)
+  if (millis() <= 7000)
   {
     intro();
+    return;
   }
   music.setGain(gain);
   if (orange.appear && blue.appear) {

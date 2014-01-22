@@ -174,7 +174,7 @@ class Turret
           player = minim.loadFile("targetLost" + int(random(2)) + ".wav");
           justPlayed = 1;
         }
-        int random = int(random(0, 1000));
+        int random = int(random(0, 2000));
         if (random == 0 & justPlayed != 0)
         {
           player = minim.loadFile("lookTarget" + int(random(4)) + ".wav");
