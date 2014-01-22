@@ -14,11 +14,14 @@ class Turret
   boolean lTrue = false;
   boolean die;
   int life = 255;
+  AudioPlayer player;
+  int justPlayed = 1;
   Turret(float x, float y, boolean leftorRight)
   {
     loc = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
+    player = minim.loadFile("noSound.mp3");
     if (leftorRight)
     {
       lTrue = true;
@@ -30,12 +33,13 @@ class Turret
   }
   void display()
   {
+    player.play();
     fill(250, life);
     noStroke();
     rectMode(CENTER);
-    if(life <= 0)
+    if (life <= 0)
     {
-      loc.set(-100,-100);
+      loc.set(-100, -100);
     }
     rect(loc.x, loc.y, 20, 40);
   }
@@ -56,7 +60,7 @@ class Turret
     }
     else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
-      if(vel.y >= velSet)
+      if (vel.y >= velSet)
       {
         die = true;
       }
@@ -106,48 +110,72 @@ class Turret
   }
   void die()
   {
-    if(die)
+    if (die)
     {
       life-=10;
+      if (justPlayed != 3)
+      {
+        player = minim.loadFile("turretDead.wav");
+        justPlayed = 3;
+      }
     }
   }
 
   void shoot(Player p, float px) {
-    run=(px-loc.x);
-    if (checkPlayer(p))
+    if (!die)
     {
-      stroke(250, 0, 0);
-      strokeWeight(2);
-      line(p.loc.x, p.loc.y, loc.x, loc.y); 
-      if (((millis()-startTime))>800) {
-        shoot = true;
-      }
-    }
-    else
-    {
-      shoot = false;
-    }
-
-    for (int i = bullet.size()-1; i >=0; i--) {
-      Bullet b = bullet.get(i);
-      b.hit();
-      b.display();
-      b.update();
-      if (b.life <= 0) {
-        bullet.remove(i);
-      }
-    }
-    if (shoot) {
-
-      if (rTrue) {
-        if (run>0) {
-          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+      run=(px-loc.x);
+      if (checkPlayer(p))
+      {
+        if (justPlayed == 1 && !shoot)
+        {
+          justPlayed = 2;
+          player = minim.loadFile("targetFound.wav");
+        }
+        stroke(250, 0, 0);
+        strokeWeight(2);
+        line(p.loc.x, p.loc.y, loc.x, loc.y); 
+        if (((millis()-startTime))>800) {
+          shoot = true;
         }
       }
-      if (lTrue) {
-        if (run<0) {
+      else
+      {
+        shoot = false;
+        if (justPlayed == 2)
+        {
+          player = minim.loadFile("targetLost.wav");
+          justPlayed = 1;
+        }
+        int random = int(random(0, 1000));
+        if (random == 0 & justPlayed != 0)
+        {
+          player = minim.loadFile("lookTarget.wav");
+          justPlayed = 1;
+        }
+      }
 
-          bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+      for (int i = bullet.size()-1; i >=0; i--) {
+        Bullet b = bullet.get(i);
+        b.hit();
+        b.display();
+        b.update();
+        if (b.life <= 0) {
+          bullet.remove(i);
+        }
+      }
+      if (shoot) {
+
+        if (rTrue) {
+          if (run>0) {
+            bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+          }
+        }
+        if (lTrue) {
+          if (run<0) {
+
+            bullet.add(new Bullet(loc.x, loc.y, p.loc.x, p.loc.y));
+          }
         }
       }
     }

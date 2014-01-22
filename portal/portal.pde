@@ -667,7 +667,7 @@ void initializeLevel()
       turret = new Turret[0];
       walls = new movingWall[1];
       walls[0] = new movingWall(750, 180, 76, 10, true, true, 300);
-      walls[0].assignButton(603, 419);
+      walls[0].assignButton(590, 414);
       cubes = new Cube[1];
       cubes[0] = new Cube(106, 456);
       lasers = new Laser[0];
