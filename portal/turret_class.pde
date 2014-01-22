@@ -37,6 +37,7 @@ class Turret
   void display()
   {
     fill(250);
+    player.setGain(gain);
     player.play();
     fill(250, life);
     noStroke();
