@@ -222,7 +222,7 @@ class Portal {
             {
               p.vel.y*=-1;
             }
-            else if (p.vel.y == 0)
+            else if (p.vel.y <= 0)
             {
               p.vel.y = -2;
             }

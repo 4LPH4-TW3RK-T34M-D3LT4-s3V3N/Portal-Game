@@ -84,7 +84,7 @@ void intro()
 {
   background(0);
   imageMode(CENTER);
-        noTint();
+  noTint();
   image(loadImage("title screen.png"), width/2, height/2);
 }
 void draw()
@@ -127,12 +127,12 @@ void draw()
       rect(width/2+250, 425, 200, 75);
       if (dist(width/2, height/2, mouseX, mouseY)<50) {
         imageMode(CENTER);
-              noTint();
+        noTint();
         image(door, width/2, height/2, 200, 130);
       }
       else {
         imageMode(CENTER);
-              noTint();
+        noTint();
         image(doorclosed, width/2, height/2, 200, 130);
       }
       if (inbetween(width/2+250, 425, 200, 75)) {
@@ -228,8 +228,7 @@ void draw()
       blue.checkTurret(turret[i], orange);
       orange.checkTurret(turret[i], blue);
     }
-    orange.checkPlayer(player, blue);  
-    blue.checkPlayer(player, orange);
+
     player.checkDoor();
     player.move();
 
@@ -244,6 +243,8 @@ void draw()
       turret[i].fall();
       turret[i].show();
     }
+    orange.checkPlayer(player, blue);  
+    blue.checkPlayer(player, orange);
     player.fall();
     for (int i = 0; i < lasers.length; i++)
     {
