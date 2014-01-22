@@ -108,7 +108,7 @@ class Turret
   }
   boolean checkPlayer(Player p)
   {
-    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15) {
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15 && p.loc.y > loc.y-100) {
       if (timer==true) {
         startTime=millis();
         timer=false;
@@ -117,7 +117,7 @@ class Turret
     else {
       timer=true;
     }
-    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15)
+    if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15 && p.loc.y > loc.y-100)
     {
       return true;
     }

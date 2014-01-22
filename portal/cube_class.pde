@@ -36,7 +36,7 @@ class Cube
   }
   void onPlayer(Player p)
   {
-    if (killPlayer(p))
+    if (killPlayer(p) && vel.y > 0)
     {
       lose = true;//the player will die if it is directly under a cube
     }

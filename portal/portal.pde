@@ -669,14 +669,15 @@ void initializeLevel()
     }
     if (currentLevel == 11)
     {  
-      turret = new Turret[0];
+      turret = new Turret[1];
+      turret[0] = new Turret(345,458,true);
       walls = new movingWall[1];
-      walls[0] = new movingWall(750, 180, 76, 10, true, true, 300);
+      walls[0] = new movingWall(750, 180, 76, 10, false, true, 300);
       walls[0].assignButton(590, 414);
       cubes = new Cube[1];
       cubes[0] = new Cube(106, 456);
       lasers = new Laser[0];
-      player = new Player("P34CH35", 98, 234);
+      player = new Player("P34CH35", 313, 170);
     }
   }
 }

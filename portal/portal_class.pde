@@ -37,7 +37,14 @@ class Portal {
   {
     if (w.checkPortal(c) && w.moving)//portal will move on a white movingWall if it was shot on one
     {
+      if(!w.vertical)
+      {
       loc.x+=w.moveSpeed;
+      }
+      else
+      {
+        loc.y+=w.moveSpeed;
+      }
     }
   }
   void shoot(Player p)
