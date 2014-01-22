@@ -248,7 +248,15 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = -p.vel.y*2;
+            if (p.vel.x < 0)
+            {
+              p.vel.x = 1;
+            }
+            else
+            {
+              p.vel.x = p.vel.y;
+            }
+
             p.vel.y = 0;
           }
           if (orient == 3)
@@ -261,7 +269,15 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = p.vel.y*2;
+            if (p.vel.x > 0)
+            {
+              p.vel.x = -1;
+            }
+            else
+            {
+              p.vel.x = -p.vel.y;
+            }
+
             p.vel.y = 0;
           }
           if (orient == 3)
@@ -328,3 +344,4 @@ class Portal {
     }
   }
 }
+

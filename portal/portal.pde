@@ -89,7 +89,7 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 7000)
+  if (millis() <= 1)
   {
     intro();
     return;
