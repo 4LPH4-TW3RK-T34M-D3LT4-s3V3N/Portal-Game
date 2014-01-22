@@ -80,7 +80,7 @@ class Turret
     die = true;
     if (justPlayed != 3)
     {
-      player = minim.loadFile("turretDead.wav");
+      player = minim.loadFile("turretDead" + int(random(6)) + ".wav");
       justPlayed = 3;
     }
     if(die)
@@ -148,7 +148,7 @@ class Turret
         if (justPlayed == 1 && !shoot)
         {
           justPlayed = 2;
-          player = minim.loadFile("targetFound.wav");
+          player = minim.loadFile("targetFound" + int(random(7)) + ".wav");
         }
         if (rTrue) {
           stroke(250, 0, 0);
@@ -170,13 +170,13 @@ class Turret
         shoot = false;
         if (justPlayed == 2)
         {
-          player = minim.loadFile("targetLost.wav");
+          player = minim.loadFile("targetLost" + int(random(2)) + ".wav");
           justPlayed = 1;
         }
         int random = int(random(0, 1000));
         if (random == 0 & justPlayed != 0)
         {
-          player = minim.loadFile("lookTarget.wav");
+          player = minim.loadFile("lookTarget" + int(random(4)) + ".wav");
           justPlayed = 1;
         }
       }
