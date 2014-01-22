@@ -1,4 +1,4 @@
-int goWall(PVector _loc, float _w, float _h)
+int goWall(PVector _loc, float _w, float _h)//checks if the pixel next to a certain width is not grey
 {
   PVector loc = new PVector(_loc.x, _loc.y);
   float w = _w/2;
@@ -24,7 +24,7 @@ int goWall(PVector _loc, float _w, float _h)
     return 0;
   }
 }
-boolean goCeil(PVector _loc, float _w, float _h)
+boolean goCeil(PVector _loc, float _w, float _h)//checks if the pixel above the given height is not grey
 {
   PVector loc = new PVector(_loc.x, _loc.y);
   float w = _w/2;
@@ -39,7 +39,7 @@ boolean goCeil(PVector _loc, float _w, float _h)
     return false;
   }
 }
-boolean goGround(PVector _loc, float _w, float _h)
+boolean goGround(PVector _loc, float _w, float _h)//checks if the pixel below a certain height is not grey
 {
   PVector loc = new PVector(_loc.x, _loc.y);
   float w = _w/2;

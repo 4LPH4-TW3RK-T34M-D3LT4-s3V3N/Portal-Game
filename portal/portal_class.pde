@@ -1,31 +1,21 @@
 class Portal {
-  PVector loc;
-  PVector shootLoc;
-  int size;
-  boolean appear = false;
-  color c;
-  int orient;
+  PVector loc;//location of portal
+  PVector shootLoc;//calculates possible location of portal if it was shot at that instant
+  boolean appear = false;//decide if portal has appeared or not
+  color c; // portal color
+  int orient; //direction of portal
   /*
   0 = portal is on the floor
    1 = wall (right)
    2 = wall (left)
    3 = ceiling
    */
-  float wut = 0;
-
+  float span = 0;//helps calculate shootLoc of portal
+  ;
+  AudioPlayer portalPlayer;//sound effect player
   Portal(color _c)
   {
     c = _c;
-    // orient = 0;
-    if (c == color(0, 0, 255))
-    {
-      loc = new PVector(50, 3);
-      //  orient = 3;
-    }
-    else
-    {
-      loc = new PVector(50, 3);
-    }
   }
   void display()
   {
@@ -33,7 +23,7 @@ class Portal {
     if (appear)
     {
       fill(c);
-      if (orient == 0 || orient == 3)
+      if (orient == 0 || orient == 3)//display portal according to orientation
       {
         rect(loc.x, loc.y, 50, 5);
       }
@@ -45,33 +35,25 @@ class Portal {
   }
   void wallMove(movingWall w)
   {
-    if (w.checkPortal(c) && w.moving)
+    if (w.checkPortal(c) && w.moving)//portal will move on a white movingWall if it was shot on one
     {
       loc.x+=w.moveSpeed;
     }
   }
   void shoot(Player p)
   {
-    stroke(0, 255, 0);
-    strokeWeight(1);
     float rise = (mouseY-p.loc.y)/100;
     float run = (mouseX-p.loc.x)/100;
-    while (get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(255) && get (int (p.loc.x+ (run*wut)), int(p.loc.y+(rise*wut))) != color(0))
+    while (get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(255) && get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(0))
     {
-      // ellipse(p.loc.x+(run*wut), p.loc.y+(rise*wut), 30, 30);
-      wut+=.1;
-      shootLoc = new PVector(p.loc.x+ (run*wut), p.loc.y+(rise*wut));
+      span+=.1;
+      shootLoc = new PVector(p.loc.x+ (run*span), p.loc.y+(rise*span));
       if (shootLoc.x > width || shootLoc.x < 0  || shootLoc.y > height || shootLoc.y < 0)
       {
         return;
       }
     }
-    fill(255, 0, 0);
-    wut = 0;
-    for (int i =0; i < 20; i++)
-    {
-      // line(p.loc.x, p.loc.y, p.loc.x+(run*i), p.loc.y+(rise*i));
-    }
+    span = 0;
   }
   void appear()
   {
@@ -79,6 +61,9 @@ class Portal {
     loc = shootLoc;
     if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))
     {
+      portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+      portalPlayer.setGain(gain);
+      portalPlayer.play();
       appear = false;
     }
     checkOrient();
@@ -91,6 +76,12 @@ class Portal {
           appear = false;
         }
       }
+      if (!appear)
+      {
+        portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer.setGain(gain);
+        portalPlayer.play();
+      }
     }
     if (orient == 2 || orient == 1)
     {
@@ -101,6 +92,25 @@ class Portal {
           appear = false;
         }
       }
+      if (!appear)
+      {
+        portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer.setGain(gain);
+        portalPlayer.play();
+      }
+    }
+    if (c == color(0, 0, 255))
+    {
+      portalPlayer = minim.loadFile("Portal2_sfx_portal_gun_fire_blue.mp3");
+    }
+    else
+    {
+      portalPlayer = minim.loadFile("Portal2_sfx_portal_gun_fire_orange.mp3");
+    }
+    if (appear)
+    {
+      portalPlayer.setGain(gain);
+      portalPlayer.play();
     }
   }
   void checkOrient()
@@ -132,7 +142,7 @@ class Portal {
   }
   void dissapear()
   {
-    if (key == 'r' || key == 'R')
+    if (key == 'r' || key == 'R')//portals will dissapear if the r key is pressed
     {
       appear = false;
     }
@@ -143,6 +153,9 @@ class Portal {
     {
       if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 20 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 20)
       {
+        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer.setGain(gain);
+        portalPlayer.play();
         if (partner.orient == 0)
         {
           if (orient == 0)
@@ -197,7 +210,10 @@ class Portal {
     if (appear && partner.appear)
     {
       if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25 || dist(p.loc.x+p.vel.x, p.loc.y+p.vel.y, loc.x, loc.y) < 25)
-      {
+      {      
+        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer.setGain(gain);
+        portalPlayer.play();
         if (partner.orient == 0)
         {
           if (orient == 0)
@@ -232,7 +248,8 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = p.vel.y;
+            p.vel.x = -p.vel.y*2;
+            p.vel.y = 0;
           }
           if (orient == 3)
           {
@@ -244,7 +261,8 @@ class Portal {
         {
           if (orient == 0)
           {
-            p.vel.x = -p.vel.y;
+            p.vel.x = p.vel.y*2;
+            p.vel.y = 0;
           }
           if (orient == 3)
           {
@@ -260,7 +278,10 @@ class Portal {
     if (appear && partner.appear)
     {
       if (dist(t.loc.x, t.loc.y, loc.x, loc.y) < 25 || dist(t.loc.x+t.vel.x, t.loc.y+t.vel.y, loc.x, loc.y) < 25)
-      {
+      {      
+        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer.setGain(gain);
+        portalPlayer.play();
         if (partner.orient == 0)
         {
           if (orient == 0)
@@ -307,4 +328,3 @@ class Portal {
     }
   }
 }
-
