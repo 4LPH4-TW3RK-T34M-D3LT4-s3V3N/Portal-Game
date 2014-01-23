@@ -21,7 +21,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[12];
+Level[] levels = new Level[13];
 tLevel[] tLevels = new tLevel[6];
 String[] loadData;
 int changeLevel;
@@ -678,6 +678,14 @@ void initializeLevel()
       cubes[0] = new Cube(106, 456);
       lasers = new Laser[0];
       player = new Player("P34CH35", 313, 170);
+    }
+    if (currentLevel == 12)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 45, 118);
     }
   }
 }
