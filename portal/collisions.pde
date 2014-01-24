@@ -20,7 +20,7 @@ int goWall(PVector _loc, float _w, float _h)//checks if the pixel next to a cert
     return 2;
   }
   else
-  {
+  { 
     return 0;
   }
 }

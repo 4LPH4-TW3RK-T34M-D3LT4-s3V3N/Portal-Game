@@ -55,6 +55,7 @@ class Turret
       vel.y = velSet;
     }
   }
+ 
   void fall()
   {
     if (get(int(loc.x+10), int(loc.y+21)) == color(195))
@@ -65,7 +66,7 @@ class Turret
     }
     else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
     {
-      while (get (int (loc.x+10), int(loc.y+30)) == color(0) || get(int (loc.x+10), int(loc.y+30)) == color(255))
+      while (get (int (loc.x+10), int(loc.y+20)) != color(195))// || get(int (loc.x+10), int(loc.y+20)) == color(255))
       {
         loc.y--;
       }
@@ -84,11 +85,12 @@ class Turret
       player = minim.loadFile("turretDead" + int(random(6)) + ".wav");
       justPlayed = 3;
     }
-    if(die)
+    if (die)
     {
       life--;
     }
   }
+ 
   void faceLeft() {
     lTrue=true;
   }
@@ -130,7 +132,7 @@ class Turret
     imageMode(CENTER);
     if (!die)
     {
-      tint(255,life);
+      tint(255, life);
       if (rTrue) {
         image(turretpicr, loc.x, loc.y-10, 50, 70);
       }

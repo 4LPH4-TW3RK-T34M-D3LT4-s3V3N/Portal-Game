@@ -21,7 +21,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[13];
+Level[] levels = new Level[15];
 tLevel[] tLevels = new tLevel[6];
 String[] loadData;
 int changeLevel;
@@ -89,7 +89,7 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 1)
+  if (millis() <= 1000)
   {
     intro();
     return;
@@ -230,19 +230,23 @@ void draw()
     }
 
     player.checkDoor();
-    player.move();
+    for (int i=0;i<turret.length;i++) {
 
+      turret[i].display();
+    }
     for (int i = 0; i < cubes.length; i++)
     {
       cubes[i].display();
       cubes[i].fall();
     }
     for (int i=0;i<turret.length;i++) {
-      turret[i].display();
       turret[i].limitVel();
       turret[i].fall();
       turret[i].show();
     }
+
+    player.move();
+
     orange.checkPlayer(player, blue);  
     blue.checkPlayer(player, orange);
     player.fall();
@@ -670,7 +674,7 @@ void initializeLevel()
     if (currentLevel == 11)
     {  
       turret = new Turret[1];
-      turret[0] = new Turret(345,458,true);
+      turret[0] = new Turret(345, 458, true);
       walls = new movingWall[1];
       walls[0] = new movingWall(750, 180, 76, 10, false, true, 300);
       walls[0].assignButton(590, 414);
@@ -685,6 +689,28 @@ void initializeLevel()
       walls = new movingWall[0];
       cubes = new Cube[0];
       lasers = new Laser[0];
+      player = new Player("P34CH35", 45, 118);
+    }
+    if (currentLevel == 13)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[1];
+      cubes[0] = new Cube(587, 196);
+      lasers = new Laser[1];
+      lasers[0] = new Laser(26, 450, false);
+      lasers[0].assignButton(68, 365);
+      player = new Player("P34CH35", 400, 50);
+    }
+    if (currentLevel == 14)
+    {  
+      turret = new Turret[1];
+      turret[0] = new Turret(400, 437, true);
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[2];
+      lasers[0] = new Laser(26, 300, false, 200);
+      lasers[1] = new Laser(26, 400, false, 100);
       player = new Player("P34CH35", 45, 118);
     }
   }

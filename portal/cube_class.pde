@@ -34,6 +34,7 @@ class Cube
     }
     return false;
   }
+  
   void onPlayer(Player p)
   {
     if (killPlayer(p) && vel.y > 0)

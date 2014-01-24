@@ -125,6 +125,7 @@ class Player {
         vel.x = -1;
       }
     } 
+      print(goGround(loc, 12, 45));
 
     if (keys[2] && goGround(loc, 12, 45)) {//player will "jump" if it is on the ground
       vel.y = -3;
