@@ -211,7 +211,6 @@ class Turret
         }
         if (lTrue) {
           if (run<0) {
-
             bullet.add(new Bullet(loc.x-10, loc.y-13, p.loc.x, p.loc.y));
           }
         }
@@ -219,4 +218,3 @@ class Turret
     }
   }
 }
-
