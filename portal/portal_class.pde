@@ -49,8 +49,8 @@ class Portal {
   }
   void shoot(Player p)
   {
-    float rise = (mouseY-p.loc.y)/100;
-    float run = (mouseX-p.loc.x)/100;
+    float rise = (mouseY-p.loc.y)/1000;
+    float run = (mouseX-p.loc.x)/1000;
     while (get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(255) && get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(0))
     {
       span+=.1;

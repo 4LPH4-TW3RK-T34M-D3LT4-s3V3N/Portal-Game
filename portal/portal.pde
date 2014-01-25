@@ -21,7 +21,7 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[18];
+Level[] levels = new Level[24];
 tLevel[] tLevels = new tLevel[6];
 String[] loadData;
 int changeLevel;
@@ -89,7 +89,7 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 1000)
+  if (millis() <= 1)
   {
     intro();
     return;
@@ -366,6 +366,7 @@ void keyPressed()
       {
         initialzeTLevel();
       }
+      pause = false;
       loop();
     }
   }
@@ -575,8 +576,7 @@ void initializeLevel()
       turret[0]= new Turret(200, 300, true);
       turret[1]= new Turret(600, 300, false);
       player = new Player("P34CH35", 20, 50);
-      cubes = new Cube[1];
-      cubes[0] = new Cube(width/2, height/2);
+      cubes = new Cube[0];
     }
     if (currentLevel == 2)
     {
@@ -737,6 +737,60 @@ void initializeLevel()
       cubes = new Cube[0];
       lasers = new Laser[0];
       player = new Player("P34CH35", 45, 228);
+    }
+    if (currentLevel == 18 )
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 45, 228);
+    }
+    if (currentLevel == 19 )
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 45, 228);
+    }
+    if (currentLevel == 20 )
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 45, 228);
+    }
+    if (currentLevel == 21)
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[5];
+      lasers[0] = new Laser(21, 252, false);
+      lasers[1] = new Laser(22, 257, false);
+      lasers[2] = new Laser(23, 262, false);
+      lasers[3] = new Laser(24, 267, false);
+      lasers[4] = new Laser(25, 272, false);
+
+      player = new Player("P34CH35", 42, 49);
+    }
+    if (currentLevel == 22 )
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 30, 365);
+    }
+    if (currentLevel == 23 )
+    {  
+      turret = new Turret[0];
+      walls = new movingWall[0];
+      cubes = new Cube[0];
+      lasers = new Laser[0];
+      player = new Player("P34CH35", 30, 365);
     }
   }
 }
