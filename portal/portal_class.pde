@@ -47,7 +47,7 @@ class Portal {
       }
     }
   }
-  void shoot(Player p)
+  void shoot(Player p)//this will create a straight path for the portal to follow based on the player and mouse position. Once the portal hits something black or white, the function is finished
   {
     float rise = (mouseY-p.loc.y)/1000;
     float run = (mouseX-p.loc.x)/1000;
@@ -66,7 +66,7 @@ class Portal {
   {
     appear = true;
     loc = shootLoc;
-    if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))
+    if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))//portal will not appear if the surface isnt whit
     {
       portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
       portalPlayer.setGain(gain);
@@ -78,7 +78,7 @@ class Portal {
     {
       for (int i = 0; i < 50; i++)
       {
-        if (get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(0) || get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(195))
+        if (get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(0) || get(int(shootLoc.x-25+i), int(shootLoc.y)) == color(195))//portal will not appear if it touches grey (keeps portal from appearing past corners)
         {
           appear = false;
         }
@@ -94,7 +94,7 @@ class Portal {
     {
       for (int i = 0; i < 50; i++)
       {
-        if (get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(0) || get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(195))
+        if (get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(0) || get(int(shootLoc.x), int(shootLoc.y-25+i)) == color(195))//portal will not appear if it touches grey (keeps portal from appearing past corners)
         {
           appear = false;
         }
@@ -106,7 +106,7 @@ class Portal {
         portalPlayer.play();
       }
     }
-    if (c == color(0, 0, 255))
+    if (c == color(0, 0, 255))//each portal plays a different sound
     {
       portalPlayer = minim.loadFile("Portal2_sfx_portal_gun_fire_blue.mp3");
     }
@@ -120,7 +120,7 @@ class Portal {
       portalPlayer.play();
     }
   }
-  void checkOrient()
+  void checkOrient()//this will check if the portal will be horizontal or vertical
   {
     for (int i = 0; i < 50; i++)
     {
@@ -154,7 +154,9 @@ class Portal {
       appear = false;
     }
   }
-  void checkObject(Cube c, Portal partner)
+  /*these are complicated ways to find out where the objects should go if they pass through a portal. 
+  It depends on what the orientation of the portal is and the velocity of the objects when they pass through*/
+  void checkObject(Cube c, Portal partner) 
   {
     if (appear && partner.appear)
     {

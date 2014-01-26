@@ -1,4 +1,4 @@
-import ddf.minim.spi.*;
+import ddf.minim.spi.*;//import music stuff
 import ddf.minim.signals.*;
 import ddf.minim.*;
 import ddf.minim.analysis.*;
@@ -21,8 +21,8 @@ color RaceBlack = color(125, 75, 50);
 Cube[] cubes;
 Portal orange;
 Portal blue;
-Level[] levels = new Level[36];
-tLevel[] tLevels = new tLevel[6];
+Level[] levels = new Level[36];//array for all levels
+tLevel[] tLevels = new tLevel[6];//array for all tutorial levels
 String[] loadData;
 int changeLevel;
 Player player;
@@ -89,13 +89,13 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 1)
+  if (millis() <= 5000)//displays intro screen for 5 seconds
   {
     intro();
     return;
   }
   music.setGain(gain);
-  if (orange.appear && blue.appear) {
+  if (orange.appear && blue.appear) {//displays different cursor depending on if the portals are appearing or not
     cursor(portalNone);
   }
   else if (orange.appear) {
@@ -107,7 +107,7 @@ void draw()
   else {
     cursor(portalCursor);
   }
-  if (currentLevel == 0 && whichTLevel == 0)
+  if (currentLevel == 0 && whichTLevel == 0)//displays menu if actual game is not playing
   {
     if (Screen) {
       background(250);
@@ -167,7 +167,7 @@ void draw()
       textSize(20);
       text("Press P at any time during the game to pause", width/2, 490);
     }
-    if (Credits) {
+    if (Credits) {//displays credits
       background(0, 0, 255); 
       strokeWeight(1);
       stroke(0);
@@ -198,7 +198,7 @@ void draw()
 
   else
   {
-    //the functions of each class required for the actual levels will be executed here. They must be executed in a specific order.
+    //the functions of each class required for the actual levels will be executed here. They must be executed in a specific order for the game to work properly.
     if (!tutorial)
     {
       for (int i = 1; i < levels.length; i++)
@@ -295,7 +295,7 @@ void draw()
       blue.wallMove(walls[i]);
       orange.wallMove(walls[i]);
     }
-    if (lose)
+    if (lose)//display lose screen and stops looping
     {
       textAlign(CENTER);
       fill(0, 255, 0);
@@ -303,14 +303,14 @@ void draw()
       text("YOU LOSE, Press ENTER to restart level", width/2, height/2);
       noLoop();
     }
-    if (win)
+    if (win)//display win screen and stops looping
     {
       textAlign(CENTER);
       fill(0, 255, 0);
       textSize(30);
       if (currentLevel == levels.length-1 && !tutorial || whichTLevel == 5 && tutorial)
       {
-        text("ALL LEVELS COMPLETE, \nPress ENTER to go to main menu", width/2, height/2);
+        text("ALL LEVELS COMPLETE, \nPress ENTER to go to main menu", width/2, height/2);//displays winning screen for when the entire game is won
       }
       else
       {
@@ -343,7 +343,7 @@ void keyPressed()
       Screen = true;
       pause = false;
       music.pause();
-      music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");
+      music = minim.loadFile("menu" + int(random(1, maxMusic)) + ".mp3");//reloads music
       music.setGain(gain);
       music.loop();
       loop();
@@ -371,7 +371,7 @@ void keyPressed()
       loop();
     }
   }
-  if (currentLevel != 0 || whichTLevel != 0)
+  if (currentLevel != 0 || whichTLevel != 0)//player moves when these keys are pressed
   {
     if (key=='d' || key=='d') {
       keys[0]=true;
@@ -477,7 +477,7 @@ void keyPressed()
 
 void keyReleased()
 {
-  if (currentLevel != 0 || whichTLevel != 0)
+  if (currentLevel != 0 || whichTLevel != 0)//player stops moving when these keys are released
   {
     if (key=='d' || key=='D') {
       keys[0]=false;
@@ -488,7 +488,7 @@ void keyReleased()
     if (key==' ') {
       keys[2]=false;
     }
-    orange.dissapear();
+    orange.dissapear();//portals will dissapear if the r key is releeased
     blue.dissapear();
   }
 }

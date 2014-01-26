@@ -9,7 +9,7 @@ class Turret
   boolean shoot = true;
   int velSet = 30;
   boolean timer=true;
-  ArrayList<Bullet> bullet = new ArrayList<Bullet>();
+  ArrayList<Bullet> bullet = new ArrayList<Bullet>();//each turret gets an arrayList of bullets
   boolean rTrue = false;
   boolean lTrue = false;
   boolean die;
@@ -23,7 +23,7 @@ class Turret
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
     player = minim.loadFile("noSound.mp3");
-    if (leftorRight)
+    if (leftorRight)//makes turret face left or right
     {
       lTrue = true;
       image = turretpicr;
@@ -36,7 +36,7 @@ class Turret
   }
   void display()
   {
-    fill(250);
+    fill(250);//display turret
     player.setGain(gain);
     player.play();
     fill(250, life);
@@ -48,7 +48,7 @@ class Turret
       loc.set(-100, -100);
     }
   }
-  void limitVel()
+  void limitVel()//keeps turret from going infinitely dast
   {
     if (vel.y > velSet)
     {
@@ -58,26 +58,26 @@ class Turret
  
   void fall()
   {
-    if (get(int(loc.x+10), int(loc.y+21)) == color(195))
+    if (get(int(loc.x+10), int(loc.y+21)) == color(195))//turret falls
     {
       vel.add(acc);
       limitVel();
       loc.add(vel);
     }
-    else //if(get(int(loc.x+15), int(loc.y+15)) == color(0))
+    else
     {
-      while (get (int (loc.x+10), int(loc.y+20)) != color(195))// || get(int (loc.x+10), int(loc.y+20)) == color(255))
+      while (get (int (loc.x+10), int(loc.y+20)) != color(195))//puts turret back on the ground
       {
         loc.y--;
       }
-      if (vel.y >= velSet)
+      if (vel.y >= velSet)//kills turret if it moves too fast
       {
         die();
       }
       vel.set(0, 0);
     }
   }
-  void die()
+  void die()//kills turret
   {
     die = true;
     if (justPlayed != 3)
@@ -108,7 +108,7 @@ class Turret
       loc.x = p.loc.x-17;
     }
   }
-  boolean checkPlayer(Player p)
+  boolean checkPlayer(Player p)//check for player
   {
     if (dist(loc.x, 0, p.loc.x, 0) < 100 && p.loc.y <= loc.y+15 && p.loc.y > loc.y-100) {
       if (timer==true) {
@@ -128,7 +128,7 @@ class Turret
       return false;
     }
   }
-  void show() {
+  void show() {//dsplay picture of turret
     imageMode(CENTER);
     if (!die)
     {
@@ -142,7 +142,7 @@ class Turret
     }
   }
 
-  void shoot(Player p, float px) {
+  void shoot(Player p, float px) {//shoot player depending on direction its facing
     if (!die)
     {
       run=(px-loc.x);
@@ -153,7 +153,7 @@ class Turret
           justPlayed = 2;
           player = minim.loadFile("targetFound" + int(random(7)) + ".wav");
         }
-        if (rTrue) {
+        if (rTrue) {//shows a red laser before shooting
           stroke(250, 0, 0);
           strokeWeight(2);
           line(p.loc.x, p.loc.y, loc.x+10, loc.y-13);
@@ -184,7 +184,7 @@ class Turret
         }
       }
 
-      for (int i = bullet.size()-1; i >=0; i--) {
+      for (int i = bullet.size()-1; i >=0; i--) {//shoots bullet
         Bullet b = bullet.get(i);
         b.hit();
         b.display();

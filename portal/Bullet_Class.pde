@@ -20,14 +20,17 @@ class Bullet {
     bulletPlayer.play();
   }
 
-  void display() {
-    fill(1);
-    stroke(1);
-    strokeWeight(2);
-    ellipse(loc.x, loc.y, size, size);
+  void display() {//display bullet as a color close to black
+    if (life > 0)
+    {
+      fill(1);
+      stroke(1);
+      strokeWeight(2);
+      ellipse(loc.x, loc.y, size, size);
+    }
   }
 
-  void update() {
+  void update() {//bullet's life goes down so it doesnt not display when life is 0
     loc.add(vel);
     life--;
   }
@@ -41,3 +44,4 @@ class Bullet {
     }
   }
 }
+
