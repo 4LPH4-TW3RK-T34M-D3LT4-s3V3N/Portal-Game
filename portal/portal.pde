@@ -89,7 +89,7 @@ void intro()
 }
 void draw()
 {
-  if (millis() <= 5000)//displays intro screen for 5 seconds
+  if (millis() <= 10000)//displays intro screen for 5 seconds
   {
     intro();
     return;
