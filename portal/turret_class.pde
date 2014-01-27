@@ -14,7 +14,7 @@ class Turret
   boolean lTrue = false;
   boolean die;
   int life = 400;
-  AudioPlayer player;
+  AudioSnippet player;
   int justPlayed = 1;
   PImage image;
   Turret(float x, float y, boolean leftorRight)
@@ -22,7 +22,7 @@ class Turret
     loc = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, .1);
-    player = minim.loadFile("noSound.mp3");
+    player = minim.loadSnippet("noSound.mp3");
     if (leftorRight)//makes turret face left or right
     {
       lTrue = true;
@@ -82,7 +82,7 @@ class Turret
     die = true;
     if (justPlayed != 3)
     {
-      player = minim.loadFile("turretDead" + int(random(6)) + ".wav");
+      player = minim.loadSnippet("turretDead" + int(random(6)) + ".wav");
       justPlayed = 3;
     }
     if (die)
@@ -151,7 +151,7 @@ class Turret
         if (justPlayed == 1 && !shoot)
         {
           justPlayed = 2;
-          player = minim.loadFile("targetFound" + int(random(7)) + ".wav");
+          player = minim.loadSnippet("targetFound" + int(random(7)) + ".wav");
         }
         if (rTrue) {//shows a red laser before shooting
           stroke(250, 0, 0);
@@ -171,15 +171,15 @@ class Turret
       else
       {
         shoot = false;
-        if (justPlayed == 2)
+        if (justPlayed == 2)//laser goes away
         {
-          player = minim.loadFile("targetLost" + int(random(2)) + ".wav");
+          player = minim.loadSnippet("targetLost" + int(random(2)) + ".wav");
           justPlayed = 1;
         }
         int random = int(random(0, 2000));
-        if (random == 0 & justPlayed != 0)
+        if (random == 0 & justPlayed != 0)//turret will randomly ask where the player is if it is not targeted
         {
-          player = minim.loadFile("lookTarget" + int(random(4)) + ".wav");
+          player = minim.loadSnippet("lookTarget" + int(random(4)) + ".wav");
           justPlayed = 1;
         }
       }

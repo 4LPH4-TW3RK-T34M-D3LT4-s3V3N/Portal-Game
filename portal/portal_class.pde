@@ -12,7 +12,7 @@ class Portal {
    */
   float span = 0;//helps calculate shootLoc of portal
   ;
-  AudioPlayer portalPlayer;//sound effect player
+  AudioSnippet portalPlayer;//sound effect player
   Portal(color _c)
   {
     c = _c;
@@ -37,9 +37,9 @@ class Portal {
   {
     if (w.checkPortal(c) && w.moving)//portal will move on a white movingWall if it was shot on one
     {
-      if(!w.vertical)
+      if (!w.vertical)
       {
-      loc.x+=w.moveSpeed;
+        loc.x+=w.moveSpeed;
       }
       else
       {
@@ -49,8 +49,8 @@ class Portal {
   }
   void shoot(Player p)//this will create a straight path for the portal to follow based on the player and mouse position. Once the portal hits something black or white, the function is finished
   {
-    float rise = (mouseY-p.loc.y)/1000;
-    float run = (mouseX-p.loc.x)/1000;
+    float rise = (mouseY-p.loc.y)/100;
+    float run = (mouseX-p.loc.x)/100;
     while (get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(255) && get (int (p.loc.x+ (run*span)), int(p.loc.y+(rise*span))) != color(0))
     {
       span+=.1;
@@ -68,7 +68,7 @@ class Portal {
     loc = shootLoc;
     if (get(int(shootLoc.x), int(shootLoc.y)) != color(255))//portal will not appear if the surface isnt whit
     {
-      portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+      portalPlayer = minim.loadSnippet("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
       portalPlayer.setGain(gain);
       portalPlayer.play();
       appear = false;
@@ -85,7 +85,7 @@ class Portal {
       }
       if (!appear)
       {
-        portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer = minim.loadSnippet("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
         portalPlayer.setGain(gain);
         portalPlayer.play();
       }
@@ -101,24 +101,30 @@ class Portal {
       }
       if (!appear)
       {
-        portalPlayer = minim.loadFile("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
+        portalPlayer = minim.loadSnippet("portal_invalid_surface" + int(random(1, 3)) + ".mp3");
         portalPlayer.setGain(gain);
         portalPlayer.play();
       }
     }
-    if (c == color(0, 0, 255))//each portal plays a different sound
-    {
-      portalPlayer = minim.loadFile("Portal2_sfx_portal_gun_fire_blue.mp3");
-    }
-    else
-    {
-      portalPlayer = minim.loadFile("Portal2_sfx_portal_gun_fire_orange.mp3");
-    }
+
     if (appear)
-    {
+    { 
+      if (c == color(0, 0, 255))//each portal plays a different sound
+      {        
+        portalPlayer = minim.loadSnippet("Portal2_sfx_portal_gun_fire_blue.mp3");
+      }
+      else
+      {        
+        portalPlayer = minim.loadSnippet("Portal2_sfx_portal_gun_fire_orange.mp3");
+      }
       portalPlayer.setGain(gain);
       portalPlayer.play();
     }
+  }
+  void close()
+  {
+    portalPlayer.close();
+    minim.stop();
   }
   void checkOrient()//this will check if the portal will be horizontal or vertical
   {
@@ -155,14 +161,14 @@ class Portal {
     }
   }
   /*these are complicated ways to find out where the objects should go if they pass through a portal. 
-  It depends on what the orientation of the portal is and the velocity of the objects when they pass through*/
+   It depends on what the orientation of the portal is and the velocity of the objects when they pass through*/
   void checkObject(Cube c, Portal partner) 
   {
     if (appear && partner.appear)
     {
       if (dist(c.loc.x, c.loc.y, loc.x, loc.y) < 20 || dist(c.loc.x+c.vel.x, c.loc.y+c.vel.y, loc.x, loc.y) < 20)
       {
-        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer = minim.loadSnippet("portal_open" + int(random(1, 4)) + ".mp3");
         portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)
@@ -220,7 +226,7 @@ class Portal {
     {
       if (dist(p.loc.x, p.loc.y, loc.x, loc.y) < 25 || dist(p.loc.x+p.vel.x, p.loc.y+p.vel.y, loc.x, loc.y) < 25)
       {      
-        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer = minim.loadSnippet("portal_open" + int(random(1, 4)) + ".mp3");
         portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)
@@ -304,7 +310,7 @@ class Portal {
     {
       if (dist(t.loc.x, t.loc.y, loc.x, loc.y) < 25 || dist(t.loc.x+t.vel.x, t.loc.y+t.vel.y, loc.x, loc.y) < 25)
       {      
-        portalPlayer = minim.loadFile("portal_open" + int(random(1, 4)) + ".mp3");
+        portalPlayer = minim.loadSnippet("portal_open" + int(random(1, 4)) + ".mp3");
         portalPlayer.setGain(gain);
         portalPlayer.play();
         if (partner.orient == 0)

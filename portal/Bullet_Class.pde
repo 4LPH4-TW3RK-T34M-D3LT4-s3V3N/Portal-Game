@@ -3,8 +3,8 @@ class Bullet {
   int size;
   int life;
   float rise, run;
-  AudioPlayer bulletPlayer;
-
+  AudioSnippet bulletPlayer;
+int stopPlaying; //stops bullet from playing in order to prevent lag
   Bullet(float x, float y, float px, float py) {
     loc = new PVector(x, y);
     ploc=new PVector(px, py);
@@ -15,9 +15,10 @@ class Bullet {
     vel = new PVector(run/10, rise/10);// the /50 makes it go slower
     size = 1;
     life = 100;
-    bulletPlayer = minim.loadFile("Portal2_sfx_turret_machine_gun.mp3");
+    bulletPlayer = minim.loadSnippet("Portal2_sfx_turret_machine_gun.mp3");
     bulletPlayer.setGain(gain);
     bulletPlayer.play();
+    stopPlaying = millis() + 100;
   }
 
   void display() {//display bullet as a color close to black
@@ -33,6 +34,10 @@ class Bullet {
   void update() {//bullet's life goes down so it doesnt not display when life is 0
     loc.add(vel);
     life--;
+    if(stopPlaying < millis())
+    {
+      bulletPlayer.pause();
+    }
   }
   void hit() {
     if (get(int(loc.x), int(loc.y)) == color(0) || get(int(loc.x), int(loc.y)) == color(255)||get(int(loc.x), int(loc.y)) == color(255, 0, 255) ||get(int(loc.x), int(loc.y)) == color(255, 0, 0)) {

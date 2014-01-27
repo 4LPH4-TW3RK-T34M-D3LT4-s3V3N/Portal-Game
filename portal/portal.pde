@@ -40,7 +40,7 @@ int pausedTime;
 int newTime;
 int resultTime;
 Minim minim, portalMinim;
-AudioPlayer soundEffects;
+AudioSnippet soundEffects;
 AudioPlayer music;
 int maxMusic = 3;
 int saveLevel;
@@ -348,7 +348,7 @@ void keyPressed()
   {
     if (blue.appear || orange.appear)//this will play a sound effect when the portals dissapear
     {
-      soundEffects = minim.loadFile("portal_close" + int(random(1, 3)) + ".mp3");
+      soundEffects = minim.loadSnippet("portal_close" + int(random(1, 3)) + ".mp3");
       soundEffects.setGain(gain);
       soundEffects.play();
     }

@@ -5,13 +5,13 @@ class Button {
   boolean play = true;//keeps button from playing sound continuously
   int h;//height of button
   int w;//width of button
-  AudioPlayer buttonPlayer;//sound effect player
+  AudioSnippet buttonPlayer;//sound effect player
   Button(int x, int y)
   {
     loc = new PVector(x, y);
     w = 75;
     h = 10;
-    buttonPlayer = minim.loadFile("noSound.mp3");//keeps button from playing its sound effect by playing nothing
+    buttonPlayer = minim.loadSnippet("noSound.mp3");//keeps button from playing its sound effect by playing nothing
   }
   void display()//display an almost perfectly red rectangle
   {
@@ -36,7 +36,7 @@ class Button {
     {    
       if (play && h == 5)//makes sure the sound is only played once by making play false
       {      
-        buttonPlayer = minim.loadFile("Portal2_sfx_button_positive.mp3");//reloads buttonPlayer to play sound effect
+        buttonPlayer = minim.loadSnippet("Portal2_sfx_button_positive.mp3");//reloads buttonPlayer to play sound effect
         play = false;
       }    
       buttonPlayer.setGain(gain);
@@ -56,7 +56,7 @@ class Button {
     {
       if (!play && h == 10)//makes sure the sound is only played once by making play true
       {
-        buttonPlayer = minim.loadFile("Portal2_sfx_button_negative.mp3");//reloads buttonPlayer to play sound effect
+        buttonPlayer = minim.loadSnippet("Portal2_sfx_button_negative.mp3");//reloads buttonPlayer to play sound effect
         play = true;
       }        
       buttonPlayer.setGain(gain);
