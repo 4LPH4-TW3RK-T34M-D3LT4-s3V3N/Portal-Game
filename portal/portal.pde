@@ -182,13 +182,7 @@ void draw()
       character(width/2-75, height/2+25, "Irek\nSciezcka", Irek, RaceWhite, "Graphics");
       character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "Head Programmer");
     }
-    if (Physics) {//make tutorial true
-      background(255, 125, 0);
-      if (back(inbetween(50, 50, 50, 50))) {
-        Screen = true;
-        Physics = false;
-      }
-    }
+
     if (Options) {//display options screen
       background(255, 125, 0);
       text("There are no options, but you an press m to mute/unmute sound", width/2, height/2);
