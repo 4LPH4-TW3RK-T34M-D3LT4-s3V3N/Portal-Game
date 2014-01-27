@@ -171,6 +171,7 @@ void draw()
       background(0, 0, 255); 
       strokeWeight(1);
       stroke(0);
+      rectMode(CENTER);
       if (back(inbetween(50, 50, 50, 50))) {
         Screen = true;
         Credits = false;
@@ -179,7 +180,7 @@ void draw()
       character(width/2+75, height/2-25, "Brandon\nDonohue", Brandon, RaceWhite, "UI Designer");
       character(width/2+225, height/2+25, "AJ\nSavoca", AJ, RaceWhite, "Monkey Boy");
       character(width/2-75, height/2+25, "Irek\nSciezcka", Irek, RaceWhite, "Graphics");
-      character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "HeadProgrammer");
+      character(width/2-225, height/2-25, "Clayton\nMcLean", Clayton, RaceBlack, "Head Programmer");
     }
     if (Physics) {//make tutorial true
       background(255, 125, 0);
